@@ -21,9 +21,12 @@ namespace detail{
 			try{
 				task_unwrapped_();
 			}
-			catch (const std::exception& e){ std::cerr << "Exception: " << e.what() << '\n'; }
-			catch (const boost::thread_interrupted&){ std::cerr << "Thread interrupted\n"; }
-			catch (...){ std::cerr << "Unknown exception\n"; }
+			catch (const std::exception& e){ 
+				std::cerr << "Exception: " << e.what() << '\n'; }
+			catch (const boost::thread_interrupted&){ 
+				std::cerr << "Thread interrupted\n"; }
+			catch (...){ 
+				std::cerr << "Unknown exception\n"; }
 		}
 	};
 

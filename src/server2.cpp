@@ -68,7 +68,7 @@ void func_test(){
 		throw boost::thread_interrupted();
 	}
 	if (g_val == 90){
-		//tasks_processor::get().stop();
+		tasks_processor::get().stop();
 	}
 }
 
