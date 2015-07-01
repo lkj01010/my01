@@ -96,7 +96,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions>_WIN32_WINNT=0x0501;_WIN32;STATIC_LIBMONGOCLIENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\lkj\gitText\mongo-cxx-driver\build\install\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src/net;src/mongodb;src/com;F:\lkj\gitText\mongo-cxx-driver\build\install\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -132,14 +132,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\mongo_test.cpp" />
+    <ClCompile Include="src\mongodb\mongo_test.cpp" />
     <ClCompile Include="src\server.cpp" />
     <ClCompile Include="src\server2.cpp" />
     <ClCompile Include="src\task.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\common.h" />
-    <ClInclude Include="src\mongo_test.h" />
+    <ClInclude Include="src\com\common.h" />
+    <ClInclude Include="src\com\singleton.h" />
+    <ClInclude Include="src\mongodb\mongo_test.h" />
     <ClInclude Include="src\task.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

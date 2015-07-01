@@ -12,6 +12,9 @@
 #include <boost/asio/io_service.hpp>
 #include <boost/thread/thread.hpp>
 
+
+#include "singleton.h"
+
 #include "mongo/client/dbclient.h"
 
 

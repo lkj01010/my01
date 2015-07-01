@@ -1,10 +1,10 @@
 #pragma once
 #include "common.h"
 
-using namespace mongo;
 
-namespace mongoc{
 
+namespace my{
+	using namespace mongo;
 	inline void insert(DBClientBase* conn, const char * name, int num) {
 		BSONObjBuilder obj;
 		obj.append("name", name);

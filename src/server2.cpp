@@ -68,7 +68,7 @@ void func_test(){
 		throw boost::thread_interrupted();
 	}
 	if (g_val == 90){
-		tasks_processor::get().stop();
+		my::singleton<tasks_processor>::instance().stop();
 	}
 }
 
@@ -82,17 +82,18 @@ int main(){
 	BOOST_STATIC_ASSERT(tasks_count >= 90);
 	for (std::size_t i = 0; i < tasks_count; ++i)
 	{
-		tasks_processor::get().push_task(&func_test);
-		tasks_processor::get().push_task(
+		my::singleton<tasks_processor>::instance().push_task(&func_test);
+		my::singleton<tasks_processor>::instance().push_task(
 			boost::bind(std::plus<int>(), 2, 2) );
-		tasks_processor::get().push_task(boost::bind(&mongoc::insert, conn.get(), "eliot", i));
+		my::singleton<tasks_processor>::instance().push_task(boost::bind(&mongoc::insert, conn.get(), "eliot", i));
 
 	}
 
 	assert(g_val == 0);
 
-	tasks_processor::get().start();
+	my::singleton<tasks_processor>::instance().start();
 	//assert(g_val == 90);
-
+	boost::ref(g_val);
+	std::ref(g_val);
 	return 0;
 }

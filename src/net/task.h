@@ -38,17 +38,18 @@ namespace detail{
 }
 
 
-class tasks_processor : public my::singleton<tasks_processor>
-{
+class tasks_processor : private boost::noncopyable{
 	boost::asio::io_service	ios_;
 	boost::asio::io_service::work	work_;
-protected:
-	friend class my::singleton<tasks_processor>;
 	tasks_processor()
 		: ios_()
 		, work_(ios_)
 	{}
 public:
+	static tasks_processor& get(){
+		return s_inst_;
+	}
+
 	template<class T>
 	inline void push_task(const T& task_unwrapped){
 		ios_.post(detail::make_task_wrapped(task_unwrapped));
@@ -62,4 +63,6 @@ public:
 		ios_.stop();
 	}
 
+private:
+	static tasks_processor s_inst_;
 };
