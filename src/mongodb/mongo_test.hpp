@@ -1,10 +1,13 @@
 #pragma once
-#include "common.h"
+#include "mongo_wrapper.h"
 
-
+#ifndef verify
+#  define verify(x) MONGO_verify(x)
+#endif
 
 namespace my{
 	using namespace mongo;
+	using namespace std;
 	inline void insert(DBClientBase* conn, const char * name, int num) {
 		BSONObjBuilder obj;
 		obj.append("name", name);
@@ -50,5 +53,51 @@ namespace my{
 		//insert(conn.get(), "sara", 23);
 
 		return conn;
+	}
+
+	inline int test_second(){
+		boost::scoped_ptr<DBClientBase> conn(mongo_wrapper::instance().connect());
+		const char * ns = "test.second";
+
+		conn->remove(ns, BSONObj());
+
+		conn->insert(ns, BSON("name" << "eliot" << "num" << 17));
+		conn->insert(ns, BSON("name" << "sara" << "num" << 24));
+
+		std::auto_ptr<DBClientCursor> cursor = conn->query(ns, BSONObj());
+
+		if (!cursor.get()) {
+			cout << "query failure" << endl;
+			return EXIT_FAILURE;
+		}
+
+		cout << "using cursor" << endl;
+		while (cursor->more()) {
+			BSONObj obj = cursor->next();
+			cout << "\t" << obj.jsonString() << endl;
+		}
+
+		conn->createIndex(ns, BSON("name" << 1 << "num" << -1));
+
+		///////////////////////////////////////////////
+		cout << "now using $where" << endl;
+
+		Query q = Query("{}").where("this.name == name", BSON("name" << "sara"));
+
+		cursor = conn->query(ns, q);
+		if (!cursor.get()) {
+			cout << "query failure" << endl;
+			return EXIT_FAILURE;
+		}
+
+		int num = 0;
+		while (cursor->more()) {
+			BSONObj obj = cursor->next();
+			cout << "\t" << obj.jsonString() << endl;
+			num++;
+		}
+		verify(num == 1);
+
+		return EXIT_SUCCESS;
 	}
 }

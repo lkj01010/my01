@@ -132,7 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\mongodb\mongo_test.cpp" />
+    <ClCompile Include="src\mongodb\mongo_wrapper.cpp" />
     <ClCompile Include="src\server.cpp" />
     <ClCompile Include="src\server2.cpp" />
     <ClCompile Include="src\task.cpp" />
@@ -140,7 +140,8 @@
   <ItemGroup>
     <ClInclude Include="src\com\common.h" />
     <ClInclude Include="src\com\singleton.h" />
-    <ClInclude Include="src\mongodb\mongo_test.h" />
+    <ClInclude Include="src\mongodb\mongo_test.hpp" />
+    <ClInclude Include="src\mongodb\mongo_wrapper.h" />
     <ClInclude Include="src\task.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

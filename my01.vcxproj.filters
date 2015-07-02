@@ -18,7 +18,7 @@
     <ClCompile Include="src\task.cpp">
       <Filter>net</Filter>
     </ClCompile>
-    <ClCompile Include="src\mongodb\mongo_test.cpp">
+    <ClCompile Include="src\mongodb\mongo_wrapper.cpp">
       <Filter>mongodb</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,7 +32,10 @@
     <ClInclude Include="src\com\singleton.h">
       <Filter>com</Filter>
     </ClInclude>
-    <ClInclude Include="src\mongodb\mongo_test.h">
+    <ClInclude Include="src\mongodb\mongo_wrapper.h">
+      <Filter>mongodb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mongodb\mongo_test.hpp">
       <Filter>mongodb</Filter>
     </ClInclude>
   </ItemGroup>
