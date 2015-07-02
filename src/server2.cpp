@@ -19,12 +19,12 @@
 using boost::asio::ip::tcp;
 
 
-bool read = false; 
+bool is_read = false;
 void deadline_handler(const boost::system::error_code &) 
-{ std::cout << (read ? "read successfully" : "read failed") << std::endl;
+{ std::cout << (is_read ? "read successfully" : "read failed") << std::endl;
 system("pause");
 } 
-void read_handler(const boost::system::error_code &) { read = true; } 
+void read_handler(const boost::system::error_code &) { is_read = true; }
 
 
 
@@ -70,9 +70,14 @@ void func_test(){
 		throw boost::thread_interrupted();
 	}
 	if (g_val == 90){
-		my::singleton<tasks_processor>::instance().stop();
+//		my::singleton<tasks_processor>::instance().stop();
 	}
 }
+
+void func_test_2(){
+    ++g_val;
+}
+
 
 int main(int argc, const char **argv){
 
@@ -95,6 +100,7 @@ int main(int argc, const char **argv){
 	for (std::size_t i = 0; i < tasks_count; ++i)
 	{
 		my::singleton<tasks_processor>::instance().push_task(&func_test);
+    my::singleton<tasks_processor>::instance().run_after(boost::posix_time::milliseconds(30), &func_test_2);
 		my::singleton<tasks_processor>::instance().push_task(
 			boost::bind(std::plus<int>(), 2, 2) );
 		//my::singleton<tasks_processor>::instance().push_task(boost::bind(&my::insert, conn.get(), "eliot", i));
