@@ -12,9 +12,8 @@
 #include <boost/asio/io_service.hpp>
 #include <boost/thread/thread.hpp>
 
-#include "mongo/client/dbclient.h"
 
-
+#include "singleton.h"
 
 
 #if defined(_WIN32)

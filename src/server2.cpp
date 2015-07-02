@@ -9,6 +9,12 @@
 //
 
 #include "common.h"
+#ifdef _MONGO
+#include "mongo_test.h"
+#endif
+
+
+#include "task.h"
 
 using boost::asio::ip::tcp;
 
@@ -18,7 +24,6 @@ void deadline_handler(const boost::system::error_code &)
 { std::cout << (read ? "read successfully" : "read failed") << std::endl;
 system("pause");
 } 
-
 void read_handler(const boost::system::error_code &) { read = true; } 
 
 
@@ -53,9 +58,6 @@ void read_handler(const boost::system::error_code &) { read = true; }
 //  return 0;
 //}
 
-#include "task.h"
-#include "mongo_test.h"
-
 int g_val = 0;
 void func_test(){
 	++g_val;
@@ -68,31 +70,42 @@ void func_test(){
 		throw boost::thread_interrupted();
 	}
 	if (g_val == 90){
-		tasks_processor::get().stop();
+		my::singleton<tasks_processor>::instance().stop();
 	}
 }
 
-int main(){
-	boost::shared_ptr<DBClientBase> conn = mongoc::mongo_init();
-	if (conn == NULL)
-	{
-		return -1;
-	}
+int main(int argc, const char **argv){
+
+	//boost::shared_ptr<mongo::DBClientBase> conn = my::mongo_init();
+	//if (conn == NULL)
+	//{
+	//	return -1;
+	//}
+
+
+#ifdef _MONGO
+	my::test_second();
+#endif
+	
+
+	::system("pause");
+	//////////////////////////////////////////////////////////////////////////
 	static const std::size_t tasks_count = 10000;
 	BOOST_STATIC_ASSERT(tasks_count >= 90);
 	for (std::size_t i = 0; i < tasks_count; ++i)
 	{
-		tasks_processor::get().push_task(&func_test);
-		tasks_processor::get().push_task(
+		my::singleton<tasks_processor>::instance().push_task(&func_test);
+		my::singleton<tasks_processor>::instance().push_task(
 			boost::bind(std::plus<int>(), 2, 2) );
-		tasks_processor::get().push_task(boost::bind(&mongoc::insert, conn.get(), "eliot", i));
+		//my::singleton<tasks_processor>::instance().push_task(boost::bind(&my::insert, conn.get(), "eliot", i));
 
 	}
 
 	assert(g_val == 0);
 
-	tasks_processor::get().start();
+	my::singleton<tasks_processor>::instance().start();
 	//assert(g_val == 90);
-
+	boost::ref(g_val);
+	std::ref(g_val);
 	return 0;
 }

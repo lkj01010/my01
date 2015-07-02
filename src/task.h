@@ -2,6 +2,12 @@
 
 #include "common.h"
 
+#include <boost/asio/io_service.hpp>
+#include <boost/asio/deadline_timer.hpp>
+#include <boost/system/error_code.hpp>
+#include <boost/make_shared.hpp>
+#include <iostream>
+
 namespace detail{
 	template<class T>
 	struct task_wrapped{
@@ -35,24 +41,79 @@ namespace detail{
 		return task_wrapped<T>(task_unwrapped);
 	}
 
+
+	//
+	typedef boost::asio::deadline_timer::duration_type duration_type;
+	
+	template<class Functor>
+	struct timer_task : public task_wrapped<Functor>{
+	private:
+		typedef task_wrapped<Functor> base_t;
+		boost::shared_ptr<boost::asio::deadline_timer> timer_;
+
+	public:
+		template<class Time>
+		explicit timer_task(
+			boost::asio::io_service& ios,
+			const Time& duration_or_time,
+			const Functor& task_unwrapped)
+			: base_t(task_unwrapped)
+			, timer_(boost::make_shared<boost::asio::deadline_timer>(
+			boost::ref(ios), duration_or_time))
+		{}
+
+		void push_task() const {
+			timer_->ansync_wait(*this);
+		}
+
+		void operator()(const boost::system::error_code& error) const{
+			if (!error){
+				base_t::operator()();
+			}
+			else{
+				std::cerr << error << "\n";
+			}
+		}
+	};
+
+	template<class Time, class Functor>
+	inline timer_task<Functor> make_timer_task(
+		boost::asio::io_service& ios,
+		const Time& duration_or_time,
+		const Functor& task_unwrapped)
+	{
+		return timer_task<Functor>(ios, duration_or_time, task_unwrapped);
+	}
+
 }
 
 
-class tasks_processor : private boost::noncopyable{
+class tasks_processor : public my::singleton<tasks_processor>
+{
 	boost::asio::io_service	ios_;
 	boost::asio::io_service::work	work_;
+protected:
+	friend class my::singleton<tasks_processor>;
 	tasks_processor()
 		: ios_()
 		, work_(ios_)
 	{}
 public:
-	static tasks_processor& get(){
-		return s_inst_;
-	}
-
 	template<class T>
 	inline void push_task(const T& task_unwrapped){
 		ios_.post(detail::make_task_wrapped(task_unwrapped));
+	}
+
+	typedef boost::asio::deadline_timer::time_type time_type;
+	template<class Functor>
+	void run_at(time_type time, const Functor& f){
+		detail::make_timer_task(ios_, time, f).push_task();
+	}
+
+	typedef boost::asio::deadline_timer::duration_type duration_type;
+	template<class Functor>
+	void run_after(duration_type duration, const Functor& f){
+		detail::make_timer_task(ios_, duration, f).push_task();
 	}
 
 	void start(){
@@ -63,13 +124,4 @@ public:
 		ios_.stop();
 	}
 
-private:
-	static tasks_processor s_inst_;
 };
-
-
-
-
-
-
-

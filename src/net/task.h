@@ -38,64 +38,14 @@ namespace detail{
 }
 
 
-
-
-template<typename T>
-class singleton : boost::noncopyable
-{
-public:
-    static T& instance()
-    {
-        pthread_once(&ponce_, &singleton::init);
-        return *value_;
-    }
-    
-private:
-    singleton();
-    ~singleton();
-    
-    static void init()
-    {
-        value_ = new T();
-    }
-    
-    static void destroy()
-    {
-        typedef char T_must_be_complete_type[sizeof(T) == 0 ? -1 : 1];
-        T_must_be_complete_type dummy; (void) dummy;
-        
-        delete value_;
-    }
-    
-private:
-    static pthread_once_t ponce_;
-    static T*             value_;
-};
-
-template<typename T>
-pthread_once_t singleton<T>::ponce_ = PTHREAD_ONCE_INIT;
-
-template<typename T>
-T* singleton<T>::value_ = NULL;
-
-
-
-
-
-
-
-class tasks_processor
-: private boost::noncopyable
-{
+class tasks_processor : private boost::noncopyable{
 	boost::asio::io_service	ios_;
 	boost::asio::io_service::work	work_;
-public:
 	tasks_processor()
 		: ios_()
 		, work_(ios_)
 	{}
 public:
- 
 	static tasks_processor& get(){
 		return s_inst_;
 	}
@@ -116,10 +66,3 @@ public:
 private:
 	static tasks_processor s_inst_;
 };
-
-
-
-
-
-
-

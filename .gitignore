@@ -17,3 +17,8 @@ x64/
 *.aps
 *.rc
 *.user
+
+
+
+# mac os
+*.DS_Store
