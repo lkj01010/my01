@@ -13,6 +13,7 @@
 		166890201B458F3D003AE8B7 /* server2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1668901B1B458F3D003AE8B7 /* server2.cpp */; };
 		166890221B459169003AE8B7 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 166890211B459169003AE8B7 /* libboost_system.a */; };
 		166890241B4591AB003AE8B7 /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 166890231B4591AB003AE8B7 /* libboost_thread.a */; };
+		16919B021B47009400AB29D8 /* tcp_connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16919B001B47009400AB29D8 /* tcp_connection.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,8 @@
 		1668901B1B458F3D003AE8B7 /* server2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server2.cpp; sourceTree = "<group>"; };
 		166890211B459169003AE8B7 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_system.a; sourceTree = "<group>"; };
 		166890231B4591AB003AE8B7 /* libboost_thread.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_thread.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_thread.a; sourceTree = "<group>"; };
+		16919B001B47009400AB29D8 /* tcp_connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tcp_connection.cpp; sourceTree = "<group>"; };
+		16919B011B47009400AB29D8 /* tcp_connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tcp_connection.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,8 @@
 			children = (
 				166890181B458F3D003AE8B7 /* task.cpp */,
 				166890191B458F3D003AE8B7 /* task.h */,
+				16919B001B47009400AB29D8 /* tcp_connection.cpp */,
+				16919B011B47009400AB29D8 /* tcp_connection.h */,
 			);
 			path = net;
 			sourceTree = "<group>";
@@ -173,6 +178,7 @@
 				1668901F1B458F3D003AE8B7 /* server.cpp in Sources */,
 				166890201B458F3D003AE8B7 /* server2.cpp in Sources */,
 				1668901E1B458F3D003AE8B7 /* task.cpp in Sources */,
+				16919B021B47009400AB29D8 /* tcp_connection.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

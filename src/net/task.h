@@ -3,10 +3,10 @@
 #include "common.h"
 
 #include <boost/asio/io_service.hpp>
-#include <boost/asio/deadline_timer.hpp>
-#include <boost/system/error_code.hpp>
-#include <boost/make_shared.hpp>
+
 #include <iostream>
+
+#include "tcp_connection.h"
 
 namespace detail{
     
@@ -88,7 +88,7 @@ namespace detail{
     
 }
 
-
+//////////////////////////////////////////////////////////
 class tasks_processor : public my::singleton<tasks_processor>
 {
     boost::asio::io_service	ios_;
@@ -115,6 +115,14 @@ public:
     template<class Functor>
     void run_after(duration_type duration, const Functor& f){
         detail::make_timer_task(ios_, duration, f).push_task();
+    }
+    
+    tcp_connection_ptr create_connection(const char* addr,
+                                         unsigned short port_num){
+        return tcp_connection_ptr(ios_,
+                                  boost::asio::ip::tcp::endpoint( boost::asio::ip::address_v4::from_string(addr),
+                                                                 port_num)
+                                  );
     }
     
     void start(){
