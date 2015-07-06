@@ -69,23 +69,6 @@ inline std::string encode(const MSG& message)
   return result;
 }
 
-inline google::protobuf::Message* createMessage(const std::string& type_name)
-{
-  google::protobuf::Message* message = NULL;
-  const google::protobuf::Descriptor* descriptor =
-    google::protobuf::DescriptorPool::generated_pool()->FindMessageTypeByName(type_name);
-  if (descriptor)
-  {
-    const google::protobuf::Message* prototype =
-      google::protobuf::MessageFactory::generated_factory()->GetPrototype(descriptor);
-    if (prototype)
-    {
-      message = prototype->New();
-    }
-  }
-  return message;
-}
-
 inline int32_t asInt32(const char* buf)
 {
   int32_t be32 = 0;
@@ -99,7 +82,7 @@ inline int32_t asInt32(const char* buf)
 ///
 /// returns NULL if fails.
 ///
-inline google::protobuf::Message* decode(const std::string& buf)
+inline std::string decode(const std::string& buf)
 {
   google::protobuf::Message* result = NULL;
 
