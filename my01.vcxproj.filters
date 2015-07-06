@@ -15,17 +15,17 @@
   <ItemGroup>
     <ClCompile Include="src\server.cpp" />
     <ClCompile Include="src\server2.cpp" />
-    <ClCompile Include="src\task.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
     <ClCompile Include="src\mongodb\mongo_wrapper.cpp">
       <Filter>mongodb</Filter>
     </ClCompile>
+    <ClCompile Include="src\net\tcp_connection.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\task.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\task.h">
-      <Filter>net</Filter>
-    </ClInclude>
     <ClInclude Include="src\com\common.h">
       <Filter>com</Filter>
     </ClInclude>
@@ -37,6 +37,12 @@
     </ClInclude>
     <ClInclude Include="src\mongodb\mongo_test.hpp">
       <Filter>mongodb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\tcp_connection.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\task.h">
+      <Filter>net</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
