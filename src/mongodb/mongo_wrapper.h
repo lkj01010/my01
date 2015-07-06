@@ -9,7 +9,7 @@ namespace my{
 		mongo_wrapper();
 		~mongo_wrapper();
 
-		mongo::DBClientBase*connect(const string& url = "mongodb://localhost:27017");
+		mongo::DBClientBase*connect(const std::string& url = "mongodb://localhost:27017");
 
 	public:
 		mongo::client::GlobalInstance instance_;

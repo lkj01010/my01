@@ -133,16 +133,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\mongodb\mongo_wrapper.cpp" />
+    <ClCompile Include="src\net\task.cpp" />
+    <ClCompile Include="src\net\tcp_connection.cpp" />
     <ClCompile Include="src\server.cpp" />
     <ClCompile Include="src\server2.cpp" />
-    <ClCompile Include="src\task.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\com\common.h" />
     <ClInclude Include="src\com\singleton.h" />
     <ClInclude Include="src\mongodb\mongo_test.hpp" />
     <ClInclude Include="src\mongodb\mongo_wrapper.h" />
-    <ClInclude Include="src\task.h" />
+    <ClInclude Include="src\net\task.h" />
+    <ClInclude Include="src\net\tcp_connection.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

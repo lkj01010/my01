@@ -43,7 +43,8 @@ namespace detail{
     }
     
     
-    //
+	//----------------------------------------------------------------------
+
     typedef boost::asio::deadline_timer::duration_type duration_type;
     
     template<class Functor>
@@ -88,7 +89,9 @@ namespace detail{
     
 }
 
-//////////////////////////////////////////////////////////
+
+//----------------------------------------------------------------------
+
 class tasks_processor : public my::singleton<tasks_processor>
 {
     boost::asio::io_service	ios_;
