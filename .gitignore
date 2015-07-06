@@ -20,5 +20,6 @@ x64/
 
 
 
-# mac os
+# xcode
 *.DS_Store
+UserInterfaceState.xcuserstate
