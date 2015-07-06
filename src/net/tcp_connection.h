@@ -58,6 +58,8 @@ public:
         socket_->shutdown(boost::asio::ip::tcp::socket::shutdown_both);
         socket_->close();
     }
+    
+    
 };
 
 

@@ -8,8 +8,6 @@
 
 #pragma once
 
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/message.h>
 #include <zlib.h>  // adler32
 
 #include <string>

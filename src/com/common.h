@@ -31,6 +31,8 @@
 
 #include <boost/thread/thread.hpp>
 
+#include <boost/lexical_cast.hpp>
+
 
 
 #if defined(_WIN32)

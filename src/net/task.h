@@ -8,6 +8,8 @@
 
 #include "tcp_connection.h"
 
+using boost::asio::ip::tcp;
+
 namespace detail{
     
     template<class T>
@@ -87,6 +89,57 @@ namespace detail{
         return timer_task<Functor>(ios, duration_or_time, task_unwrapped);
     }
     
+    //----------------------------------------------------------------------
+    
+    class tcp_listener : public boost::enable_shared_from_this<tcp_listener>{
+        typedef boost::asio::ip::tcp::acceptor acceptor_t;
+        acceptor_t acceptor_;
+        
+        boost::function<void(tcp_connection_ptr)> func_;
+    public:
+        template<class Functor>
+        tcp_listener(
+                     boost::asio::io_service& io_service,
+                     unsigned short port,
+                     const Functor& task_unwrapped)
+        :acceptor_(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))
+        ,func_(task_unwrapped)
+        {}
+        
+        void push_task() {
+            if(!acceptor_.is_open()){
+                return;
+            }
+            
+            typedef tcp::socket socket_t;
+            boost::shared_ptr<socket_t> socket
+            = boost::make_shared<socket_t>(boost::ref(acceptor_.get_io_service()));
+            
+            acceptor_.async_accept(*socket, boost::bind(
+                                                        &::detail::tcp_listener::handle_acceptor,
+                                                        this->shared_from_this(),
+                                                        tcp_connection_ptr(socket),
+                                                        boost::asio::placeholders::error));
+        }
+        
+        void stop(){
+            acceptor_.close();
+        }
+        
+    private:
+        void handle_acceptor(
+                             const tcp_connection_ptr& new_connection,
+                             const boost::system::error_code& error){
+            push_task();
+            
+            if(!error){
+                make_task_wrapped(boost::bind(func_, new_connection))();    //run it
+            }else{
+                std::cerr << error << '\n';
+            }
+        }
+    };
+    
 }
 
 
@@ -136,4 +189,36 @@ public:
         ios_.stop();
     }
     
+    
+    //////////////////////////
+    typedef std::map<unsigned short, boost::shared_ptr<::detail::tcp_listener>> listeners_map_t;
+    
+    listeners_map_t listeners_;
+    
+    template<class Functor>
+    void add_listener(unsigned short port_num, const Functor& f){
+        listeners_map_t::const_iterator it = listeners_.find(port_num);
+        if(it != listeners_.end()){
+            throw std::logic_error(
+            "such listener for port '"  + boost::lexical_cast<std::string>(port_num) + "' already created");  // exist
+            
+        }
+    
+        listeners_[port_num] = boost::make_shared<detail::tcp_listener>(boost::ref(ios_), port_num, f);
+        listeners_[port_num]->push_task();
+    }
+    
+    void remove_listener(unsigned short port_num){
+        listeners_map_t::const_iterator it = listeners_.find(port_num);
+        if(it == listeners_.end()){
+            throw std::logic_error(
+                "No listener for port '" + boost::lexical_cast<std::string>(port_num)+ "' created");  //
+        }
+        
+        (*it).second->stop();
+        listeners_.erase(it);
+    }
+    
 };
+
+
