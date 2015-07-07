@@ -92,7 +92,7 @@ namespace detail{
     //----------------------------------------------------------------------
     
     class tcp_listener : public boost::enable_shared_from_this<tcp_listener>{
-        typedef boost::asio::ip::tcp::acceptor acceptor_t;
+        typedef tcp::acceptor acceptor_t;
         acceptor_t acceptor_;
         
         boost::function<void(tcp_connection_ptr)> func_;
@@ -102,7 +102,7 @@ namespace detail{
                      boost::asio::io_service& io_service,
                      unsigned short port,
                      const Functor& task_unwrapped)
-        :acceptor_(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))
+        :acceptor_(io_service, tcp::endpoint(tcp::v4(), port))
         ,func_(task_unwrapped)
         {}
         
@@ -115,11 +115,12 @@ namespace detail{
             boost::shared_ptr<socket_t> socket
             = boost::make_shared<socket_t>(boost::ref(acceptor_.get_io_service()));
             
-            acceptor_.async_accept(*socket, boost::bind(
-                                                        &::detail::tcp_listener::handle_acceptor,
-                                                        this->shared_from_this(),
-                                                        tcp_connection_ptr(socket),
-                                                        boost::asio::placeholders::error));
+            acceptor_.async_accept(*socket, 
+            						boost::bind(
+                                        &::detail::tcp_listener::handle_acceptor,
+                                        this->shared_from_this(),
+                                        tcp_connection_ptr(socket),
+                                        boost::asio::placeholders::error));
         }
         
         void stop(){
@@ -176,7 +177,7 @@ public:
     tcp_connection_ptr create_connection(const char* addr,
                                          unsigned short port_num){
         return tcp_connection_ptr(ios_,
-                                  boost::asio::ip::tcp::endpoint( boost::asio::ip::address_v4::from_string(addr),
+                                  tcp::endpoint( boost::asio::ip::address_v4::from_string(addr),
                                                                  port_num)
                                   );
     }

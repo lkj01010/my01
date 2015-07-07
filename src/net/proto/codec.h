@@ -8,11 +8,13 @@
 
 #pragma once
 
+#include "common.h"
+
 #include <zlib.h>  // adler32
 
 #include <string>
 
-#include <arpa/inet.h>  // htonl, ntohl
+//#include <arpa/inet.h>  // htonl, ntohl
 #include <stdint.h>
 
 // struct ProtobufTransportFormat __attribute__ ((__packed__))
@@ -34,7 +36,11 @@
 
 const int kHeaderLen = sizeof(uint32_t);
 
- //MSG should implement:1.type()  2.append_to_string(std::string)
+//MSG should implement:
+//1.type()    set_type(int32_t)
+//2.append_to_string(std::string)
+//3.parse_from_array(char*, uint32_t)
+
 template<class MSG>  
 inline std::string encode(const MSG& message)
 {
@@ -42,7 +48,7 @@ inline std::string encode(const MSG& message)
 
   result.resize(kHeaderLen);
 
-  const int_32& type = message.type();
+  const int32_t& type = message.type();
   int32_t be32 = ::htonl(type);
   result.append(reinterpret_cast<char*>(&be32), sizeof be32);
   bool succeed = message.append_to_string(&result);
@@ -74,16 +80,11 @@ inline int32_t asInt32(const char* buf)
   return ::ntohl(be32);
 }
 
-///
-/// Decode protobuf Message from transport format defined above.
-/// returns a Message*
-///
 /// returns NULL if fails.
-///
-inline std::string decode(const std::string& buf)
+template<class MSG>
+inline bool decode(const std::string& buf, MSG& message)
 {
-  google::protobuf::Message* result = NULL;
-
+	bool ret = false;
   int32_t len = static_cast<int32_t>(buf.size());
   if (len >= 10)
   {
@@ -92,34 +93,41 @@ inline std::string decode(const std::string& buf)
     int32_t checkSum = adler32(1, reinterpret_cast<const Bytef*>(begin), len-kHeaderLen);
     if (checkSum == expectedCheckSum)
     {
-      int32_t nameLen = asInt32(buf.c_str());
-      if (nameLen >= 2 && nameLen <= len - 2*kHeaderLen)
-      {
-        std::string typeName(buf.begin() + kHeaderLen, buf.begin() + kHeaderLen + nameLen - 1);
+      //int32_t nameLen = asInt32(buf.c_str());
+		int32_t type = asInt32(buf.begin() + kHeaderLen);
+		message.set_type(type);
+      /*if (nameLen >= 2 && nameLen <= len - 2*kHeaderLen)
+      {*/
+  /*      std::string typeName(buf.begin() + kHeaderLen, buf.begin() + kHeaderLen + nameLen - 1);
         google::protobuf::Message* message = createMessage(typeName);
-        if (message)
-        {
-          const char* data = buf.c_str() + kHeaderLen + nameLen;
-          int32_t dataLen = len - nameLen - 2*kHeaderLen;
-          if (message->ParseFromArray(data, dataLen))
-          {
-            result = message;
-          }
-          else
-          {
-            // parse error
-            delete message;
-          }
-        }
-        else
-        {
-          // unknown message type
-        }
-      }
-      else
-      {
-        // invalid name len
-      }
+        if (message)*/
+        //{
+		const char* data = buf.c_str() + 2*kHeaderLen;
+        int32_t data_len = len - 3*kHeaderLen;
+        //  if (message->ParseFromArray(data, dataLen))
+        //  {
+        //    result = message;
+        //  }
+        //  else
+        //  {
+        //    // parse error
+        //    delete message;
+        //  }
+        //}
+		if (message.parse_from_array(data, data_len)){
+			ret = true;
+		}
+		else{
+		}
+        //else
+        //{
+        //  // unknown message type
+        //}
+      //}
+      //else
+      //{
+      //  // invalid name len
+      //}
     }
     else
     {
@@ -127,6 +135,6 @@ inline std::string decode(const std::string& buf)
     }
   }
 
-  return result;
+  return ret;
 }
 

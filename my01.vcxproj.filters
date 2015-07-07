@@ -11,6 +11,9 @@
     <Filter Include="com">
       <UniqueIdentifier>{0bee410f-3f54-4509-b7b9-096ce3360694}</UniqueIdentifier>
     </Filter>
+    <Filter Include="net\proto">
+      <UniqueIdentifier>{d114418b-cc88-4d19-af0b-664bd20f8cfe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\server.cpp" />
@@ -43,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="src\net\task.h">
       <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\proto\codec.h">
+      <Filter>net\proto</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

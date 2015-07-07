@@ -96,11 +96,12 @@
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions>_WIN32_WINNT=0x0501;_WIN32;STATIC_LIBMONGOCLIENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src/net;src/mongodb;src/com;F:\lkj\gitText\mongo-cxx-driver\build\install\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src/net;src/net/proto;src/mongodb;src/com;F:\lkj\gitText\mongo-cxx-driver\build\install\include;external\win32-specific\zlib\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>F:\lkj\gitText\mongo-cxx-driver\build\win32\64\dbg_on</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>F:\lkj\gitText\mongo-cxx-driver\build\win32\64\dbg_on;external\win32-specific\zlib\prebuilt</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,6 +144,7 @@
     <ClInclude Include="src\com\singleton.h" />
     <ClInclude Include="src\mongodb\mongo_test.hpp" />
     <ClInclude Include="src\mongodb\mongo_wrapper.h" />
+    <ClInclude Include="src\net\proto\codec.h" />
     <ClInclude Include="src\net\task.h" />
     <ClInclude Include="src\net\tcp_connection.h" />
   </ItemGroup>

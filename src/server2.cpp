@@ -15,6 +15,7 @@
 
 
 #include "task.h"
+#include "codec.h"
 
 using boost::asio::ip::tcp;
 
