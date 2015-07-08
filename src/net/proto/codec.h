@@ -28,8 +28,9 @@
 
 // ------------------>lkj change to:
 // {
-//   uint32_t  len;
-//   int32_t   type;
+//   int32_t  len;
+//    int16_t   info;  // just like which server, userid etc.
+//   int16_t   type;    // msg type
 //   char      data[len-6];
 //   int32_t   checkSum;
 // }
@@ -37,7 +38,8 @@
 const int kHeaderLen = sizeof(uint32_t);
 
 //MSG should implement:
-//1.type()    set_type(int32_t)
+//0.info()    set_info(int16_t)
+//1.type()    set_type(int16_t)
 //2.append_to_string(std::string)
 //3.parse_from_array(char*, uint32_t)
 
@@ -48,9 +50,12 @@ inline std::string encode(const MSG& message)
 
   result.resize(kHeaderLen);
 
-  const int32_t& type = message.type();
-  int32_t be32 = ::htonl(type);
-  result.append(reinterpret_cast<char*>(&be32), sizeof be32);
+  int16_t info = ::htons(message.info());
+  result.append(reinterpret_cast<char*>(&info), sizeof info);
+
+  int16_t type = ::htons(message.type());
+  result.append(reinterpret_cast<char*>(&type), sizeof type);
+
   bool succeed = message.append_to_string(&result);
 
   if (succeed)
@@ -70,7 +75,14 @@ inline std::string encode(const MSG& message)
     result.clear();
   }
 
+
   return result;
+}
+
+inline int16_t asInt16(const char* buf){
+    int32_t be16 = 0;
+    ::memcpy(&be16, buf, sizeof(be16));
+    return ::ntohs(be16);
 }
 
 inline int32_t asInt32(const char* buf)
@@ -94,7 +106,9 @@ inline bool decode(const std::string& buf, MSG& message)
     if (checkSum == expectedCheckSum)
     {
       //int32_t nameLen = asInt32(buf.c_str());
-		int32_t type = asInt32(buf.begin() + kHeaderLen);
+		int16_t info = asInt16(buf.begin() + kHeaderLen);
+		message.set_info(info);
+		int16_t type = asInt16(buf.begin() + kHeaderLen + sizeof int16_t);
 		message.set_type(type);
       /*if (nameLen >= 2 && nameLen <= len - 2*kHeaderLen)
       {*/
