@@ -1,12 +1,13 @@
 #pragma once
 
-
+#include <string>
 #include <array>
 #include <cstdlib>
 #include <iostream>
 #include <memory>
 #include <type_traits>
 #include <utility>
+#include <stdint.h>
 
 
 
