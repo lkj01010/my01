@@ -16,6 +16,7 @@
 
 #include "task.h"
 #include "codec.h"
+#include "message.h"
 
 using boost::asio::ip::tcp;
 
@@ -88,6 +89,15 @@ int main(int argc, const char **argv){
 	//	return -1;
 	//}
 
+	message msg;
+	msg.set_info(65531);
+	msg.set_type(-65530);
+	msg.set_data("ooxx");
+
+	std::string encoded = encode(msg);
+
+	message msg_decode;
+	bool isOK = decode(encoded, msg_decode);
 
 #ifdef _MONGO
 	my::test_second();
@@ -101,7 +111,7 @@ int main(int argc, const char **argv){
 	for (std::size_t i = 0; i < tasks_count; ++i)
 	{
 		my::singleton<tasks_processor>::instance().push_task(&func_test);
-    my::singleton<tasks_processor>::instance().run_after(boost::posix_time::milliseconds(30), &func_test_2);
+		my::singleton<tasks_processor>::instance().run_after(boost::posix_time::milliseconds(30), &func_test_2);
 		my::singleton<tasks_processor>::instance().push_task(
 			boost::bind(std::plus<int>(), 2, 2) );
 		//my::singleton<tasks_processor>::instance().push_task(boost::bind(&my::insert, conn.get(), "eliot", i));
@@ -112,7 +122,6 @@ int main(int argc, const char **argv){
 
 	my::singleton<tasks_processor>::instance().start();
 	//assert(g_val == 90);
-	boost::ref(g_val);
-	std::ref(g_val);
+
 	return 0;
 }

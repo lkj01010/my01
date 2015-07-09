@@ -145,6 +145,7 @@
     <ClInclude Include="src\mongodb\mongo_test.hpp" />
     <ClInclude Include="src\mongodb\mongo_wrapper.h" />
     <ClInclude Include="src\net\proto\codec.h" />
+    <ClInclude Include="src\net\proto\message.h" />
     <ClInclude Include="src\net\task.h" />
     <ClInclude Include="src\net\tcp_connection.h" />
   </ItemGroup>

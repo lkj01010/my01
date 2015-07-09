@@ -50,5 +50,8 @@
     <ClInclude Include="src\net\proto\codec.h">
       <Filter>net\proto</Filter>
     </ClInclude>
+    <ClInclude Include="src\net\proto\message.h">
+      <Filter>net\proto</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
