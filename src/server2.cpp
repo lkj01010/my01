@@ -15,7 +15,7 @@
 
 
 #include "task.h"
-#include "codec.h"
+//#include "codec.h"
 #include "message.h"
 
 using boost::asio::ip::tcp;
@@ -89,16 +89,22 @@ int main(int argc, const char **argv){
 	//	return -1;
 	//}
 
+    // test-codec ------------------------------
+    using namespace net;
 	message msg;
 	msg.set_info(65531);
 	msg.set_type(-65530);
 	msg.set_data("ooxx");
 
-	std::string encoded = encode(msg);
-
+	std::string encoded = msg.encode();
+    
+    char see[512] = {0};
+    memcpy(see, encoded.c_str(), encoded.size()*sizeof(char));
+    
 	message msg_decode;
-	bool isOK = decode(encoded, msg_decode);
-
+	msg_decode.decode(encoded);
+    bzero(see, 512);
+    // test-end ------------------------------
 #ifdef _MONGO
 	my::test_second();
 #endif

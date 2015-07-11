@@ -15,7 +15,7 @@
 #include <zlib.h>  // adler32
 #endif
 
-//#include <arpa/inet.h>  // htonl, ntohl
+
 
 
 // struct ProtobufTransportFormat __attribute__ ((__packed__))
@@ -51,10 +51,10 @@ inline std::string encode(const MSG& message)
 
 	result.resize(kHeaderLen);
 
-	int32_t info = ::htonl(message.info());
+	int32_t info = htonl(message.info());
 	result.append(reinterpret_cast<char*>(&info), sizeof info);
 
-	int32_t type = ::htonl(message.type());
+	int32_t type = htonl(message.type());
 	result.append(reinterpret_cast<char*>(&type), sizeof type);
 
 	message.append_to_string(boost::ref(result));
@@ -66,10 +66,10 @@ inline std::string encode(const MSG& message)
 	int32_t checkSum = 123456;
 #endif
    
-    int32_t be32 = ::htonl(checkSum);
+    int32_t be32 = htonl(checkSum);
     result.append(reinterpret_cast<char*>(&be32), sizeof be32);
     
-    int32_t len = ::htonl(result.size() - kHeaderLen);
+    int32_t len = htonl(result.size() - kHeaderLen);
     std::copy(reinterpret_cast<char*>(&len),
               reinterpret_cast<char*>(&len) + sizeof len,
               result.begin());
@@ -86,7 +86,7 @@ inline int32_t asInt32(const char* buf)
 {
 	int32_t be32 = 0;
 	::memcpy(&be32, buf, sizeof(be32));
-	return ::ntohl(be32);
+	return ntohl(be32);
 }
 
 template<class MSG>

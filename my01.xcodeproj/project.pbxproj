@@ -21,6 +21,7 @@
 		16BB27EE1B4AECB700AF2115 /* mongo_wrapper.h in Sources */ = {isa = PBXBuildFile; fileRef = 166890161B458F3D003AE8B7 /* mongo_wrapper.h */; };
 		16BB27EF1B4AECB700AF2115 /* task.h in Sources */ = {isa = PBXBuildFile; fileRef = 166890191B458F3D003AE8B7 /* task.h */; };
 		16BB27F01B4AECB700AF2115 /* tcp_connection.h in Sources */ = {isa = PBXBuildFile; fileRef = 16919B011B47009400AB29D8 /* tcp_connection.h */; };
+		16FAC8F11B50194A00AAF935 /* message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16FAC8F01B50194A00AAF935 /* message.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,9 +49,11 @@
 		1668901B1B458F3D003AE8B7 /* server2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server2.cpp; sourceTree = "<group>"; };
 		166890211B459169003AE8B7 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_system.a; sourceTree = "<group>"; };
 		166890231B4591AB003AE8B7 /* libboost_thread.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_thread.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_thread.a; sourceTree = "<group>"; };
+		168D42C61B4EB342001D7B3A /* message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = message.h; sourceTree = "<group>"; };
 		16919B001B47009400AB29D8 /* tcp_connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tcp_connection.cpp; sourceTree = "<group>"; };
 		16919B011B47009400AB29D8 /* tcp_connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tcp_connection.h; sourceTree = "<group>"; };
 		16BB27E91B4AEC8D00AF2115 /* codec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = codec.h; sourceTree = "<group>"; };
+		16FAC8F01B50194A00AAF935 /* message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = message.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,8 @@
 		16BB27E81B4AEC8D00AF2115 /* proto */ = {
 			isa = PBXGroup;
 			children = (
+				16FAC8F01B50194A00AAF935 /* message.cpp */,
+				168D42C61B4EB342001D7B3A /* message.h */,
 				16BB27E91B4AEC8D00AF2115 /* codec.h */,
 			);
 			path = proto;
@@ -192,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16BB27EB1B4AECB700AF2115 /* common.h in Sources */,
+				16FAC8F11B50194A00AAF935 /* message.cpp in Sources */,
 				16BB27EC1B4AECB700AF2115 /* singleton.h in Sources */,
 				16BB27ED1B4AECB700AF2115 /* mongo_test.hpp in Sources */,
 				16BB27EE1B4AECB700AF2115 /* mongo_wrapper.h in Sources */,
