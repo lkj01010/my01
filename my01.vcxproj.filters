@@ -27,6 +27,12 @@
     <ClCompile Include="src\net\task.cpp">
       <Filter>net</Filter>
     </ClCompile>
+    <ClCompile Include="src\net\proto\message.cpp">
+      <Filter>net\proto</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\tcp_server.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\com\common.h">
@@ -52,6 +58,12 @@
     </ClInclude>
     <ClInclude Include="src\net\proto\message.h">
       <Filter>net\proto</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\tcp_server.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="src\com\thread_lock.h">
+      <Filter>com</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

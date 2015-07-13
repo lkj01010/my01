@@ -103,7 +103,7 @@ int main(int argc, const char **argv){
     
 	message msg_decode;
 	msg_decode.decode(encoded);
-    bzero(see, 512);
+	memset(see, 0, 512);
     // test-end ------------------------------
 #ifdef _MONGO
 	my::test_second();

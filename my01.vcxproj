@@ -80,7 +80,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>F:\lkj\gitText\mongo-cxx-driver\build\install\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\net\proto;src\net;src\mongodb;src\com;F:\lkj\gitText\mongo-cxx-driver\build\install\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN32;STATIC_LIBMONGOCLIENT;_WIN32_WINNT=0x0501;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -134,20 +134,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\mongodb\mongo_wrapper.cpp" />
+    <ClCompile Include="src\net\proto\message.cpp" />
     <ClCompile Include="src\net\task.cpp" />
     <ClCompile Include="src\net\tcp_connection.cpp" />
+    <ClCompile Include="src\net\tcp_server.cpp" />
     <ClCompile Include="src\server.cpp" />
     <ClCompile Include="src\server2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\com\common.h" />
     <ClInclude Include="src\com\singleton.h" />
+    <ClInclude Include="src\com\thread_lock.h" />
     <ClInclude Include="src\mongodb\mongo_test.hpp" />
     <ClInclude Include="src\mongodb\mongo_wrapper.h" />
     <ClInclude Include="src\net\proto\codec.h" />
     <ClInclude Include="src\net\proto\message.h" />
     <ClInclude Include="src\net\task.h" />
     <ClInclude Include="src\net\tcp_connection.h" />
+    <ClInclude Include="src\net\tcp_server.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
