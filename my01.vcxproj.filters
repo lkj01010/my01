@@ -14,17 +14,16 @@
     <Filter Include="net\proto">
       <UniqueIdentifier>{d114418b-cc88-4d19-af0b-664bd20f8cfe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="example">
+      <UniqueIdentifier>{0e26ff94-539e-4f15-a1e0-9abab0655768}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\server.cpp" />
-    <ClCompile Include="src\server2.cpp" />
     <ClCompile Include="src\mongodb\mongo_wrapper.cpp">
       <Filter>mongodb</Filter>
     </ClCompile>
     <ClCompile Include="src\net\tcp_connection.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
-    <ClCompile Include="src\net\task.cpp">
       <Filter>net</Filter>
     </ClCompile>
     <ClCompile Include="src\net\proto\message.cpp">
@@ -32,6 +31,12 @@
     </ClCompile>
     <ClCompile Include="src\net\tcp_server.cpp">
       <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\io_service_pool.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="src\example\echo_server.hpp">
+      <Filter>example</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,12 +55,6 @@
     <ClInclude Include="src\net\tcp_connection.h">
       <Filter>net</Filter>
     </ClInclude>
-    <ClInclude Include="src\net\task.h">
-      <Filter>net</Filter>
-    </ClInclude>
-    <ClInclude Include="src\net\proto\codec.h">
-      <Filter>net\proto</Filter>
-    </ClInclude>
     <ClInclude Include="src\net\proto\message.h">
       <Filter>net\proto</Filter>
     </ClInclude>
@@ -64,6 +63,9 @@
     </ClInclude>
     <ClInclude Include="src\com\thread_lock.h">
       <Filter>com</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\io_service_pool.hpp">
+      <Filter>net</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

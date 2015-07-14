@@ -12,85 +12,61 @@
 #include <stdio.h>
 #include "common.h"
 
-using boost::asio::ip::tcp;
-
 namespace net
 {
+	class tcp_connection;
+	typedef boost::shared_ptr<tcp_connection> tcp_connection_ptr;
+	typedef boost::function < void(const tcp_connection_ptr&)> connection_callback;
+	typedef boost::function < void(const tcp_connection_ptr&, std::string, boost::posix_time::ptime)> message_callback;
+	typedef boost::function < void(const tcp_connection_ptr&)> write_complete_callback;
 
 	class tcp_connection : public boost::enable_shared_from_this<tcp_connection>
 	{
-
 	public:
 		tcp_connection(boost::asio::io_service& io_service)
 			: socket_(io_service)
-		{
+		{}
+
+		boost::asio::ip::tcp::socket& socket(){ return socket_; }
+
+		void start();
+
+		void set_tie(const boost::shared_ptr<void>& tie){
+			tie_ = tie;
 		}
+		boost::shared_ptr<void> tie() const { return tie_; }
 
-		tcp::socket& socket(){ return socket_; }
-
+		void set_connection_callback(const connection_callback& cb){
+			connection_callback_ = cb;
+		}
+		void set_message_callback(const message_callback& cb){
+			message_callback_ = cb;
+		}
+		void set_write_complete_callback(const write_complete_callback& cb){
+			write_complete_callback_ = cb;
+		}
 	private:
-		tcp::socket socket_;
+		/// Handle completion of a read operation.
+		void handle_read(const boost::system::error_code& e,
+			std::size_t bytes_transferred);
+
+		/// Handle completion of a write operation.
+		void handle_write(const boost::system::error_code& e);
+
+		/// Socket for the connection.
+		boost::asio::ip::tcp::socket socket_;
+
+		/// Buffer for incoming data.
+		boost::array<char, 8192> buffer_;
+
+
+		boost::shared_ptr<void> tie_;	//Tie a object to this, and managed by this
+
+		connection_callback connection_callback_;
+		message_callback message_callback_;
+		write_complete_callback write_complete_callback_;
 	};
 
-	typedef boost::shared_ptr<tcp_connection> tcp_connection_ptr;
-
-
-
-
-
-
-
-
-
-	//class tcp_connection_ptr{
-	//    boost::shared_ptr<boost::asio::ip::tcp::socket> socket_;
-	//    
-	//public:
-	//    explicit tcp_connection_ptr(
-	//        boost::shared_ptr<boost::asio::ip::tcp::socket> socket)
-	//    : socket_(socket)
-	//    {}
-	//    
-	//    explicit tcp_connection_ptr(
-	//                                boost::asio::io_service& ios,
-	//                                const boost::asio::ip::tcp::endpoint& endpoint)
-	//    : socket_(boost::make_shared<boost::asio::ip::tcp::socket>(boost::ref(ios)))
-	//    {
-	//        socket_->connect(endpoint);
-	//    }
-	//    
-	//    template<class Functor>
-	//    void async_read(
-	//                    const boost::asio::mutable_buffers_1& buf,
-	//                    const Functor& f,
-	//                    std::size_t at_least_bytes) const
-	//    {
-	//        boost::asio::async_read(*socket_, buf, boost::asio::transfer_at_least(at_least_bytes), f);
-	//    }
-	//    
-	//    template<class Functor>
-	//    void async_write(
-	//                     const boost::asio::const_buffers_1& buf,
-	//                     const Functor& f) const
-	//    {
-	//        boost::asio::async_write(*socket_, buf, f);
-	//    }
-	//    
-	//    template<class Functor>
-	//    void async_write(
-	//                     const boost::asio::mutable_buffers_1& buf,
-	//                     const Functor& f) const
-	//    {
-	//        boost::asio::async_read(*socket_, buf, f);
-	//    }
-	//    
-	//    void shutdown() const {
-	//        socket_->shutdown(boost::asio::ip::tcp::socket::shutdown_both);
-	//        socket_->close();
-	//    }
-	//    
-	//    
-	//};
 
 }
 

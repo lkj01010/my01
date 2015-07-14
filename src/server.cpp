@@ -1,61 +1,32 @@
-////
-//// server.cpp
-//// ~~~~~~~~~~
-////
-//// Copyright (c) 2003-2015 Christopher M. Kohlhoff (chris at kohlhoff dot com)
-////
-//// Distributed under the Boost Software License, Version 1.0. (See accompanying
-//// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-////
-//
-//#include <array>
-//#include <cstdlib>
-//#include <iostream>
-//#include <memory>
-//#include <type_traits>
-//#include <utility>
-//#include <boost/asio.hpp>
-//
-//using boost::asio::ip::tcp;
-//
-//
-//bool read = false; 
-//void deadline_handler(const boost::system::error_code &) 
-//{ std::cout << (read ? "read successfully" : "read failed") << std::endl;
-//system("pause");
-//} 
-//
-//void read_handler(const boost::system::error_code &) { read = true; } 
-//
-//
-//
-//
-//int main(int argc, char* argv[])
-//{
-//  try
-//  {
-//	  boost::asio::io_service io_service;
-//	  tcp::socket sock(io_service);
-//	  read = false;
-//	  char data[512];
-//	  sock.async_read_some(boost::asio::buffer(data, 512),
-//		  [](boost::system::error_code ec, std::size_t length)
-//			{
-//				read = true;
-//			}
-//		  );
-//							
-//
-//	  boost::asio::deadline_timer t(io_service, boost::posix_time::milliseconds(4000));
-//
-//	  t.async_wait(&deadline_handler);
-//
-//	  io_service.run();
-//  }
-//  catch (std::exception& e)
-//  {
-//    std::cerr << "Exception: " << e.what() << "\n";
-//  }
-//
-//  return 0;
-//}
+
+#include "tcp_server.h"
+using boost::asio::ip::tcp;
+
+
+
+int main(int argc, char* argv[])
+{
+	try
+	{
+		if (argc != 5)
+		{
+			std::cerr << "Usage: http_server <address> <port> <threads> <doc_root>\n";
+			std::cerr << "  For IPv4, try:\n";
+			std::cerr << "    receiver 0.0.0.0 80 1 .\n";
+			std::cerr << "  For IPv6, try:\n";
+			std::cerr << "    receiver 0::0 80 1 .\n";
+			return 1;
+		}
+
+		std::size_t num_threads = boost::lexical_cast<std::size_t>(argv[3]);
+		net::tcp_server s(argv[1], argv[2], argv[4], num_threads);
+
+		s.run();
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << "exception: " << e.what() << "\n";
+	}
+
+	return 0;
+}

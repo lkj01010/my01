@@ -9,6 +9,7 @@
 #include "tcp_connection.h"
 
 using boost::asio::ip::tcp;
+using namespace net;
 
 namespace detail{
     
