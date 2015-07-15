@@ -80,7 +80,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>src\net\proto;src\net;src\mongodb;src\com;F:\lkj\gitText\mongo-cxx-driver\build\install\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\net\proto;src\net;src\mongodb;src\example;src\com;F:\lkj\gitText\mongo-cxx-driver\build\install\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN32;STATIC_LIBMONGOCLIENT;_WIN32_WINNT=0x0501;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>

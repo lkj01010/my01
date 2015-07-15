@@ -8,7 +8,8 @@ tcp_server::tcp_server(const std::string& address, const std::string& port,
 	: io_service_pool_(io_service_pool_size),
 	signals_(io_service_pool_.get_io_service()),
 	acceptor_(io_service_pool_.get_io_service()),
-	new_connection_()
+	new_connection_(),
+	n_conn_(0)
 {
 	// Register to handle the signals that indicate when the server should exit.
 	// It is safe to register for the same signal multiple times in a program,
@@ -29,11 +30,14 @@ tcp_server::tcp_server(const std::string& address, const std::string& port,
 	acceptor_.bind(endpoint);
 	acceptor_.listen();
 
-	start_accept();
+	std::cout << "server open with ip: " << endpoint.address().to_string() << 
+		" port: " << endpoint.port() << " threads: " << io_service_pool_size 
+		<< std::endl;
 }
 
 void tcp_server::run()
 {
+	start_accept();
 	io_service_pool_.run();
 }
 
@@ -44,13 +48,21 @@ void tcp_server::start_accept()
 	acceptor_.async_accept(new_connection_->socket(),
 		boost::bind(&tcp_server::handle_accept, this,
 		boost::asio::placeholders::error));
+
+	new_connection_->set_connection_callback(connection_callback_);
+	new_connection_->set_message_callback(message_callback_);
+	new_connection_->set_write_complete_callback(write_complete_callback_);
 }
 
 void tcp_server::handle_accept(const boost::system::error_code& e)
 {
 	if (!e)
 	{
+		n_conn_++;
 		new_connection_->start();
+
+		tcp::endpoint ep = new_connection_->socket().remote_endpoint();
+		std::cout << ep.address().to_string() << ":" << ep.port() << "connected. n_conn = " << n_conn_ << std::endl;
 	}
 
 	start_accept();

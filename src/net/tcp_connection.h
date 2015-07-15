@@ -15,26 +15,36 @@
 namespace net
 {
 	class tcp_connection;
+	class message;
+
 	typedef boost::shared_ptr<tcp_connection> tcp_connection_ptr;
 	typedef boost::function < void(const tcp_connection_ptr&)> connection_callback;
-	typedef boost::function < void(const tcp_connection_ptr&, std::string, boost::posix_time::ptime)> message_callback;
+	typedef boost::function < void(const tcp_connection_ptr&, const message&, boost::posix_time::ptime)> message_callback;
 	typedef boost::function < void(const tcp_connection_ptr&)> write_complete_callback;
 
+	
 	class tcp_connection : public boost::enable_shared_from_this<tcp_connection>
 	{
 	public:
 		tcp_connection(boost::asio::io_service& io_service)
 			: socket_(io_service)
+			, strand_(io_service)
 		{}
 
 		boost::asio::ip::tcp::socket& socket(){ return socket_; }
+		bool is_open() { return socket_.is_open(); }
 
 		void start();
 
-		void set_tie(const boost::shared_ptr<void>& tie){
-			tie_ = tie;
-		}
-		boost::shared_ptr<void> tie() const { return tie_; }
+		//void set_tie(const boost::shared_ptr<void>& tie){
+		//	tie_ = tie;
+		//}
+
+		void set_module(void* module){ module_ = module; }
+		void* const module() const{ return module_; }
+
+		void send(const std::string& data);
+
 
 		void set_connection_callback(const connection_callback& cb){
 			connection_callback_ = cb;
@@ -51,16 +61,20 @@ namespace net
 			std::size_t bytes_transferred);
 
 		/// Handle completion of a write operation.
-		void handle_write(const boost::system::error_code& e);
+		void handle_write(const boost::system::error_code& e, 
+			const size_t size);
 
-		/// Socket for the connection.
+		void handle_send(const std::string& data);
+	private:
 		boost::asio::ip::tcp::socket socket_;
-
+		boost::asio::io_service::strand strand_;
 		/// Buffer for incoming data.
 		boost::array<char, 8192> buffer_;
 
 
-		boost::shared_ptr<void> tie_;	//Tie a object to this, and managed by this
+		//boost::shared_ptr<boost::any> tie_;	//Tie a object to this, and managed by this
+
+		void *module_;
 
 		connection_callback connection_callback_;
 		message_callback message_callback_;

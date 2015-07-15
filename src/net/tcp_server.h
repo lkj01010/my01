@@ -46,6 +46,8 @@ namespace net
 		connection_callback connection_callback_;
 		message_callback message_callback_;
 		write_complete_callback write_complete_callback_;
+
+		int n_conn_;
 	};
 
 }

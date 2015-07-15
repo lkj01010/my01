@@ -26,6 +26,8 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/any.hpp>
+#include "boost/date_time/posix_time/time_formatters.hpp"
 
 
 #include <boost/asio.hpp>
