@@ -38,8 +38,6 @@ namespace net
 
 		// can invoke from master thread or conn thread both
 		void remove_connection(const tcp_connection_ptr& conn);
-		// callback needed by connection
-		void connection_close_callback(const tcp_connection_ptr& conn);
 		// do something like removing conn handler from server, if have.
 		void handle_remove_connection(const tcp_connection_ptr& conn);
 

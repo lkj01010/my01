@@ -46,40 +46,41 @@ void tcp_connection::connect_established()
 void tcp_connection::handle_read(const boost::system::error_code& e,
 	std::size_t bytes_transferred)
 {
-	if (!e)
-	{
-		if (bytes_transferred > 0)
-		{
-			message msg;
-			msg.set_content(string(buffer_.begin(), buffer_.end()));
-			message_callback_(shared_from_this(), msg, boost::posix_time::second_clock::local_time());
-
-			bool result = false;
-
-
-			if (result)
-			{
-				boost::asio::async_write(socket_,
-					boost::asio::buffer(""),
-					boost::asio::transfer_at_least(0),
-					boost::bind(&tcp_connection::handle_write, shared_from_this(),
-					boost::asio::placeholders::error,
-					boost::asio::placeholders::bytes_transferred));
-			}
-			else
-			{
-				socket_.async_read_some(boost::asio::buffer(buffer_),
-					boost::bind(&tcp_connection::handle_read, shared_from_this(),
-					boost::asio::placeholders::error,
-					boost::asio::placeholders::bytes_transferred));
-			}
-		}
-	}
-	else{
-		close();
-		std::cerr << "tcp_connection closed. handle_read." << e.value() << e.message() << std::endl;
-
-	}
+    // is_open()??? NO !!! should not discard this. when client is close, you should still deal with their message！
+    if (!e)
+    {
+        if (bytes_transferred > 0)
+        {
+            message msg;
+            msg.set_content(string(buffer_.begin(), buffer_.end()));
+            message_callback_(shared_from_this(), msg, boost::posix_time::second_clock::local_time());
+            
+            bool result = false;
+            
+            
+            if (result)
+            {
+                boost::asio::async_write(socket_,
+                                         boost::asio::buffer(""),
+                                         boost::asio::transfer_at_least(0),
+                                         boost::bind(&tcp_connection::handle_write, shared_from_this(),
+                                                     boost::asio::placeholders::error,
+                                                     boost::asio::placeholders::bytes_transferred));
+            }
+            else
+            {
+                socket_.async_read_some(boost::asio::buffer(buffer_),
+                                        boost::bind(&tcp_connection::handle_read, shared_from_this(),
+                                                    boost::asio::placeholders::error,
+                                                    boost::asio::placeholders::bytes_transferred));
+            }
+        }
+    }
+    else{
+        close();
+        std::cerr << "tcp_connection closed. handle_read." << e.value() << e.message() << std::endl;
+        
+    }
 
 	// If an error occurs then no new asynchronous operations are started. This
 	// means that all shared_ptr references to the connection object will
@@ -89,20 +90,19 @@ void tcp_connection::handle_read(const boost::system::error_code& e,
 
 void tcp_connection::handle_write(const boost::system::error_code& e, const size_t size)
 {
-	if (!e)
-	{
-		// Initiate graceful connection closure.
-		boost::system::error_code ignored_ec;
-		//socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
-	}
-	else{
-		close();
-		std::cerr << "tcp_connection closed. handle_write." << e.value() << e.message() << std::endl;
-	}
-	// No new asynchronous operations are started. This means that all shared_ptr
-	// references to the connection object will disappear and the object will be
-	// destroyed automatically after this handler returns. The connection class's
-	// destructor closes the socket.
+    // there would be much accumulated commands before socket is closed. When this occurs, discard them.
+    if (is_open()){
+        if (!e)
+        {
+            // Initiate graceful connection closure.
+            boost::system::error_code ignored_ec;
+            //socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
+        }
+        else{
+            close();
+            std::cerr << "tcp_connection closed. handle_write." << e.value() << e.message() << std::endl;
+        }
+    }
 }
 
 void tcp_connection::close(){
@@ -117,8 +117,15 @@ void tcp_connection::close(){
 }
 
 void tcp_connection::connect_destroyed(){
-	socket_.close();
-	connection_callback_(shared_from_this());
+    try{
+        if (is_open()){
+            socket_.close();
+            connection_callback_(shared_from_this());
+        }
+    }
+    catch (const boost::exception& e){
+        std::cerr << "socket close exception." << std::endl;
+    }
 }
 
 void tcp_connection::send(const string& data)
