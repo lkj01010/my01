@@ -1,0 +1,41 @@
+import socket 
+import sys,time
+
+
+
+host = '127.0.0.1'
+port =12303
+n_conn = 1500
+
+remote_ip = socket.gethostbyname( host )
+remote_ip = host
+
+start = time.time()
+for i in range(n_conn):
+	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	sock.connect((remote_ip, port))
+	print 'Socket ' + str(i) + ' Connected to ' + str(port) + ' on ip ' + remote_ip
+	sock.close()
+
+end = time.time()
+elapsed = end-start
+print "all elapsed seconds %.3f" % elapsed
+
+
+sockarr = []
+start = time.time()
+for i in range(n_conn):
+	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	sockarr.append(sock)
+end = time.time()
+elapsed = end-start
+print "socks alloc seconds %.3f" % elapsed
+
+
+start = time.time()
+for i in range(n_conn):
+	sockarr[i].connect((remote_ip, port))
+	sockarr[i].close()
+end = time.time()
+elapsed = end-start
+print "socks connect seconds %.3f" % elapsed

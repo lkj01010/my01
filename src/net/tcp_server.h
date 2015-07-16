@@ -36,6 +36,13 @@ namespace net
 
 		void handle_accept(const boost::system::error_code& e);
 
+		// can invoke from master thread or conn thread both
+		void remove_connection(const tcp_connection_ptr& conn);
+		// callback needed by connection
+		void connection_close_callback(const tcp_connection_ptr& conn);
+		// do something like removing conn handler from server, if have.
+		void handle_remove_connection(const tcp_connection_ptr& conn);
+
 		void handle_stop();
 
 		io_service_pool io_service_pool_;
@@ -43,11 +50,15 @@ namespace net
 		boost::asio::ip::tcp::acceptor acceptor_;
 		tcp_connection_ptr new_connection_;
 
+		boost::asio::io_service& io_master_;
+		boost::asio::io_service::strand strand_;
+
 		connection_callback connection_callback_;
 		message_callback message_callback_;
 		write_complete_callback write_complete_callback_;
 
-		int n_conn_;
+		int next_conn_id_;
+
 	};
 
 }
