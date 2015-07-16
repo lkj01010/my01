@@ -7,8 +7,8 @@ if __name__ == '__main__':
 #    port = 80
      
      
-    host = '192.168.1.107'
-    port =12303
+    host = 'localhost'
+    port =42218
     
     remote_ip = socket.gethostbyname( host )
     

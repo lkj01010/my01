@@ -8,18 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		1668901D1B458F3D003AE8B7 /* mongo_wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 166890151B458F3D003AE8B7 /* mongo_wrapper.cpp */; };
-		1668901E1B458F3D003AE8B7 /* task.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 166890181B458F3D003AE8B7 /* task.cpp */; };
 		1668901F1B458F3D003AE8B7 /* server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1668901A1B458F3D003AE8B7 /* server.cpp */; };
-		166890201B458F3D003AE8B7 /* server2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1668901B1B458F3D003AE8B7 /* server2.cpp */; };
 		166890221B459169003AE8B7 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 166890211B459169003AE8B7 /* libboost_system.a */; };
 		166890241B4591AB003AE8B7 /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 166890231B4591AB003AE8B7 /* libboost_thread.a */; };
 		16919B021B47009400AB29D8 /* tcp_connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16919B001B47009400AB29D8 /* tcp_connection.cpp */; };
-		16BB27EA1B4AECA800AF2115 /* codec.h in Sources */ = {isa = PBXBuildFile; fileRef = 16BB27E91B4AEC8D00AF2115 /* codec.h */; };
+		169B8FAD1B56A96A00C83D9C /* io_service_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169B8FA91B56A96A00C83D9C /* io_service_pool.cpp */; };
+		169B8FAE1B56A96A00C83D9C /* tcp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169B8FAB1B56A96A00C83D9C /* tcp_server.cpp */; };
+		169B8FB31B56AB2400C83D9C /* libboost_timer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 169B8FB21B56AB2400C83D9C /* libboost_timer.a */; };
+		169B8FB51B56AB9F00C83D9C /* libboost_date_time.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 169B8FB41B56AB9F00C83D9C /* libboost_date_time.a */; };
 		16BB27EB1B4AECB700AF2115 /* common.h in Sources */ = {isa = PBXBuildFile; fileRef = 166890101B458F3D003AE8B7 /* common.h */; };
 		16BB27EC1B4AECB700AF2115 /* singleton.h in Sources */ = {isa = PBXBuildFile; fileRef = 166890111B458F3D003AE8B7 /* singleton.h */; };
 		16BB27ED1B4AECB700AF2115 /* mongo_test.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 166890141B458F3D003AE8B7 /* mongo_test.hpp */; };
 		16BB27EE1B4AECB700AF2115 /* mongo_wrapper.h in Sources */ = {isa = PBXBuildFile; fileRef = 166890161B458F3D003AE8B7 /* mongo_wrapper.h */; };
-		16BB27EF1B4AECB700AF2115 /* task.h in Sources */ = {isa = PBXBuildFile; fileRef = 166890191B458F3D003AE8B7 /* task.h */; };
 		16BB27F01B4AECB700AF2115 /* tcp_connection.h in Sources */ = {isa = PBXBuildFile; fileRef = 16919B011B47009400AB29D8 /* tcp_connection.h */; };
 		16FAC8F11B50194A00AAF935 /* message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16FAC8F01B50194A00AAF935 /* message.cpp */; };
 /* End PBXBuildFile section */
@@ -43,16 +43,20 @@
 		166890141B458F3D003AE8B7 /* mongo_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mongo_test.hpp; sourceTree = "<group>"; };
 		166890151B458F3D003AE8B7 /* mongo_wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mongo_wrapper.cpp; sourceTree = "<group>"; };
 		166890161B458F3D003AE8B7 /* mongo_wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mongo_wrapper.h; sourceTree = "<group>"; };
-		166890181B458F3D003AE8B7 /* task.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = task.cpp; sourceTree = "<group>"; };
-		166890191B458F3D003AE8B7 /* task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = task.h; sourceTree = "<group>"; };
 		1668901A1B458F3D003AE8B7 /* server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server.cpp; sourceTree = "<group>"; };
-		1668901B1B458F3D003AE8B7 /* server2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server2.cpp; sourceTree = "<group>"; };
 		166890211B459169003AE8B7 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_system.a; sourceTree = "<group>"; };
 		166890231B4591AB003AE8B7 /* libboost_thread.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_thread.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_thread.a; sourceTree = "<group>"; };
 		168D42C61B4EB342001D7B3A /* message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = message.h; sourceTree = "<group>"; };
 		16919B001B47009400AB29D8 /* tcp_connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tcp_connection.cpp; sourceTree = "<group>"; };
 		16919B011B47009400AB29D8 /* tcp_connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tcp_connection.h; sourceTree = "<group>"; };
-		16BB27E91B4AEC8D00AF2115 /* codec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = codec.h; sourceTree = "<group>"; };
+		169B8FA91B56A96A00C83D9C /* io_service_pool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = io_service_pool.cpp; sourceTree = "<group>"; };
+		169B8FAA1B56A96A00C83D9C /* io_service_pool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = io_service_pool.hpp; sourceTree = "<group>"; };
+		169B8FAB1B56A96A00C83D9C /* tcp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tcp_server.cpp; sourceTree = "<group>"; };
+		169B8FAC1B56A96A00C83D9C /* tcp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tcp_server.h; sourceTree = "<group>"; };
+		169B8FB01B56A97700C83D9C /* echo_server.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = echo_server.hpp; sourceTree = "<group>"; };
+		169B8FB11B56A99000C83D9C /* thread_lock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thread_lock.h; sourceTree = "<group>"; };
+		169B8FB21B56AB2400C83D9C /* libboost_timer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_timer.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_timer.a; sourceTree = "<group>"; };
+		169B8FB41B56AB9F00C83D9C /* libboost_date_time.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_date_time.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_date_time.a; sourceTree = "<group>"; };
 		16FAC8F01B50194A00AAF935 /* message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = message.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,6 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				169B8FB51B56AB9F00C83D9C /* libboost_date_time.a in Frameworks */,
+				169B8FB31B56AB2400C83D9C /* libboost_timer.a in Frameworks */,
 				166890241B4591AB003AE8B7 /* libboost_thread.a in Frameworks */,
 				166890221B459169003AE8B7 /* libboost_system.a in Frameworks */,
 			);
@@ -72,6 +78,8 @@
 		165CA77D1B41BAF600A29321 = {
 			isa = PBXGroup;
 			children = (
+				169B8FB41B56AB9F00C83D9C /* libboost_date_time.a */,
+				169B8FB21B56AB2400C83D9C /* libboost_timer.a */,
 				166890231B4591AB003AE8B7 /* libboost_thread.a */,
 				166890211B459169003AE8B7 /* libboost_system.a */,
 				1668900E1B458F3D003AE8B7 /* src */,
@@ -90,11 +98,11 @@
 		1668900E1B458F3D003AE8B7 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				169B8FAF1B56A97700C83D9C /* example */,
 				1668900F1B458F3D003AE8B7 /* com */,
 				166890121B458F3D003AE8B7 /* mongodb */,
 				166890171B458F3D003AE8B7 /* net */,
 				1668901A1B458F3D003AE8B7 /* server.cpp */,
-				1668901B1B458F3D003AE8B7 /* server2.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -102,6 +110,7 @@
 		1668900F1B458F3D003AE8B7 /* com */ = {
 			isa = PBXGroup;
 			children = (
+				169B8FB11B56A99000C83D9C /* thread_lock.h */,
 				166890101B458F3D003AE8B7 /* common.h */,
 				166890111B458F3D003AE8B7 /* singleton.h */,
 			);
@@ -122,12 +131,22 @@
 			isa = PBXGroup;
 			children = (
 				16BB27E81B4AEC8D00AF2115 /* proto */,
-				166890181B458F3D003AE8B7 /* task.cpp */,
-				166890191B458F3D003AE8B7 /* task.h */,
+				169B8FA91B56A96A00C83D9C /* io_service_pool.cpp */,
+				169B8FAA1B56A96A00C83D9C /* io_service_pool.hpp */,
+				169B8FAB1B56A96A00C83D9C /* tcp_server.cpp */,
+				169B8FAC1B56A96A00C83D9C /* tcp_server.h */,
 				16919B001B47009400AB29D8 /* tcp_connection.cpp */,
 				16919B011B47009400AB29D8 /* tcp_connection.h */,
 			);
 			path = net;
+			sourceTree = "<group>";
+		};
+		169B8FAF1B56A97700C83D9C /* example */ = {
+			isa = PBXGroup;
+			children = (
+				169B8FB01B56A97700C83D9C /* echo_server.hpp */,
+			);
+			path = example;
 			sourceTree = "<group>";
 		};
 		16BB27E81B4AEC8D00AF2115 /* proto */ = {
@@ -135,7 +154,6 @@
 			children = (
 				16FAC8F01B50194A00AAF935 /* message.cpp */,
 				168D42C61B4EB342001D7B3A /* message.h */,
-				16BB27E91B4AEC8D00AF2115 /* codec.h */,
 			);
 			path = proto;
 			sourceTree = "<group>";
@@ -197,17 +215,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				16BB27EB1B4AECB700AF2115 /* common.h in Sources */,
+				169B8FAE1B56A96A00C83D9C /* tcp_server.cpp in Sources */,
 				16FAC8F11B50194A00AAF935 /* message.cpp in Sources */,
 				16BB27EC1B4AECB700AF2115 /* singleton.h in Sources */,
 				16BB27ED1B4AECB700AF2115 /* mongo_test.hpp in Sources */,
 				16BB27EE1B4AECB700AF2115 /* mongo_wrapper.h in Sources */,
-				16BB27EF1B4AECB700AF2115 /* task.h in Sources */,
 				16BB27F01B4AECB700AF2115 /* tcp_connection.h in Sources */,
-				16BB27EA1B4AECA800AF2115 /* codec.h in Sources */,
 				1668901D1B458F3D003AE8B7 /* mongo_wrapper.cpp in Sources */,
+				169B8FAD1B56A96A00C83D9C /* io_service_pool.cpp in Sources */,
 				1668901F1B458F3D003AE8B7 /* server.cpp in Sources */,
-				166890201B458F3D003AE8B7 /* server2.cpp in Sources */,
-				1668901E1B458F3D003AE8B7 /* task.cpp in Sources */,
 				16919B021B47009400AB29D8 /* tcp_connection.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
