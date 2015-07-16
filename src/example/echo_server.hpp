@@ -16,15 +16,23 @@ public:
 class echo_server{
 public:
 	echo_server(const std::string& address, const std::string& port,
-	std::size_t io_service_pool_size)
-	: server_(address, port, io_service_pool_size)
+		std::size_t io_service_pool_size)
+		: server_(address, port, io_service_pool_size)
+		, n_conn_(0)
 	{
 		server_.set_connection_callback(boost::bind(&echo_server::connection_callback, this, _1));
 		server_.set_message_callback(boost::bind(&echo_server::message_callback, this, _1, _2, _3));
 	}
 
 	void connection_callback(const tcp_connection_ptr& connection_ptr){
-		connection_ptr->set_module((void*)(new session()));
+		if (connection_ptr->is_open()){
+			connection_ptr->set_module((void*)(new session()));
+			n_conn_++;
+		}
+		else{
+			n_conn_--;
+		}
+		std::cerr << "*****connected. n_conn = " << n_conn_ << std::endl;
 	}
 
 	void message_callback(const tcp_connection_ptr& connection_ptr, const net::message& msg, boost::posix_time::ptime time){
@@ -44,4 +52,5 @@ public:
 
 
 	net::tcp_server server_;
+	int n_conn_;
 }; 

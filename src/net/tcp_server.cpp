@@ -9,7 +9,11 @@ tcp_server::tcp_server(const std::string& address, const std::string& port,
 	signals_(io_service_pool_.get_io_service()),
 	acceptor_(io_service_pool_.get_io_service()),
 	new_connection_(),
-	n_conn_(0)
+	next_conn_id_(0),
+	io_master_(acceptor_.get_io_service()),
+	strand_(io_master_),
+	message_callback_(default_message_callback),
+	connection_callback_(default_connection_callback)
 {
 	// Register to handle the signals that indicate when the server should exit.
 	// It is safe to register for the same signal multiple times in a program,
@@ -30,7 +34,7 @@ tcp_server::tcp_server(const std::string& address, const std::string& port,
 	acceptor_.bind(endpoint);
 	acceptor_.listen();
 
-	std::cout << "server open with ip: " << endpoint.address().to_string() << 
+	std::cerr << "server open with ip: " << endpoint.address().to_string() <<
 		" port: " << endpoint.port() << " threads: " << io_service_pool_size 
 		<< std::endl;
 }
@@ -38,6 +42,7 @@ tcp_server::tcp_server(const std::string& address, const std::string& port,
 void tcp_server::run()
 {
 	start_accept();
+	//io_work_.run();
 	io_service_pool_.run();
 }
 
@@ -52,21 +57,37 @@ void tcp_server::start_accept()
 	new_connection_->set_connection_callback(connection_callback_);
 	new_connection_->set_message_callback(message_callback_);
 	new_connection_->set_write_complete_callback(write_complete_callback_);
+	new_connection_->set_close_callback(boost::bind(&tcp_server::remove_connection, this, _1));	//this should be "new_connection_"?
 }
 
 void tcp_server::handle_accept(const boost::system::error_code& e)
 {
 	if (!e)
 	{
-		n_conn_++;
-		new_connection_->start();
+		next_conn_id_++;
+		new_connection_->connect_established();
 
-		tcp::endpoint ep = new_connection_->socket().remote_endpoint();
-		std::cout << ep.address().to_string() << ":" << ep.port() << "connected. n_conn = " << n_conn_ << std::endl;
+		//remote_endpoint() thread unsafe? cause crash !
+		//tcp::endpoint ep = new_connection_->socket().remote_endpoint();
+
+		std::cerr << /*ep.address().to_string() << ":" << ep.port() <<*/ "connected. conn id = " << next_conn_id_ << std::endl;
 	}
 
 	start_accept();
 }
+
+void tcp_server::remove_connection(const tcp_connection_ptr& conn){
+	conn->io_service().post(boost::bind(&tcp_connection::connect_destroyed, conn));
+	io_master_.post(
+		/*strand_.wrap*/(boost::bind(&tcp_server::handle_remove_connection, this, conn))
+		);
+}
+
+void tcp_server::handle_remove_connection(const tcp_connection_ptr& conn){
+	std::cerr << "master ios : handle_remove_connection " << std::endl;
+	
+}
+
 
 void tcp_server::handle_stop()
 {

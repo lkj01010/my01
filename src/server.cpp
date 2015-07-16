@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 		}*/
 
 		std::size_t num_threads = boost::lexical_cast<std::size_t>(argv[1]);
-		echo_server s("localhost", "12303", num_threads);
+		echo_server s("127.0.0.1", "12303", num_threads);
 
 		s.run();
 	}
