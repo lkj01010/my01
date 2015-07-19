@@ -54,3 +54,4 @@
 
 
 #include "singleton.h"
+#include "log.h"

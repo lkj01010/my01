@@ -21,6 +21,13 @@
 		16BB27ED1B4AECB700AF2115 /* mongo_test.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 166890141B458F3D003AE8B7 /* mongo_test.hpp */; };
 		16BB27EE1B4AECB700AF2115 /* mongo_wrapper.h in Sources */ = {isa = PBXBuildFile; fileRef = 166890161B458F3D003AE8B7 /* mongo_wrapper.h */; };
 		16BB27F01B4AECB700AF2115 /* tcp_connection.h in Sources */ = {isa = PBXBuildFile; fileRef = 16919B011B47009400AB29D8 /* tcp_connection.h */; };
+		16E7873B1B5C25E300D8DF77 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16E787391B5C25E300D8DF77 /* log.cpp */; };
+		16E7873D1B5C2CC500D8DF77 /* libboost_log.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E7873C1B5C2CC500D8DF77 /* libboost_log.a */; };
+		16E787411B5C2D2400D8DF77 /* libboost_iostreams.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E787401B5C2D2400D8DF77 /* libboost_iostreams.a */; };
+		16E787431B5C325400D8DF77 /* libboost_locale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E787421B5C325400D8DF77 /* libboost_locale.a */; };
+		16E787451B5C34E400D8DF77 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E787441B5C34E400D8DF77 /* libboost_filesystem.a */; };
+		16E787471B5C43B900D8DF77 /* libboost_log.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E787461B5C43B900D8DF77 /* libboost_log.dylib */; };
+		16E787491B5C45A000D8DF77 /* libboost_log_setup.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E787481B5C45A000D8DF77 /* libboost_log_setup.dylib */; };
 		16FAC8F11B50194A00AAF935 /* message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16FAC8F01B50194A00AAF935 /* message.cpp */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +64,14 @@
 		169B8FB11B56A99000C83D9C /* thread_lock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thread_lock.h; sourceTree = "<group>"; };
 		169B8FB21B56AB2400C83D9C /* libboost_timer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_timer.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_timer.a; sourceTree = "<group>"; };
 		169B8FB41B56AB9F00C83D9C /* libboost_date_time.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_date_time.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_date_time.a; sourceTree = "<group>"; };
+		16E787391B5C25E300D8DF77 /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
+		16E7873A1B5C25E300D8DF77 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
+		16E7873C1B5C2CC500D8DF77 /* libboost_log.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_log.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_log.a; sourceTree = "<group>"; };
+		16E787401B5C2D2400D8DF77 /* libboost_iostreams.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_iostreams.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_iostreams.a; sourceTree = "<group>"; };
+		16E787421B5C325400D8DF77 /* libboost_locale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_locale.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_locale.a; sourceTree = "<group>"; };
+		16E787441B5C34E400D8DF77 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_filesystem.a; sourceTree = "<group>"; };
+		16E787461B5C43B900D8DF77 /* libboost_log.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_log.dylib; path = ../../boost/boost_1_58_0/stage/lib/libboost_log.dylib; sourceTree = "<group>"; };
+		16E787481B5C45A000D8DF77 /* libboost_log_setup.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_log_setup.dylib; path = ../../boost/boost_1_58_0/stage/lib/libboost_log_setup.dylib; sourceTree = "<group>"; };
 		16FAC8F01B50194A00AAF935 /* message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = message.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,6 +80,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16E787491B5C45A000D8DF77 /* libboost_log_setup.dylib in Frameworks */,
+				16E787471B5C43B900D8DF77 /* libboost_log.dylib in Frameworks */,
+				16E787451B5C34E400D8DF77 /* libboost_filesystem.a in Frameworks */,
+				16E787431B5C325400D8DF77 /* libboost_locale.a in Frameworks */,
+				16E787411B5C2D2400D8DF77 /* libboost_iostreams.a in Frameworks */,
+				16E7873D1B5C2CC500D8DF77 /* libboost_log.a in Frameworks */,
 				169B8FB51B56AB9F00C83D9C /* libboost_date_time.a in Frameworks */,
 				169B8FB31B56AB2400C83D9C /* libboost_timer.a in Frameworks */,
 				166890241B4591AB003AE8B7 /* libboost_thread.a in Frameworks */,
@@ -78,6 +99,12 @@
 		165CA77D1B41BAF600A29321 = {
 			isa = PBXGroup;
 			children = (
+				16E787481B5C45A000D8DF77 /* libboost_log_setup.dylib */,
+				16E787461B5C43B900D8DF77 /* libboost_log.dylib */,
+				16E787441B5C34E400D8DF77 /* libboost_filesystem.a */,
+				16E787421B5C325400D8DF77 /* libboost_locale.a */,
+				16E787401B5C2D2400D8DF77 /* libboost_iostreams.a */,
+				16E7873C1B5C2CC500D8DF77 /* libboost_log.a */,
 				169B8FB41B56AB9F00C83D9C /* libboost_date_time.a */,
 				169B8FB21B56AB2400C83D9C /* libboost_timer.a */,
 				166890231B4591AB003AE8B7 /* libboost_thread.a */,
@@ -113,6 +140,8 @@
 				169B8FB11B56A99000C83D9C /* thread_lock.h */,
 				166890101B458F3D003AE8B7 /* common.h */,
 				166890111B458F3D003AE8B7 /* singleton.h */,
+				16E787391B5C25E300D8DF77 /* log.cpp */,
+				16E7873A1B5C25E300D8DF77 /* log.h */,
 			);
 			path = com;
 			sourceTree = "<group>";
@@ -220,6 +249,7 @@
 				16BB27EC1B4AECB700AF2115 /* singleton.h in Sources */,
 				16BB27ED1B4AECB700AF2115 /* mongo_test.hpp in Sources */,
 				16BB27EE1B4AECB700AF2115 /* mongo_wrapper.h in Sources */,
+				16E7873B1B5C25E300D8DF77 /* log.cpp in Sources */,
 				16BB27F01B4AECB700AF2115 /* tcp_connection.h in Sources */,
 				1668901D1B458F3D003AE8B7 /* mongo_wrapper.cpp in Sources */,
 				169B8FAD1B56A96A00C83D9C /* io_service_pool.cpp in Sources */,

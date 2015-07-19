@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>D773DDAC-23F0-4392-8ACD-5F1E9631E0AB</string>
 	<key>IDESourceControlProjectName</key>
-	<string>my01</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>FFBCF926F05D1247498AE81E8E6AA86175156661</key>
 		<string>https://github.com/lkj01010/my01</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>my01.xcodeproj</string>
+	<string>my01.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>FFBCF926F05D1247498AE81E8E6AA86175156661</key>

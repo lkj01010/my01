@@ -155,4 +155,10 @@ void tcp_connection::handle_send(const std::string& data){
 		boost::asio::buffer(data.c_str(), data.size()), boost::asio::transfer_at_least(data.size()),
 		strand_.wrap(boost::bind(&tcp_connection::handle_write, shared_from_this(), boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred))
 		);
+    
+    my::log lg;
+    lg<<(data);
+    
+//    BOOST_LOG_TRIVIAL(trace) << data;
+    
 }
