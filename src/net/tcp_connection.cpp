@@ -97,6 +97,8 @@ void tcp_connection::handle_write(const boost::system::error_code& e, const size
             // Initiate graceful connection closure.
             boost::system::error_code ignored_ec;
             //socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
+            
+            SLOG_WARNING<< "write size:" << size;
         }
         else{
             close();
@@ -156,9 +158,11 @@ void tcp_connection::handle_send(const std::string& data){
 		strand_.wrap(boost::bind(&tcp_connection::handle_write, shared_from_this(), boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred))
 		);
     
-    my::log lg;
-    lg<<(data);
+//    my::log lg;
+//    lg<<(data);
     
 //    BOOST_LOG_TRIVIAL(trace) << data;
+
+    
     
 }

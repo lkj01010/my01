@@ -1,23 +1,8 @@
-//
-//  log.h
-//  my01
-//
-//  Created by 林 科俊 on 15/7/20.
-//  Copyright (c) 2015年 mid. All rights reserved.
-//
+#pragma once
+#include <string>
 
-#ifndef __my01__log__
-#define __my01__log__
 
 #define BOOST_LOG_DYN_LINK 1
-
-#include <boost/filesystem.hpp>
-#include <boost/filesystem/fstream.hpp>
-
-#include <iostream>
-
-#include <fstream>
-
 
 #include <boost/log/common.hpp>
 #include <boost/log/expressions.hpp>
@@ -33,130 +18,35 @@
 
 #include <boost/log/support/date_time.hpp>
 
-
-namespace logging = boost::log;
-namespace sinks = boost::log::sinks;
-namespace attrs = boost::log::attributes;
-namespace src = boost::log::sources;
-namespace expr = boost::log::expressions;
-namespace keywords = boost::log::keywords;
-
-
-namespace logging = boost::log;
-namespace expr = boost::log::expressions;
-namespace sinks = boost::log::sinks;
-namespace attrs = boost::log::attributes;
-namespace src = boost::log::sources;
-namespace keywords = boost::log::keywords;
-
-
-enum severity_level
+enum severity_levels
 {
-    normal,
-    notification,
-    warning,
-    error,
-    critical
+    slog_emergency = 0,                //slog_emerg
+    slog_alert = 1,                    //slog_alert
+    slog_critical = 2,                 //slog_crit
+    slog_error = 3,                    //slog_error 大于slog_error的log不会在console显示 并且不会马上写入文件
+    slog_warning = 4,                  //slog_warning
+    slog_notice = 5,                   //slog_notice
+    slog_info = 6,                     //slog_info
+    slog_debug = 7                     //slog_debug
 };
 
-// The formatting logic for the severity level
-template< typename CharT, typename TraitsT >
-inline std::basic_ostream< CharT, TraitsT >& operator<< (std::basic_ostream< CharT, TraitsT >& strm, severity_level lvl)
+class SLog
 {
-    static const char* const str[] =
-    {
-        "normal",
-        "notification",
-        "warning",
-        "error",
-        "critical"
-    };
-    if (static_cast< std::size_t >(lvl) < (sizeof(str) / sizeof(*str)))
-        strm << str[lvl];
-    else
-        strm << static_cast< int >(lvl);
-    return strm;
-}
-
-namespace my
-{
-    
-class log{
 public:
-    log(){
-        logging::add_console_log(std::clog, keywords::format = "%TimeStamp%: %Message%");
-        
-        namespace fs=boost::filesystem;
-//        std::string dir = "\\Users\\Midstream\\Documents\\Dev\\git-me\\my01\\sample.log";
-//        bf::path file_path( "Users\Midstream\Documents\Dev\git-me\my01\");
-        std::string file_path = "/Users/Midstream/Documents/Dev/git-me/my01/sssss.log";
-        std::ofstream ff( file_path.c_str(), std::ios_base::out | std::ios_base::binary );      // or   fs::ofstream    all ok!!!!!!!
-//        file_path /= "sample.log";
-//        if (boost::filesystem::exists(file_path) == false)
-//        {
-////            boost::filesystem::create_directory(dir);
-//            std::ofstream f;
-//            f.open(file_path.c_str());
-//        }
-        logging::add_file_log
-        (
-         file_path,
-         keywords::filter = expr::attr< severity_level >("Severity") >= normal,
-         keywords::format = expr::stream
-         << expr::format_date_time< boost::posix_time::ptime >("TimeStamp", "%Y-%m-%d, %H:%M:%S.%f")
-         << " [" << expr::format_date_time< attrs::timer::value_type >("Uptime", "%O:%M:%S")
-         << "] [" << expr::format_named_scope("Scope", keywords::format = "%n (%f:%l)")
-         << "] <" << expr::attr< severity_level >("Severity")
-         << "> " << expr::message
-        /*
-         keywords::format = expr::format("%1% [%2%] [%3%] <%4%> %5%")
-         % expr::format_date_time< boost::posix_time::ptime >("TimeStamp", "%Y-%m-%d, %H:%M:%S.%f")
-         % expr::format_date_time< attrs::timer::value_type >("Uptime", "%O:%M:%S")
-         % expr::format_named_scope("Scope", keywords::format = "%n (%f:%l)")
-         % expr::attr< severity_level >("Severity")
-         % expr::message
-         */
-         );
-        
-        // Also let's add some commonly used attributes, like timestamp and record counter.
-        logging::add_common_attributes();
-        logging::core::get()->add_thread_attribute("Scope", attrs::named_scope());
-    }
+    SLog(void);
+    ~SLog(void);
     
-    void logger(){
-        
-        
-    }
-    
-    void operator<<(std::string what){
-        BOOST_LOG_FUNCTION();
-        
-        src::logger lg;
-        
-        // And output...
-        
-        BOOST_LOG(lg) << what + "fjeijfei" << "  append!!!!  ";
-        
-        src::severity_logger< severity_level > slg;
-        
-        // Let's pretend we also want to profile our code, so add a special timer attribute.
-        slg.add_attribute("Uptime", attrs::timer());
-        
-        BOOST_LOG_SEV(slg, normal) << "A normal severity message, will not pass to the file";
-        BOOST_LOG_SEV(slg, warning) << "A warning severity message, will pass to the file";
-        BOOST_LOG_SEV(slg, error) << "An error severity message, will pass to the file";
-    }
-    
-//    src::logger lg_;
+    static boost::log::sources::severity_logger< severity_levels > slg;
+    static void InitLog(const std::string& filename);
+    static void SetLevel(severity_levels sl);
 };
 
-}
-
-
-//#include <boost/log/trivial.hpp>
-//#include <boost/log/core.hpp>
-//#include <boost/log/expressions.hpp>
-
-
-
-#endif /* defined(__my01__log__) */
+#define BOOST_SLOG(slog_lvl)    BOOST_LOG_FUNCTION();BOOST_LOG_SEV(SLog::slg, slog_lvl)
+#define SLOG_EMERGENCY          BOOST_SLOG(slog_emergency)
+#define SLOG_ALERT              BOOST_SLOG(slog_alert)
+#define SLOG_CRITICAL           BOOST_SLOG(slog_critical)
+#define SLOG_ERROR              BOOST_SLOG(slog_error)
+#define SLOG_WARNING            BOOST_SLOG(slog_warning)
+#define SLOG_NOTICE             BOOST_SLOG(slog_notice)
+#define SLOG_INFO               BOOST_SLOG(slog_info)
+#define SLOG_DEBUG              BOOST_SLOG(slog_debug)

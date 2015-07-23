@@ -5,19 +5,20 @@ import sys,time
 
 host = '127.0.0.1'
 port =12303
-n_conn = 10000
+n_conn = 1000000
 remote_ip = socket.gethostbyname( host )
 remote_ip = host
 message = "1234567890abcdefghijklmn"
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect((remote_ip, port))
+
 
 
 start = time.time()
 for i in range(n_conn):
+	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	sock.connect((remote_ip, port))
 	sock.sendall(message)
 	print 'Socket ' + str(i) + ' Connected to ' + str(port) + ' on ip ' + remote_ip
-sock.close()	
+	sock.close()	
 
 end = time.time()
 elapsed = end-start
