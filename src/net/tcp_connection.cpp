@@ -78,7 +78,7 @@ void tcp_connection::handle_read(const boost::system::error_code& e,
     }
     else{
         close();
-        std::cerr << "tcp_connection closed. handle_read." << e.value() << e.message() << std::endl;
+		SLOG_WARNING << "tcp_connection closed. handle_read." << e.value() << e.message();
         
     }
 
@@ -98,11 +98,11 @@ void tcp_connection::handle_write(const boost::system::error_code& e, const size
             boost::system::error_code ignored_ec;
             //socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
             
-            SLOG_WARNING<< "write size:" << size;
+			SLOG_DEBUG << "write size:" << size;
         }
         else{
             close();
-            std::cerr << "tcp_connection closed. handle_write." << e.value() << e.message() << std::endl;
+			SLOG_DEBUG << "tcp_connection closed. handle_write." << e.value() << e.message() ;
         }
     }
 }
@@ -126,7 +126,7 @@ void tcp_connection::connect_destroyed(){
         }
     }
     catch (const boost::exception& e){
-        std::cerr << "socket close exception." << std::endl;
+		SLOG_WARNING << "socket close exception.";
     }
 }
 

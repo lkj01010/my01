@@ -1,8 +1,10 @@
 #pragma once
 #include <string>
 
-
+#ifndef _WIN32
 #define BOOST_LOG_DYN_LINK 1
+#endif
+
 
 #include <boost/log/common.hpp>
 #include <boost/log/expressions.hpp>

@@ -55,7 +55,7 @@ void SLog::InitLog(const std::string& filename)
          << " <" << _severity
          << ">: " << expr::message);
 
-     asink->set_filter(expr::attr< severity_levels >("Severity") <= slog_error);
+	 asink->set_filter(expr::attr< severity_levels >("Severity") <= slog_debug);
 
      logging::core::get()->add_sink(asink);
 

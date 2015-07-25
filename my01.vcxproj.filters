@@ -38,6 +38,9 @@
     <ClCompile Include="src\example\echo_server.hpp">
       <Filter>example</Filter>
     </ClCompile>
+    <ClCompile Include="src\com\log.cpp">
+      <Filter>com</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\com\common.h">
@@ -66,6 +69,9 @@
     </ClInclude>
     <ClInclude Include="src\net\io_service_pool.hpp">
       <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="src\com\log.h">
+      <Filter>com</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

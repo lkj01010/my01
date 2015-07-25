@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 			return 1;
 		}*/
         SLog::InitLog("/Users/Midstream/Documents/Dev/git-me/my01/sssss");
-        SLog::SetLevel(slog_notice);
+		SLog::SetLevel(slog_debug);
 
 		std::size_t num_threads = boost::lexical_cast<std::size_t>(argv[1]);
 //		echo_server s("::1", "12303", num_threads);         //ipv6  localhost
@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
 	}
 	catch (std::exception& e)
 	{
-		std::cerr << "exception: " << e.what() << "\n";
+		SLOG_EMERGENCY << "exception: " << e.what();
 		system("pause");
 	}
 

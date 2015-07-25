@@ -34,9 +34,8 @@ tcp_server::tcp_server(const std::string& address, const std::string& port,
 	acceptor_.bind(endpoint);
 	acceptor_.listen();
 
-	std::cerr << "server open with ip: " << endpoint.address().to_string() <<
-		" port: " << endpoint.port() << " threads: " << io_service_pool_size 
-		<< std::endl;
+	SLOG_DEBUG << "server open with ip: " << endpoint.address().to_string() <<
+		" port: " << endpoint.port() << " threads: " << io_service_pool_size ;
 }
 
 void tcp_server::run()
@@ -70,7 +69,7 @@ void tcp_server::handle_accept(const boost::system::error_code& e)
 		//remote_endpoint() thread unsafe? cause crash !
 		//tcp::endpoint ep = new_connection_->socket().remote_endpoint();
 
-		std::cerr << /*ep.address().to_string() << ":" << ep.port() <<*/ "connected. conn id = " << next_conn_id_ << std::endl;
+		SLOG_DEBUG << /*ep.address().to_string() << ":" << ep.port() <<*/ "connected. conn id = " << next_conn_id_ ;
 	}
 
 	start_accept();
@@ -84,7 +83,7 @@ void tcp_server::remove_connection(const tcp_connection_ptr& conn){
 }
 
 void tcp_server::handle_remove_connection(const tcp_connection_ptr& conn){
-	std::cerr << "master ios : handle_remove_connection " << std::endl;
+	SLOG_DEBUG << "master ios : handle_remove_connection " ;
 	
 }
 

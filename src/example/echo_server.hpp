@@ -32,7 +32,7 @@ public:
 		else{
 			n_conn_--;
 		}
-		std::cerr << "*****connected. n_conn = " << n_conn_ << std::endl;
+		SLOG_DEBUG << "new connection. n_conn = " << n_conn_;
 	}
 
 	void message_callback(const tcp_connection_ptr& connection_ptr, const net::message& msg, boost::posix_time::ptime time){
