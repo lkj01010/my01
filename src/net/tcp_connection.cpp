@@ -20,9 +20,10 @@ void net::default_connection_callback(const tcp_connection_ptr& conn)
 	SLOG_DEBUG << "default_connection_callback";
 }
 
-void net::default_message_callback(const tcp_connection_ptr&, std::string&)
+bool net::default_message_callback(const tcp_connection_ptr&, std::string&)
 {
 	SLOG_DEBUG << "default_message_callback";
+    return true;
 }
 
 //----------------------------------------------------------------------
@@ -31,7 +32,14 @@ tcp_connection::tcp_connection(boost::asio::io_service& io_service)
 	: ios_(io_service)
 	, socket_(io_service)
 	, strand_(io_service)
+    , module_(nullptr)
 {}
+
+tcp_connection::~tcp_connection(){
+    if (module_) {
+        SLOG_ERROR << "module must dealloc out of connection !!!";
+    }
+}
 
 void tcp_connection::connect_established()
 {
@@ -49,33 +57,38 @@ void tcp_connection::handle_read(const boost::system::error_code& e,
     // is_open()??? NO !!! should not discard this. when client is close, you should still deal with their message！
     if (!e)
     {
-//         message msg;
-		//msg.set_content(string(buffer_.data(), buffer_.data() + bytes_transferred));
-//         message_callback_(shared_from_this(), msg, boost::posix_time::second_clock::local_time());
-//         
-//         bool result = false;
-
-		rev_string_.append(rev_buffer_.data(), bytes_transferred);
-
-		message_callback_(shared_from_this(), rev_string_);
-
-        ////if (result)
-        //{
-        //    boost::asio::async_write(socket_,
-        //                             boost::asio::buffer("nihaoma"),
-        //                             boost::asio::transfer_at_least(0),
-        //                             boost::bind(&tcp_connection::handle_write, shared_from_this(),
-        //                                         boost::asio::placeholders::error,
-        //                                         boost::asio::placeholders::bytes_transferred));
-        //}
-        ////else
-        //{
-            socket_.async_read_some(boost::asio::buffer(rev_buffer_),		
-									//boost::asio::buffer(rev_buffer_, rev_buffer_size),			// or use this ?  need test
+        if(bytes_transferred > 0){
+            //         message msg;
+            //msg.set_content(string(buffer_.data(), buffer_.data() + bytes_transferred));
+            //         message_callback_(shared_from_this(), msg, boost::posix_time::second_clock::local_time());
+            //
+            //         bool result = false;
+            
+            rev_string_.append(rev_buffer_.data(), bytes_transferred);
+            
+            bool result = message_callback_(shared_from_this(), rev_string_);
+            
+            ////if (result)
+            //{
+            //    boost::asio::async_write(socket_,
+            //                             boost::asio::buffer("nihaoma"),
+            //                             boost::asio::transfer_at_least(0),
+            //                             boost::bind(&tcp_connection::handle_write, shared_from_this(),
+            //                                         boost::asio::placeholders::error,
+            //                                         boost::asio::placeholders::bytes_transferred));
+            //}
+            ////else
+            //{
+            socket_.async_read_some(boost::asio::buffer(rev_buffer_),
+                                    //boost::asio::buffer(rev_buffer_, rev_buffer_size),			// or use this ?  need test
                                     boost::bind(&tcp_connection::handle_read, shared_from_this(),
                                                 boost::asio::placeholders::error,
                                                 boost::asio::placeholders::bytes_transferred));
-        //}
+            //}
+        }else if(bytes_transferred == 0){
+            close();        // client first close
+        }
+
     }
     else{
         close();

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16642A611B67DB430054009C /* msg_codec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A5F1B67DB430054009C /* msg_codec.cpp */; };
+		16642A6C1B67EC260054009C /* mime_types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A631B67EC260054009C /* mime_types.cpp */; };
+		16642A6D1B67EC260054009C /* reply.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A651B67EC260054009C /* reply.cpp */; };
+		16642A6E1B67EC260054009C /* request_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A671B67EC260054009C /* request_handler.cpp */; };
+		16642A6F1B67EC260054009C /* request_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A691B67EC260054009C /* request_parser.cpp */; };
+		16642A721B67F0AB0054009C /* http_codec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A701B67F0AB0054009C /* http_codec.cpp */; };
 		1668901D1B458F3D003AE8B7 /* mongo_wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 166890151B458F3D003AE8B7 /* mongo_wrapper.cpp */; };
 		1668901F1B458F3D003AE8B7 /* server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1668901A1B458F3D003AE8B7 /* server.cpp */; };
 		166890221B459169003AE8B7 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 166890211B459169003AE8B7 /* libboost_system.a */; };
@@ -45,6 +51,20 @@
 
 /* Begin PBXFileReference section */
 		165CA7861B41BAF600A29321 /* my01 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = my01; sourceTree = BUILT_PRODUCTS_DIR; };
+		16642A5F1B67DB430054009C /* msg_codec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = msg_codec.cpp; sourceTree = "<group>"; };
+		16642A601B67DB430054009C /* msg_codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msg_codec.h; sourceTree = "<group>"; };
+		16642A621B67EC260054009C /* header.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = header.hpp; path = http/header.hpp; sourceTree = "<group>"; };
+		16642A631B67EC260054009C /* mime_types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mime_types.cpp; path = http/mime_types.cpp; sourceTree = "<group>"; };
+		16642A641B67EC260054009C /* mime_types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = mime_types.hpp; path = http/mime_types.hpp; sourceTree = "<group>"; };
+		16642A651B67EC260054009C /* reply.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = reply.cpp; path = http/reply.cpp; sourceTree = "<group>"; };
+		16642A661B67EC260054009C /* reply.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = reply.hpp; path = http/reply.hpp; sourceTree = "<group>"; };
+		16642A671B67EC260054009C /* request_handler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = request_handler.cpp; path = http/request_handler.cpp; sourceTree = "<group>"; };
+		16642A681B67EC260054009C /* request_handler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = request_handler.hpp; path = http/request_handler.hpp; sourceTree = "<group>"; };
+		16642A691B67EC260054009C /* request_parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = request_parser.cpp; path = http/request_parser.cpp; sourceTree = "<group>"; };
+		16642A6A1B67EC260054009C /* request_parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = request_parser.hpp; path = http/request_parser.hpp; sourceTree = "<group>"; };
+		16642A6B1B67EC260054009C /* request.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = request.hpp; path = http/request.hpp; sourceTree = "<group>"; };
+		16642A701B67F0AB0054009C /* http_codec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = http_codec.cpp; sourceTree = "<group>"; };
+		16642A711B67F0AB0054009C /* http_codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_codec.h; sourceTree = "<group>"; };
 		166890101B458F3D003AE8B7 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		166890111B458F3D003AE8B7 /* singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = singleton.h; sourceTree = "<group>"; };
 		166890141B458F3D003AE8B7 /* mongo_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mongo_test.hpp; sourceTree = "<group>"; };
@@ -122,6 +142,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		16642A5E1B67D9F50054009C /* http */ = {
+			isa = PBXGroup;
+			children = (
+				16642A621B67EC260054009C /* header.hpp */,
+				16642A631B67EC260054009C /* mime_types.cpp */,
+				16642A641B67EC260054009C /* mime_types.hpp */,
+				16642A651B67EC260054009C /* reply.cpp */,
+				16642A661B67EC260054009C /* reply.hpp */,
+				16642A671B67EC260054009C /* request_handler.cpp */,
+				16642A681B67EC260054009C /* request_handler.hpp */,
+				16642A691B67EC260054009C /* request_parser.cpp */,
+				16642A6A1B67EC260054009C /* request_parser.hpp */,
+				16642A6B1B67EC260054009C /* request.hpp */,
+			);
+			name = http;
+			sourceTree = "<group>";
+		};
 		1668900E1B458F3D003AE8B7 /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +218,11 @@
 		16BB27E81B4AEC8D00AF2115 /* proto */ = {
 			isa = PBXGroup;
 			children = (
+				16642A5E1B67D9F50054009C /* http */,
+				16642A701B67F0AB0054009C /* http_codec.cpp */,
+				16642A711B67F0AB0054009C /* http_codec.h */,
+				16642A5F1B67DB430054009C /* msg_codec.cpp */,
+				16642A601B67DB430054009C /* msg_codec.h */,
 				16FAC8F01B50194A00AAF935 /* message.cpp */,
 				168D42C61B4EB342001D7B3A /* message.h */,
 			);
@@ -244,17 +286,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				16BB27EB1B4AECB700AF2115 /* common.h in Sources */,
+				16642A6F1B67EC260054009C /* request_parser.cpp in Sources */,
 				169B8FAE1B56A96A00C83D9C /* tcp_server.cpp in Sources */,
 				16FAC8F11B50194A00AAF935 /* message.cpp in Sources */,
+				16642A611B67DB430054009C /* msg_codec.cpp in Sources */,
+				16642A6D1B67EC260054009C /* reply.cpp in Sources */,
 				16BB27EC1B4AECB700AF2115 /* singleton.h in Sources */,
 				16BB27ED1B4AECB700AF2115 /* mongo_test.hpp in Sources */,
 				16BB27EE1B4AECB700AF2115 /* mongo_wrapper.h in Sources */,
 				16E7873B1B5C25E300D8DF77 /* log.cpp in Sources */,
 				16BB27F01B4AECB700AF2115 /* tcp_connection.h in Sources */,
+				16642A6E1B67EC260054009C /* request_handler.cpp in Sources */,
 				1668901D1B458F3D003AE8B7 /* mongo_wrapper.cpp in Sources */,
 				169B8FAD1B56A96A00C83D9C /* io_service_pool.cpp in Sources */,
+				16642A721B67F0AB0054009C /* http_codec.cpp in Sources */,
 				1668901F1B458F3D003AE8B7 /* server.cpp in Sources */,
 				16919B021B47009400AB29D8 /* tcp_connection.cpp in Sources */,
+				16642A6C1B67EC260054009C /* mime_types.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

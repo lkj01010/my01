@@ -20,11 +20,11 @@ namespace net
 	typedef boost::shared_ptr<tcp_connection> tcp_connection_ptr;
 	typedef boost::function <void(const tcp_connection_ptr&)> connection_callback;
 	typedef boost::function <void(const tcp_connection_ptr&)> close_callback;
-	typedef boost::function <void(const tcp_connection_ptr&, std::string&)> message_callback;
+	typedef boost::function <bool(const tcp_connection_ptr&, std::string&)> message_callback;
 	typedef boost::function <void(const tcp_connection_ptr&)> write_complete_callback;
 
 	void default_connection_callback(const tcp_connection_ptr& conn);
-	void default_message_callback(const tcp_connection_ptr& conn, std::string& msg);
+	bool default_message_callback(const tcp_connection_ptr& conn, std::string& msg);
 
 	//----------------------------------------------------------------------
 
@@ -32,6 +32,7 @@ namespace net
 	{
 	public:
 		tcp_connection(boost::asio::io_service& io_service);
+        ~tcp_connection();
 
 		boost::asio::io_service& io_service(){ return ios_; }
 		boost::asio::ip::tcp::socket& socket(){ return socket_; }
