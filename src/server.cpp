@@ -1,4 +1,4 @@
-
+﻿
 #include "echo_server.hpp"
 using boost::asio::ip::tcp;
 
@@ -17,7 +17,12 @@ int main(int argc, char* argv[])
 			std::cerr << "    receiver 0::0 80 1 .\n";
 			return 1;
 		}*/
+#ifdef _WIN32
+        SLog::InitLog("./sssss");
+#else
         SLog::InitLog("/Users/Midstream/Documents/Dev/git-me/my01/sssss");
+#endif
+
 		SLog::SetLevel(slog_debug);
 
 		std::size_t num_threads = boost::lexical_cast<std::size_t>(argv[1]);

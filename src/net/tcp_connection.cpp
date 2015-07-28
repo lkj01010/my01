@@ -16,13 +16,13 @@ using namespace std;
 
 void net::default_connection_callback(const tcp_connection_ptr& conn)
 {
-	std::cout << "defaultConnectionCallback" << std::endl;
 	// do not call conn->forceClose(), because some users want to register message callback only.
+	SLOG_DEBUG << "default_connection_callback";
 }
 
-void net::default_message_callback(const tcp_connection_ptr&, const message&, boost::posix_time::ptime)
+void net::default_message_callback(const tcp_connection_ptr&, std::string&)
 {
-	
+	SLOG_DEBUG << "default_message_callback";
 }
 
 //----------------------------------------------------------------------
@@ -37,7 +37,7 @@ void tcp_connection::connect_established()
 {
 	connection_callback_(shared_from_this());
 
-	socket_.async_read_some(boost::asio::buffer(buffer_),
+	socket_.async_read_some(boost::asio::buffer(rev_buffer_),
 		boost::bind(&tcp_connection::handle_read, shared_from_this(),
 		boost::asio::placeholders::error,
 		boost::asio::placeholders::bytes_transferred));
@@ -49,32 +49,33 @@ void tcp_connection::handle_read(const boost::system::error_code& e,
     // is_open()??? NO !!! should not discard this. when client is close, you should still deal with their message！
     if (!e)
     {
-        if (bytes_transferred > 0)
-        {
-            message msg;
-            msg.set_content(string(buffer_.begin(), buffer_.end()));
-            message_callback_(shared_from_this(), msg, boost::posix_time::second_clock::local_time());
-            
-            bool result = false;
-            
-            
-            if (result)
-            {
-                boost::asio::async_write(socket_,
-                                         boost::asio::buffer(""),
-                                         boost::asio::transfer_at_least(0),
-                                         boost::bind(&tcp_connection::handle_write, shared_from_this(),
-                                                     boost::asio::placeholders::error,
-                                                     boost::asio::placeholders::bytes_transferred));
-            }
-            else
-            {
-                socket_.async_read_some(boost::asio::buffer(buffer_),
-                                        boost::bind(&tcp_connection::handle_read, shared_from_this(),
-                                                    boost::asio::placeholders::error,
-                                                    boost::asio::placeholders::bytes_transferred));
-            }
-        }
+//         message msg;
+		//msg.set_content(string(buffer_.data(), buffer_.data() + bytes_transferred));
+//         message_callback_(shared_from_this(), msg, boost::posix_time::second_clock::local_time());
+//         
+//         bool result = false;
+
+		rev_string_.append(rev_buffer_.data(), bytes_transferred);
+
+		message_callback_(shared_from_this(), rev_string_);
+
+        ////if (result)
+        //{
+        //    boost::asio::async_write(socket_,
+        //                             boost::asio::buffer("nihaoma"),
+        //                             boost::asio::transfer_at_least(0),
+        //                             boost::bind(&tcp_connection::handle_write, shared_from_this(),
+        //                                         boost::asio::placeholders::error,
+        //                                         boost::asio::placeholders::bytes_transferred));
+        //}
+        ////else
+        //{
+            socket_.async_read_some(boost::asio::buffer(rev_buffer_),		
+									//boost::asio::buffer(rev_buffer_, rev_buffer_size),			// or use this ?  need test
+                                    boost::bind(&tcp_connection::handle_read, shared_from_this(),
+                                                boost::asio::placeholders::error,
+                                                boost::asio::placeholders::bytes_transferred));
+        //}
     }
     else{
         close();
@@ -126,7 +127,7 @@ void tcp_connection::connect_destroyed(){
         }
     }
     catch (const boost::exception& e){
-		SLOG_WARNING << "socket close exception.";
+		SLOG_WARNING << "socket close exception: ";
     }
 }
 
@@ -135,7 +136,6 @@ void tcp_connection::send(const string& data)
 	if (!is_open()) {
 		return;
 	}
-	//string data = message.serialize_as_string();
 	try
 	{
 		strand_.dispatch(
@@ -148,21 +148,22 @@ void tcp_connection::send(const string& data)
 	}
 	catch (const boost::bad_weak_ptr& e)
 	{
-		//LOG_DEBUG("net", "_strand.post: send_data, error:%s", e.what());
+		SLOG_WARNING << "_strand.post: send_data, error:" << e.what();
 	};
 }
-void tcp_connection::handle_send(const std::string& data){
-	boost::asio::async_write(
-		socket_,
-		boost::asio::buffer(data.c_str(), data.size()), boost::asio::transfer_at_least(data.size()),
-		strand_.wrap(boost::bind(&tcp_connection::handle_write, shared_from_this(), boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred))
-		);
-    
-//    my::log lg;
-//    lg<<(data);
-    
-//    BOOST_LOG_TRIVIAL(trace) << data;
 
-    
-    
+void tcp_connection::handle_send(const std::string& data){
+	send_queue_.push_back(data);
+	if (send_queue_.size() > 1)
+	{
+		return;
+	}
+	else{
+		const std::string& output = send_queue_[0];
+		boost::asio::async_write(
+			socket_,
+			boost::asio::buffer(output.c_str(), output.size()), boost::asio::transfer_at_least(data.size()),
+			strand_.wrap(boost::bind(&tcp_connection::handle_write, shared_from_this(), boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred))
+			);
+	}
 }

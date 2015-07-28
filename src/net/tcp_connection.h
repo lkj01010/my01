@@ -15,18 +15,16 @@
 namespace net
 {
 	class tcp_connection;
-	class message;
+	//class message;
 
 	typedef boost::shared_ptr<tcp_connection> tcp_connection_ptr;
 	typedef boost::function <void(const tcp_connection_ptr&)> connection_callback;
 	typedef boost::function <void(const tcp_connection_ptr&)> close_callback;
-	typedef boost::function <void(const tcp_connection_ptr&, const message&, boost::posix_time::ptime)> message_callback;
+	typedef boost::function <void(const tcp_connection_ptr&, std::string&)> message_callback;
 	typedef boost::function <void(const tcp_connection_ptr&)> write_complete_callback;
 
 	void default_connection_callback(const tcp_connection_ptr& conn);
-	void default_message_callback(const tcp_connection_ptr& conn,
-		const message& buffer,
-		boost::posix_time::ptime receive_time);
+	void default_message_callback(const tcp_connection_ptr& conn, std::string& msg);
 
 	//----------------------------------------------------------------------
 
@@ -80,7 +78,13 @@ namespace net
 		boost::asio::ip::tcp::socket socket_;
 		boost::asio::io_service::strand strand_;
 		/// Buffer for incoming data.
-		boost::array<char, 8192> buffer_;
+
+		static const size_t rev_buffer_size = 8192;
+		boost::array<char, rev_buffer_size> rev_buffer_;
+		std::string rev_string_;
+		
+		typedef std::deque<std::string> send_queue;
+		send_queue send_queue_;
 
 		//boost::shared_ptr<boost::any> tie_;	//Tie a object to this, and managed by this
 

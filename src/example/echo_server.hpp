@@ -1,4 +1,4 @@
-#include "tcp_server.h"
+﻿#include "tcp_server.h"
 #include "message.h"
 
 #include "boost/date_time/posix_time/time_formatters.hpp"
@@ -7,9 +7,28 @@ using boost::asio::ip::tcp;
 using namespace net;
 using namespace std;
 
-class session{
-public:
 
+typedef boost::weak_ptr<tcp_connection> weak_tcp_connection_ptr;
+
+class echo_session{
+public:
+	explicit echo_session(const weak_tcp_connection_ptr& conn)
+		: conn_(conn)
+	{}
+	void handle_message(const net::message& data){
+		std::string content = data.get_content();
+
+		SLOG_DEBUG << "message_callback:" << content;
+		
+		tcp_connection_ptr conn = conn_.lock();
+		if (conn)
+		{
+			conn->send(boost::posix_time::to_simple_string(boost::posix_time::second_clock::local_time()));
+		}
+	}
+
+	// if you don't want to send msg to sever , conn holder is not necessary
+	weak_tcp_connection_ptr conn_;
 	string str_;
 };
 
@@ -21,12 +40,12 @@ public:
 		, n_conn_(0)
 	{
 		server_.set_connection_callback(boost::bind(&echo_server::connection_callback, this, _1));
-		server_.set_message_callback(boost::bind(&echo_server::message_callback, this, _1, _2, _3));
+		server_.set_message_callback(boost::bind(&echo_server::message_callback, this, _1, _2));
 	}
 
 	void connection_callback(const tcp_connection_ptr& connection_ptr){
 		if (connection_ptr->is_open()){
-			connection_ptr->set_module((void*)(new session()));
+			connection_ptr->set_module((void*)(new echo_session(boost::weak_ptr<tcp_connection>(connection_ptr))));
 			n_conn_++;
 		}
 		else{
@@ -35,16 +54,26 @@ public:
 		SLOG_DEBUG << "new connection. n_conn = " << n_conn_;
 	}
 
-	void message_callback(const tcp_connection_ptr& connection_ptr, const net::message& msg, boost::posix_time::ptime time){
-		std::string content = msg.get_content();
-		content = content +boost::posix_time::to_simple_string(boost::posix_time::second_clock::local_time()) + "\n";
-		
-		session *s = (session*)connection_ptr->module();
+	void message_callback(const tcp_connection_ptr& connection_ptr, std::string & data){
+		net::message message;
+		while (!data.empty()){
+			int lenght = message.parse_from_string(data);
+			if (lenght > 0)
+			{
+				data = data.substr(lenght);
 
-		s->str_ = boost::posix_time::to_simple_string(time);
-		
-		connection_ptr->send(content);
+				echo_session *s = (echo_session*)connection_ptr->module();
+				s->handle_message(message);
+			}
+			else if (lenght == 0){}
+			else{
+				SLOG_ERROR << "message_callback parsed data len < 0";
+				break;
+			}
+		}
 	}
+
+	
 
 	void run(){
 		server_.run();
