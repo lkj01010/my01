@@ -68,23 +68,18 @@ void tcp_connection::handle_read(const boost::system::error_code& e,
             
             bool result = message_callback_(shared_from_this(), rev_string_);
             
-            ////if (result)
-            //{
-            //    boost::asio::async_write(socket_,
-            //                             boost::asio::buffer("nihaoma"),
-            //                             boost::asio::transfer_at_least(0),
-            //                             boost::bind(&tcp_connection::handle_write, shared_from_this(),
-            //                                         boost::asio::placeholders::error,
-            //                                         boost::asio::placeholders::bytes_transferred));
-            //}
-            ////else
-            //{
-            socket_.async_read_some(boost::asio::buffer(rev_buffer_),
-                                    //boost::asio::buffer(rev_buffer_, rev_buffer_size),			// or use this ?  need test
-                                    boost::bind(&tcp_connection::handle_read, shared_from_this(),
-                                                boost::asio::placeholders::error,
-                                                boost::asio::placeholders::bytes_transferred));
-            //}
+            if (result)
+            {
+                socket_.async_read_some(boost::asio::buffer(rev_buffer_),
+                                        //boost::asio::buffer(rev_buffer_, rev_buffer_size),			// or use this ?  need test
+                                        boost::bind(&tcp_connection::handle_read, shared_from_this(),
+                                                    boost::asio::placeholders::error,
+                                                    boost::asio::placeholders::bytes_transferred));
+            }
+            else
+            {
+                close();
+            }
         }else if(bytes_transferred == 0){
             close();        // client first close
         }
@@ -121,6 +116,7 @@ void tcp_connection::handle_write(const boost::system::error_code& e, const size
     }
 }
 
+//lkj todo: need default
 void tcp_connection::close(){
 	// remove self in parent. 
 	// 1. invoke parent close connection
