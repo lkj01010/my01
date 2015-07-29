@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 mid. All rights reserved.
 //
 
-#include "tcp_connection.h"
-#include "message.h"
+#include "net/tcp_connection.h"
+#include "net/proto/message.h"
 
 using namespace net;
 

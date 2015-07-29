@@ -17,9 +17,11 @@
     <Filter Include="example">
       <UniqueIdentifier>{0e26ff94-539e-4f15-a1e0-9abab0655768}</UniqueIdentifier>
     </Filter>
+    <Filter Include="net\proto\http">
+      <UniqueIdentifier>{20433f17-07ad-4fe8-9444-e7ffca8b7268}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\server.cpp" />
     <ClCompile Include="src\mongodb\mongo_wrapper.cpp">
       <Filter>mongodb</Filter>
     </ClCompile>
@@ -40,6 +42,24 @@
     </ClCompile>
     <ClCompile Include="src\com\log.cpp">
       <Filter>com</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\proto\http\reply.cpp">
+      <Filter>net\proto\http</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\proto\http\request_handler.cpp">
+      <Filter>net\proto\http</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\proto\http\request_parser.cpp">
+      <Filter>net\proto\http</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\proto\http\mime_types.cpp">
+      <Filter>net\proto\http</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\proto\http_codec.cpp">
+      <Filter>net\proto</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\proto\msg_codec.cpp">
+      <Filter>net\proto</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +92,30 @@
     </ClInclude>
     <ClInclude Include="src\com\log.h">
       <Filter>com</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\proto\http\reply.hpp">
+      <Filter>net\proto\http</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\proto\http\request.hpp">
+      <Filter>net\proto\http</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\proto\http\request_handler.hpp">
+      <Filter>net\proto\http</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\proto\http\request_parser.hpp">
+      <Filter>net\proto\http</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\proto\http\header.hpp">
+      <Filter>net\proto\http</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\proto\http\mime_types.hpp">
+      <Filter>net\proto\http</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\proto\http_codec.h">
+      <Filter>net\proto</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\proto\msg_codec.h">
+      <Filter>net\proto</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

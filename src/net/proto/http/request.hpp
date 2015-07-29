@@ -13,7 +13,7 @@
 
 #include <string>
 #include <vector>
-#include "header.hpp"
+#include "net/proto/http/header.hpp"
 
 namespace net {
 namespace http {

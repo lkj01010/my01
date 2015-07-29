@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.h"
-#include "tcp_connection.h"
-#include "io_service_pool.hpp"
+#include "com/common.h"
+#include "net/tcp_connection.h"
+#include "net/io_service_pool.hpp"
 
 using boost::asio::ip::tcp;
 

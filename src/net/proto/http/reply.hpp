@@ -14,7 +14,7 @@
 #include <string>
 #include <vector>
 #include <boost/asio.hpp>
-#include "header.hpp"
+#include "net/proto/http/header.hpp"
 
 namespace net {
 namespace http {

@@ -24,7 +24,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -66,8 +66,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>D:\lkj-dev\boost_1_58_0\stage\lib;F:\lkj-setup\boost_1_58_0\stage\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>D:\lkj-dev\boost_1_58_0\;F:\lkj-setup\boost_1_58_0;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\lkj-dev\boost_1_58_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\lkj-dev\boost_1_58_0\;$(IncludePath)</IncludePath>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -84,7 +84,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>src\net\proto;src\net;src\mongodb;src\example;src\com;F:\lkj\gitText\mongo-cxx-driver\build\install\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\net\proto\http;src\net\proto;src\net;src\mongodb;src\example;src;src\com;F:\lkj\gitText\mongo-cxx-driver\build\install\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN32;STATIC_LIBMONGOCLIENT;_WIN32_WINNT=0x0501;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -146,10 +146,15 @@
     <ClCompile Include="src\example\echo_server.hpp" />
     <ClCompile Include="src\mongodb\mongo_wrapper.cpp" />
     <ClCompile Include="src\net\io_service_pool.cpp" />
+    <ClCompile Include="src\net\proto\http\mime_types.cpp" />
+    <ClCompile Include="src\net\proto\http\reply.cpp" />
+    <ClCompile Include="src\net\proto\http\request_handler.cpp" />
+    <ClCompile Include="src\net\proto\http\request_parser.cpp" />
+    <ClCompile Include="src\net\proto\http_codec.cpp" />
     <ClCompile Include="src\net\proto\message.cpp" />
+    <ClCompile Include="src\net\proto\msg_codec.cpp" />
     <ClCompile Include="src\net\tcp_connection.cpp" />
     <ClCompile Include="src\net\tcp_server.cpp" />
-    <ClCompile Include="src\server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\com\common.h" />
@@ -159,7 +164,15 @@
     <ClInclude Include="src\mongodb\mongo_test.hpp" />
     <ClInclude Include="src\mongodb\mongo_wrapper.h" />
     <ClInclude Include="src\net\io_service_pool.hpp" />
+    <ClInclude Include="src\net\proto\http\header.hpp" />
+    <ClInclude Include="src\net\proto\http\mime_types.hpp" />
+    <ClInclude Include="src\net\proto\http\reply.hpp" />
+    <ClInclude Include="src\net\proto\http\request.hpp" />
+    <ClInclude Include="src\net\proto\http\request_handler.hpp" />
+    <ClInclude Include="src\net\proto\http\request_parser.hpp" />
+    <ClInclude Include="src\net\proto\http_codec.h" />
     <ClInclude Include="src\net\proto\message.h" />
+    <ClInclude Include="src\net\proto\msg_codec.h" />
     <ClInclude Include="src\net\tcp_connection.h" />
     <ClInclude Include="src\net\tcp_server.h" />
   </ItemGroup>

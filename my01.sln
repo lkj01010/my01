@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "my01", "my01.vcxproj", "{68DC702D-838C-4476-93CC-E77900E29A53}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dotasrv", "dotasrv\dotasrv.vcxproj", "{8442CD30-5283-41C5-AE5E-5A24623B1541}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68DC702D-838C-4476-93CC-E77900E29A53}.Debug|Win32.ActiveCfg = Debug|Win32
+		{68DC702D-838C-4476-93CC-E77900E29A53}.Debug|Win32.Build.0 = Debug|Win32
+		{68DC702D-838C-4476-93CC-E77900E29A53}.Debug|x64.ActiveCfg = Debug|x64
+		{68DC702D-838C-4476-93CC-E77900E29A53}.Debug|x64.Build.0 = Debug|x64
+		{68DC702D-838C-4476-93CC-E77900E29A53}.Release|Win32.ActiveCfg = Release|Win32
+		{68DC702D-838C-4476-93CC-E77900E29A53}.Release|Win32.Build.0 = Release|Win32
+		{68DC702D-838C-4476-93CC-E77900E29A53}.Release|x64.ActiveCfg = Release|x64
+		{68DC702D-838C-4476-93CC-E77900E29A53}.Release|x64.Build.0 = Release|x64
+		{8442CD30-5283-41C5-AE5E-5A24623B1541}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8442CD30-5283-41C5-AE5E-5A24623B1541}.Debug|Win32.Build.0 = Debug|Win32
+		{8442CD30-5283-41C5-AE5E-5A24623B1541}.Debug|x64.ActiveCfg = Debug|Win32
+		{8442CD30-5283-41C5-AE5E-5A24623B1541}.Release|Win32.ActiveCfg = Release|Win32
+		{8442CD30-5283-41C5-AE5E-5A24623B1541}.Release|Win32.Build.0 = Release|Win32
+		{8442CD30-5283-41C5-AE5E-5A24623B1541}.Release|x64.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

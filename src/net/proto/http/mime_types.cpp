@@ -8,7 +8,7 @@
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#include "mime_types.hpp"
+#include "net/proto/http/mime_types.hpp"
 
 namespace net {
 namespace http {

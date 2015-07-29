@@ -1,4 +1,4 @@
-#include "msg_codec.h"
+#include "net/proto/msg_codec.h"
 
 using namespace net;
 using namespace std;
@@ -27,4 +27,3 @@ bool msg_codec::decode(std::string& data){
     }
     return true;
 }
-

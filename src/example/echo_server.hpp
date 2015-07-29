@@ -1,5 +1,5 @@
-﻿#include "tcp_server.h"
-#include "msg_codec.h"
+﻿#include "net/tcp_server.h"
+#include "net/proto/msg_codec.h"
 
 #include "boost/date_time/posix_time/time_formatters.hpp"
 
@@ -23,7 +23,8 @@ public:
 		tcp_connection_ptr conn = conn_.lock();
 		if (conn)
 		{
-			conn->send(boost::posix_time::to_simple_string(boost::posix_time::second_clock::local_time()));
+			//conn->send(boost::posix_time::to_simple_string(boost::posix_time::second_clock::local_time()));
+			conn->send(content);
 		}
         return true;
 	}

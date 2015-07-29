@@ -8,14 +8,14 @@
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#include "request_handler.hpp"
+#include "net/proto/http/request_handler.hpp"
 #include <fstream>
 #include <sstream>
 #include <string>
 #include <boost/lexical_cast.hpp>
-#include "mime_types.hpp"
-#include "reply.hpp"
-#include "request.hpp"
+#include "net/proto/http/mime_types.hpp"
+#include "net/proto/http/reply.hpp"
+#include "net/proto/http/request.hpp"
 
 namespace net {
 namespace http {

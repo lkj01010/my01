@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include "message.h"
-#include "common.h"
+#include "net/proto/message.h"
+#include "com/common.h"
 
 namespace net
 {

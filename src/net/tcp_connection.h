@@ -10,7 +10,7 @@
 #define __my01__tcp_connection__
 
 #include <stdio.h>
-#include "common.h"
+#include "com/common.h"
 
 namespace net
 {
