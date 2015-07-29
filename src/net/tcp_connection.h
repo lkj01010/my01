@@ -48,8 +48,9 @@ namespace net
 		void* const module() const{ return module_; }
 
 		void send(const std::string& data);
-
-
+//        void send(const std::vector<boost::asio::const_buffer>& buffers);
+        
+        
 		void set_connection_callback(const connection_callback& cb){
 			connection_callback_ = cb;
 		}
@@ -72,6 +73,9 @@ namespace net
 			const size_t size);
 
 		void handle_send(const std::string& data);
+//        void handle_send_array(const std::vector<boost::asio::const_buffer>& buffers);
+        
+        void actual_write_data(void);
 
 		void close();
 	private:
@@ -84,7 +88,7 @@ namespace net
 		boost::array<char, rev_buffer_size> rev_buffer_;
 		std::string rev_string_;
 		
-		typedef std::deque<std::string> send_queue;
+        typedef std::deque<std::string> send_queue;
 		send_queue send_queue_;
 
 		//boost::shared_ptr<boost::any> tie_;	//Tie a object to this, and managed by this

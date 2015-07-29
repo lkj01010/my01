@@ -17,10 +17,12 @@ int main_(int argc, char* argv[])
 			std::cerr << "    receiver 0::0 80 1 .\n";
 			return 1;
 		}
-#ifdef _WIN32
-        SLog::InitLog("./logs/pay_server");
-#else
-        SLog::InitLog("/Users/Midstream/Documents/Dev/git-me/my01/pay_server");
+#if defined _WIN32
+        SLog::InitLog("./logs/dotalog");
+#elif   defined _MAC
+        SLog::InitLog("/Users/Midstream/Documents/Dev/git-me/my01/dotalog");
+#else   //linux
+        SLog::InitLog("./logs/dotalog");
 #endif
 
 		SLog::SetLevel(slog_debug);

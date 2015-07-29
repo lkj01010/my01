@@ -15,10 +15,16 @@ public:
 	bool handle_message(const string& content){
 		SLOG_DEBUG << "pay_session message_callback:" << content;
 
+        
 		tcp_connection_ptr conn = conn_.lock();
 		if (conn)
 		{
-			conn->send(content);
+            if(content.empty()){
+                conn->send(http_codec::make_bad_replay());
+            }else{
+               conn->send(http_codec::make_replay("indicate not need read any more, close connection"));
+            }
+			
 		}
 		return false;	//indicate not need read any more, close connection
 	}
@@ -87,10 +93,12 @@ int main(int argc, char* argv[])
 			std::cerr << "    receiver 0::0 80 1 .\n";
 			return 1;
 		}
-#ifdef _WIN32
-        SLog::InitLog("./logs/sssss");
-#else
-        SLog::InitLog("/Users/Midstream/Documents/Dev/git-me/my01/sssss");
+#if defined _WIN32
+        SLog::InitLog("./logs/dotalog");
+#elif   defined _MAC
+        SLog::InitLog("/Users/Midstream/Documents/Dev/git-me/my01/dotalog");
+#else   //linux
+       SLog::InitLog("./logs/dotalog");
 #endif
 
 		SLog::SetLevel(slog_debug);

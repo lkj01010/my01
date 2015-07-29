@@ -53,6 +53,9 @@ struct reply
   /// underlying memory blocks, therefore the reply object must remain valid and
   /// not be changed until the write operation has completed.
   std::vector<boost::asio::const_buffer> to_buffers();
+    
+  //lkj modify: add this to do ease
+  std::string to_string();
 
   /// Get a stock reply.
   static reply stock_reply(status_type status);

@@ -99,19 +99,21 @@ void tcp_connection::handle_read(const boost::system::error_code& e,
 
 void tcp_connection::handle_write(const boost::system::error_code& e, const size_t size)
 {
+    SLOG_DEBUG << "write size:" << size;
+    
+    send_queue_.pop_front();
     // there would be much accumulated commands before socket is closed. When this occurs, discard them.
     if (is_open()){
         if (!e)
         {
-            // Initiate graceful connection closure.
-            boost::system::error_code ignored_ec;
-            //socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
-            
-			SLOG_DEBUG << "write size:" << size;
+            if(send_queue_.empty() == false)
+            {
+                this->actual_write_data();
+            }
         }
         else{
             close();
-			SLOG_DEBUG << "tcp_connection closed. handle_write." << e.value() << e.message() ;
+			SLOG_DEBUG << "tcp_connection closed in handle_write() with value[" << e.value()  << "] message[" << e.message() << "]";
         }
     }
 }
@@ -131,7 +133,10 @@ void tcp_connection::close(){
 void tcp_connection::connect_destroyed(){
     try{
         if (is_open()){
-            socket_.close();
+            // Initiate graceful connection closure.
+            boost::system::error_code ignored_ec;
+            socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
+            //lkj todo: test if socket_ is closed
             connection_callback_(shared_from_this());
         }
     }
@@ -161,18 +166,52 @@ void tcp_connection::send(const string& data)
 	};
 }
 
+//void tcp_connection::send(const std::vector<boost::asio::const_buffer>& buffers){
+//    if (!is_open()) {
+//        return;
+//    }
+//    try {
+//        strand_.dispatch( boost::bind( &tcp_connection::handle_send_array,
+//                                      shared_from_this(), buffers));
+//    }
+//    catch (const boost::bad_weak_ptr& e) {
+//        SLOG_WARNING << "_strand.post: send_data, error:" << e.what();
+//    };
+//}
+
 void tcp_connection::handle_send(const std::string& data){
-	send_queue_.push_back(data);
+    send_queue_.push_back(data);
 	if (send_queue_.size() > 1)
 	{
 		return;
 	}
 	else{
-		const std::string& output = send_queue_[0];
-		boost::asio::async_write(
-			socket_,
-			boost::asio::buffer(output.c_str(), output.size()), boost::asio::transfer_at_least(data.size()),
-			strand_.wrap(boost::bind(&tcp_connection::handle_write, shared_from_this(), boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred))
-			);
+		actual_write_data();
 	}
+}
+
+//void tcp_connection::handle_send_array(const std::vector<boost::asio::const_buffer>& buffers){
+//    unsigned long old_size = send_queue_.size();
+//    
+//    for(int i = 0; i < buffers.size(); ++i){
+//        send_queue_.push_back(buffers[i]);
+//    }
+//    
+//    if (old_size > 0)
+//    {
+//        return;
+//    }
+//    else{
+//        actual_write_data();
+//    }
+//}
+
+void tcp_connection::actual_write_data(){
+    const string& output = send_queue_[0];
+    boost::asio::async_write(
+                             socket_,
+                             boost::asio::buffer(output), boost::asio::transfer_at_least(output.size()),
+                             strand_.wrap(boost::bind(&tcp_connection::handle_write, shared_from_this(), boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred))
+                             );
+
 }

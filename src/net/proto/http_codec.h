@@ -24,8 +24,9 @@ public:
     
     bool decode(std::string& data); // return false indicates got a wrong request
 	
-	static const std::string make_replay(const std::string& content);
-	static const std::string make_bad_replay();
+//	static std::vector<boost::asio::const_buffer> make_replay(const std::string& content);
+    static std::string make_replay(const std::string& content);
+    static std::string make_bad_replay();
 private:
 	void handle_request();
 private:

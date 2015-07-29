@@ -7,50 +7,57 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16642A611B67DB430054009C /* msg_codec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A5F1B67DB430054009C /* msg_codec.cpp */; };
-		16642A6C1B67EC260054009C /* mime_types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A631B67EC260054009C /* mime_types.cpp */; };
-		16642A6D1B67EC260054009C /* reply.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A651B67EC260054009C /* reply.cpp */; };
-		16642A6E1B67EC260054009C /* request_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A671B67EC260054009C /* request_handler.cpp */; };
-		16642A6F1B67EC260054009C /* request_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A691B67EC260054009C /* request_parser.cpp */; };
-		16642A721B67F0AB0054009C /* http_codec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A701B67F0AB0054009C /* http_codec.cpp */; };
-		1668901D1B458F3D003AE8B7 /* mongo_wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 166890151B458F3D003AE8B7 /* mongo_wrapper.cpp */; };
-		1668901F1B458F3D003AE8B7 /* server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1668901A1B458F3D003AE8B7 /* server.cpp */; };
-		166890221B459169003AE8B7 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 166890211B459169003AE8B7 /* libboost_system.a */; };
-		166890241B4591AB003AE8B7 /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 166890231B4591AB003AE8B7 /* libboost_thread.a */; };
-		16919B021B47009400AB29D8 /* tcp_connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16919B001B47009400AB29D8 /* tcp_connection.cpp */; };
-		169B8FAD1B56A96A00C83D9C /* io_service_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169B8FA91B56A96A00C83D9C /* io_service_pool.cpp */; };
-		169B8FAE1B56A96A00C83D9C /* tcp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169B8FAB1B56A96A00C83D9C /* tcp_server.cpp */; };
-		169B8FB31B56AB2400C83D9C /* libboost_timer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 169B8FB21B56AB2400C83D9C /* libboost_timer.a */; };
-		169B8FB51B56AB9F00C83D9C /* libboost_date_time.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 169B8FB41B56AB9F00C83D9C /* libboost_date_time.a */; };
-		16BB27EB1B4AECB700AF2115 /* common.h in Sources */ = {isa = PBXBuildFile; fileRef = 166890101B458F3D003AE8B7 /* common.h */; };
-		16BB27EC1B4AECB700AF2115 /* singleton.h in Sources */ = {isa = PBXBuildFile; fileRef = 166890111B458F3D003AE8B7 /* singleton.h */; };
-		16BB27ED1B4AECB700AF2115 /* mongo_test.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 166890141B458F3D003AE8B7 /* mongo_test.hpp */; };
-		16BB27EE1B4AECB700AF2115 /* mongo_wrapper.h in Sources */ = {isa = PBXBuildFile; fileRef = 166890161B458F3D003AE8B7 /* mongo_wrapper.h */; };
-		16BB27F01B4AECB700AF2115 /* tcp_connection.h in Sources */ = {isa = PBXBuildFile; fileRef = 16919B011B47009400AB29D8 /* tcp_connection.h */; };
-		16E7873B1B5C25E300D8DF77 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16E787391B5C25E300D8DF77 /* log.cpp */; };
-		16E7873D1B5C2CC500D8DF77 /* libboost_log.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E7873C1B5C2CC500D8DF77 /* libboost_log.a */; };
-		16E787411B5C2D2400D8DF77 /* libboost_iostreams.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E787401B5C2D2400D8DF77 /* libboost_iostreams.a */; };
-		16E787431B5C325400D8DF77 /* libboost_locale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E787421B5C325400D8DF77 /* libboost_locale.a */; };
-		16E787451B5C34E400D8DF77 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E787441B5C34E400D8DF77 /* libboost_filesystem.a */; };
-		16E787471B5C43B900D8DF77 /* libboost_log.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E787461B5C43B900D8DF77 /* libboost_log.dylib */; };
-		16E787491B5C45A000D8DF77 /* libboost_log_setup.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E787481B5C45A000D8DF77 /* libboost_log_setup.dylib */; };
-		16FAC8F11B50194A00AAF935 /* message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16FAC8F01B50194A00AAF935 /* message.cpp */; };
+		16B5C5DE1B691C4A00754981 /* echo_server.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 169B8FB01B56A97700C83D9C /* echo_server.hpp */; };
+		16B5C5DF1B691C4A00754981 /* thread_lock.h in Sources */ = {isa = PBXBuildFile; fileRef = 169B8FB11B56A99000C83D9C /* thread_lock.h */; };
+		16B5C5E01B691C4A00754981 /* common.h in Sources */ = {isa = PBXBuildFile; fileRef = 166890101B458F3D003AE8B7 /* common.h */; };
+		16B5C5E11B691C4A00754981 /* singleton.h in Sources */ = {isa = PBXBuildFile; fileRef = 166890111B458F3D003AE8B7 /* singleton.h */; };
+		16B5C5E21B691C4A00754981 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16E787391B5C25E300D8DF77 /* log.cpp */; };
+		16B5C5E31B691C4A00754981 /* log.h in Sources */ = {isa = PBXBuildFile; fileRef = 16E7873A1B5C25E300D8DF77 /* log.h */; };
+		16B5C5E41B691C4A00754981 /* mongo_test.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 166890141B458F3D003AE8B7 /* mongo_test.hpp */; };
+		16B5C5E51B691C4A00754981 /* mongo_wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 166890151B458F3D003AE8B7 /* mongo_wrapper.cpp */; };
+		16B5C5E61B691C4A00754981 /* mongo_wrapper.h in Sources */ = {isa = PBXBuildFile; fileRef = 166890161B458F3D003AE8B7 /* mongo_wrapper.h */; };
+		16B5C5E71B691C4A00754981 /* header.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A621B67EC260054009C /* header.hpp */; };
+		16B5C5E81B691C4A00754981 /* mime_types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A631B67EC260054009C /* mime_types.cpp */; };
+		16B5C5E91B691C4A00754981 /* mime_types.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A641B67EC260054009C /* mime_types.hpp */; };
+		16B5C5EA1B691C4A00754981 /* reply.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A651B67EC260054009C /* reply.cpp */; };
+		16B5C5EB1B691C4A00754981 /* reply.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A661B67EC260054009C /* reply.hpp */; };
+		16B5C5EC1B691C4A00754981 /* request_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A671B67EC260054009C /* request_handler.cpp */; };
+		16B5C5ED1B691C4A00754981 /* request_handler.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A681B67EC260054009C /* request_handler.hpp */; };
+		16B5C5EE1B691C4A00754981 /* request_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A691B67EC260054009C /* request_parser.cpp */; };
+		16B5C5EF1B691C4A00754981 /* request_parser.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A6A1B67EC260054009C /* request_parser.hpp */; };
+		16B5C5F01B691C4A00754981 /* request.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A6B1B67EC260054009C /* request.hpp */; };
+		16B5C5F11B691C4A00754981 /* http_codec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A701B67F0AB0054009C /* http_codec.cpp */; };
+		16B5C5F21B691C4A00754981 /* http_codec.h in Sources */ = {isa = PBXBuildFile; fileRef = 16642A711B67F0AB0054009C /* http_codec.h */; };
+		16B5C5F31B691C4A00754981 /* msg_codec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16642A5F1B67DB430054009C /* msg_codec.cpp */; };
+		16B5C5F41B691C4A00754981 /* msg_codec.h in Sources */ = {isa = PBXBuildFile; fileRef = 16642A601B67DB430054009C /* msg_codec.h */; };
+		16B5C5F51B691C4A00754981 /* message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16FAC8F01B50194A00AAF935 /* message.cpp */; };
+		16B5C5F61B691C4A00754981 /* message.h in Sources */ = {isa = PBXBuildFile; fileRef = 168D42C61B4EB342001D7B3A /* message.h */; };
+		16B5C5F71B691C4A00754981 /* io_service_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169B8FA91B56A96A00C83D9C /* io_service_pool.cpp */; };
+		16B5C5F81B691C4A00754981 /* io_service_pool.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 169B8FAA1B56A96A00C83D9C /* io_service_pool.hpp */; };
+		16B5C5F91B691C4A00754981 /* tcp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169B8FAB1B56A96A00C83D9C /* tcp_server.cpp */; };
+		16B5C5FA1B691C4A00754981 /* tcp_server.h in Sources */ = {isa = PBXBuildFile; fileRef = 169B8FAC1B56A96A00C83D9C /* tcp_server.h */; };
+		16B5C5FB1B691C4A00754981 /* tcp_connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16919B001B47009400AB29D8 /* tcp_connection.cpp */; };
+		16B5C5FC1B691C4A00754981 /* tcp_connection.h in Sources */ = {isa = PBXBuildFile; fileRef = 16919B011B47009400AB29D8 /* tcp_connection.h */; };
+		16B5C5FD1B691D5200754981 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E787441B5C34E400D8DF77 /* libboost_filesystem.a */; };
+		16B5C5FE1B691D7000754981 /* libboost_date_time.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 169B8FB41B56AB9F00C83D9C /* libboost_date_time.a */; };
+		16B5C5FF1B691D8B00754981 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 166890211B459169003AE8B7 /* libboost_system.a */; };
+		16B5C6001B691DA400754981 /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 166890231B4591AB003AE8B7 /* libboost_thread.a */; };
+		16B5C6011B691DC200754981 /* libboost_log.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E787461B5C43B900D8DF77 /* libboost_log.dylib */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		165CA7841B41BAF600A29321 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
+/* Begin PBXContainerItemProxy section */
+		163B945E1B69130900B8008E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 163B945A1B69130800B8008E /* dotasrv.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 163B94501B69130800B8008E;
+			remoteInfo = dotasrv;
 		};
-/* End PBXCopyFilesBuildPhase section */
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		165CA7861B41BAF600A29321 /* my01 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = my01; sourceTree = BUILT_PRODUCTS_DIR; };
+		163B945A1B69130800B8008E /* dotasrv.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dotasrv.xcodeproj; path = dotasrv/dotasrv.xcodeproj; sourceTree = "<group>"; };
+		163B94B41B691B3000B8008E /* libmy01.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmy01.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		16642A5F1B67DB430054009C /* msg_codec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = msg_codec.cpp; sourceTree = "<group>"; };
 		16642A601B67DB430054009C /* msg_codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msg_codec.h; sourceTree = "<group>"; };
 		16642A621B67EC260054009C /* header.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = header.hpp; path = http/header.hpp; sourceTree = "<group>"; };
@@ -70,7 +77,6 @@
 		166890141B458F3D003AE8B7 /* mongo_test.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mongo_test.hpp; sourceTree = "<group>"; };
 		166890151B458F3D003AE8B7 /* mongo_wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mongo_wrapper.cpp; sourceTree = "<group>"; };
 		166890161B458F3D003AE8B7 /* mongo_wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mongo_wrapper.h; sourceTree = "<group>"; };
-		1668901A1B458F3D003AE8B7 /* server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server.cpp; sourceTree = "<group>"; };
 		166890211B459169003AE8B7 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_system.a; sourceTree = "<group>"; };
 		166890231B4591AB003AE8B7 /* libboost_thread.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_thread.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_thread.a; sourceTree = "<group>"; };
 		168D42C61B4EB342001D7B3A /* message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = message.h; sourceTree = "<group>"; };
@@ -91,35 +97,36 @@
 		16E787421B5C325400D8DF77 /* libboost_locale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_locale.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_locale.a; sourceTree = "<group>"; };
 		16E787441B5C34E400D8DF77 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../boost/boost_1_58_0/stage/lib/libboost_filesystem.a; sourceTree = "<group>"; };
 		16E787461B5C43B900D8DF77 /* libboost_log.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_log.dylib; path = ../../boost/boost_1_58_0/stage/lib/libboost_log.dylib; sourceTree = "<group>"; };
-		16E787481B5C45A000D8DF77 /* libboost_log_setup.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_log_setup.dylib; path = ../../boost/boost_1_58_0/stage/lib/libboost_log_setup.dylib; sourceTree = "<group>"; };
 		16FAC8F01B50194A00AAF935 /* message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = message.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		165CA7831B41BAF600A29321 /* Frameworks */ = {
+		163B94B11B691B3000B8008E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16E787491B5C45A000D8DF77 /* libboost_log_setup.dylib in Frameworks */,
-				16E787471B5C43B900D8DF77 /* libboost_log.dylib in Frameworks */,
-				16E787451B5C34E400D8DF77 /* libboost_filesystem.a in Frameworks */,
-				16E787431B5C325400D8DF77 /* libboost_locale.a in Frameworks */,
-				16E787411B5C2D2400D8DF77 /* libboost_iostreams.a in Frameworks */,
-				16E7873D1B5C2CC500D8DF77 /* libboost_log.a in Frameworks */,
-				169B8FB51B56AB9F00C83D9C /* libboost_date_time.a in Frameworks */,
-				169B8FB31B56AB2400C83D9C /* libboost_timer.a in Frameworks */,
-				166890241B4591AB003AE8B7 /* libboost_thread.a in Frameworks */,
-				166890221B459169003AE8B7 /* libboost_system.a in Frameworks */,
+				16B5C6011B691DC200754981 /* libboost_log.dylib in Frameworks */,
+				16B5C6001B691DA400754981 /* libboost_thread.a in Frameworks */,
+				16B5C5FF1B691D8B00754981 /* libboost_system.a in Frameworks */,
+				16B5C5FE1B691D7000754981 /* libboost_date_time.a in Frameworks */,
+				16B5C5FD1B691D5200754981 /* libboost_filesystem.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		163B945B1B69130800B8008E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				163B945F1B69130900B8008E /* dotasrv */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		165CA77D1B41BAF600A29321 = {
 			isa = PBXGroup;
 			children = (
-				16E787481B5C45A000D8DF77 /* libboost_log_setup.dylib */,
 				16E787461B5C43B900D8DF77 /* libboost_log.dylib */,
 				16E787441B5C34E400D8DF77 /* libboost_filesystem.a */,
 				16E787421B5C325400D8DF77 /* libboost_locale.a */,
@@ -131,13 +138,14 @@
 				166890211B459169003AE8B7 /* libboost_system.a */,
 				1668900E1B458F3D003AE8B7 /* src */,
 				165CA7871B41BAF600A29321 /* Products */,
+				163B945A1B69130800B8008E /* dotasrv.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
 		165CA7871B41BAF600A29321 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				165CA7861B41BAF600A29321 /* my01 */,
+				163B94B41B691B3000B8008E /* libmy01.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,7 +174,6 @@
 				1668900F1B458F3D003AE8B7 /* com */,
 				166890121B458F3D003AE8B7 /* mongodb */,
 				166890171B458F3D003AE8B7 /* net */,
-				1668901A1B458F3D003AE8B7 /* server.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -231,14 +238,24 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		163B94B21B691B3000B8008E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		165CA7851B41BAF600A29321 /* my01 */ = {
+		163B94B31B691B3000B8008E /* my01 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 165CA78D1B41BAF600A29321 /* Build configuration list for PBXNativeTarget "my01" */;
+			buildConfigurationList = 163B94BC1B691B3000B8008E /* Build configuration list for PBXNativeTarget "my01" */;
 			buildPhases = (
-				165CA7821B41BAF600A29321 /* Sources */,
-				165CA7831B41BAF600A29321 /* Frameworks */,
-				165CA7841B41BAF600A29321 /* CopyFiles */,
+				163B94B01B691B3000B8008E /* Sources */,
+				163B94B11B691B3000B8008E /* Frameworks */,
+				163B94B21B691B3000B8008E /* Headers */,
 			);
 			buildRules = (
 			);
@@ -246,8 +263,8 @@
 			);
 			name = my01;
 			productName = my01;
-			productReference = 165CA7861B41BAF600A29321 /* my01 */;
-			productType = "com.apple.product-type.tool";
+			productReference = 163B94B41B691B3000B8008E /* libmy01.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -258,8 +275,8 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = mid;
 				TargetAttributes = {
-					165CA7851B41BAF600A29321 = {
-						CreatedOnToolsVersion = 6.1.1;
+					163B94B31B691B3000B8008E = {
+						CreatedOnToolsVersion = 6.4;
 					};
 				};
 			};
@@ -273,42 +290,121 @@
 			mainGroup = 165CA77D1B41BAF600A29321;
 			productRefGroup = 165CA7871B41BAF600A29321 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 163B945B1B69130800B8008E /* Products */;
+					ProjectRef = 163B945A1B69130800B8008E /* dotasrv.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
-				165CA7851B41BAF600A29321 /* my01 */,
+				163B94B31B691B3000B8008E /* my01 */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		163B945F1B69130900B8008E /* dotasrv */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = dotasrv;
+			remoteRef = 163B945E1B69130900B8008E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXSourcesBuildPhase section */
-		165CA7821B41BAF600A29321 /* Sources */ = {
+		163B94B01B691B3000B8008E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16BB27EB1B4AECB700AF2115 /* common.h in Sources */,
-				16642A6F1B67EC260054009C /* request_parser.cpp in Sources */,
-				169B8FAE1B56A96A00C83D9C /* tcp_server.cpp in Sources */,
-				16FAC8F11B50194A00AAF935 /* message.cpp in Sources */,
-				16642A611B67DB430054009C /* msg_codec.cpp in Sources */,
-				16642A6D1B67EC260054009C /* reply.cpp in Sources */,
-				16BB27EC1B4AECB700AF2115 /* singleton.h in Sources */,
-				16BB27ED1B4AECB700AF2115 /* mongo_test.hpp in Sources */,
-				16BB27EE1B4AECB700AF2115 /* mongo_wrapper.h in Sources */,
-				16E7873B1B5C25E300D8DF77 /* log.cpp in Sources */,
-				16BB27F01B4AECB700AF2115 /* tcp_connection.h in Sources */,
-				16642A6E1B67EC260054009C /* request_handler.cpp in Sources */,
-				1668901D1B458F3D003AE8B7 /* mongo_wrapper.cpp in Sources */,
-				169B8FAD1B56A96A00C83D9C /* io_service_pool.cpp in Sources */,
-				16642A721B67F0AB0054009C /* http_codec.cpp in Sources */,
-				1668901F1B458F3D003AE8B7 /* server.cpp in Sources */,
-				16919B021B47009400AB29D8 /* tcp_connection.cpp in Sources */,
-				16642A6C1B67EC260054009C /* mime_types.cpp in Sources */,
+				16B5C5DE1B691C4A00754981 /* echo_server.hpp in Sources */,
+				16B5C5DF1B691C4A00754981 /* thread_lock.h in Sources */,
+				16B5C5E01B691C4A00754981 /* common.h in Sources */,
+				16B5C5E11B691C4A00754981 /* singleton.h in Sources */,
+				16B5C5E21B691C4A00754981 /* log.cpp in Sources */,
+				16B5C5E31B691C4A00754981 /* log.h in Sources */,
+				16B5C5E41B691C4A00754981 /* mongo_test.hpp in Sources */,
+				16B5C5E51B691C4A00754981 /* mongo_wrapper.cpp in Sources */,
+				16B5C5E61B691C4A00754981 /* mongo_wrapper.h in Sources */,
+				16B5C5E71B691C4A00754981 /* header.hpp in Sources */,
+				16B5C5E81B691C4A00754981 /* mime_types.cpp in Sources */,
+				16B5C5E91B691C4A00754981 /* mime_types.hpp in Sources */,
+				16B5C5EA1B691C4A00754981 /* reply.cpp in Sources */,
+				16B5C5EB1B691C4A00754981 /* reply.hpp in Sources */,
+				16B5C5EC1B691C4A00754981 /* request_handler.cpp in Sources */,
+				16B5C5ED1B691C4A00754981 /* request_handler.hpp in Sources */,
+				16B5C5EE1B691C4A00754981 /* request_parser.cpp in Sources */,
+				16B5C5EF1B691C4A00754981 /* request_parser.hpp in Sources */,
+				16B5C5F01B691C4A00754981 /* request.hpp in Sources */,
+				16B5C5F11B691C4A00754981 /* http_codec.cpp in Sources */,
+				16B5C5F21B691C4A00754981 /* http_codec.h in Sources */,
+				16B5C5F31B691C4A00754981 /* msg_codec.cpp in Sources */,
+				16B5C5F41B691C4A00754981 /* msg_codec.h in Sources */,
+				16B5C5F51B691C4A00754981 /* message.cpp in Sources */,
+				16B5C5F61B691C4A00754981 /* message.h in Sources */,
+				16B5C5F71B691C4A00754981 /* io_service_pool.cpp in Sources */,
+				16B5C5F81B691C4A00754981 /* io_service_pool.hpp in Sources */,
+				16B5C5F91B691C4A00754981 /* tcp_server.cpp in Sources */,
+				16B5C5FA1B691C4A00754981 /* tcp_server.h in Sources */,
+				16B5C5FB1B691C4A00754981 /* tcp_connection.cpp in Sources */,
+				16B5C5FC1B691C4A00754981 /* tcp_connection.h in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		163B94BD1B691B3000B8008E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/Midstream/ln/my01/src,
+					/Users/Midstream/Documents/Dev/boost/boost_1_58_0/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Midstream/Documents/Dev/boost/boost_1_58_0/stage/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		163B94BE1B691B3000B8008E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/Midstream/ln/my01/src,
+					/Users/Midstream/Documents/Dev/boost/boost_1_58_0/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Midstream/Documents/Dev/boost/boost_1_58_0/stage/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		165CA78B1B41BAF600A29321 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -393,55 +489,23 @@
 			};
 			name = Release;
 		};
-		165CA78E1B41BAF600A29321 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/Users/Midstream/Documents/Dev/boost/boost_1_58_0,
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/Midstream/Documents/Dev/boost/boost_1_58_0/stage/lib,
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		165CA78F1B41BAF600A29321 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/Users/Midstream/Documents/Dev/boost/boost_1_58_0,
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/Midstream/Documents/Dev/boost/boost_1_58_0/stage/lib,
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		163B94BC1B691B3000B8008E /* Build configuration list for PBXNativeTarget "my01" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				163B94BD1B691B3000B8008E /* Debug */,
+				163B94BE1B691B3000B8008E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		165CA7811B41BAF600A29321 /* Build configuration list for PBXProject "my01" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				165CA78B1B41BAF600A29321 /* Debug */,
 				165CA78C1B41BAF600A29321 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		165CA78D1B41BAF600A29321 /* Build configuration list for PBXNativeTarget "my01" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				165CA78E1B41BAF600A29321 /* Debug */,
-				165CA78F1B41BAF600A29321 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

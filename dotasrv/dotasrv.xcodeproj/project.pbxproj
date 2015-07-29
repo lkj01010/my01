@@ -1,0 +1,282 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		163B94631B69139E00B8008E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 163B94611B69139E00B8008E /* main.cpp */; };
+		163B94641B69139E00B8008E /* server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 163B94621B69139E00B8008E /* server.cpp */; };
+		163B94C01B691B6300B8008E /* libmy01.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 163B94BF1B691B6300B8008E /* libmy01.a */; };
+		16B5C6041B691E3800754981 /* libboost_log.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B5C6031B691E3800754981 /* libboost_log.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		163B944E1B69130800B8008E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		163B94501B69130800B8008E /* dotasrv */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = dotasrv; sourceTree = BUILT_PRODUCTS_DIR; };
+		163B94611B69139E00B8008E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		163B94621B69139E00B8008E /* server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server.cpp; sourceTree = "<group>"; };
+		163B94BF1B691B6300B8008E /* libmy01.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmy01.a; path = "../../../../../Library/Developer/Xcode/DerivedData/my01-cgtryiuywkpjdudwhlcsqnmhidru/Build/Products/Debug/libmy01.a"; sourceTree = "<group>"; };
+		16B5C6031B691E3800754981 /* libboost_log.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_log.dylib; path = ../../../boost/boost_1_58_0/stage/lib/libboost_log.dylib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		163B944D1B69130800B8008E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16B5C6041B691E3800754981 /* libboost_log.dylib in Frameworks */,
+				163B94C01B691B6300B8008E /* libmy01.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		163B94471B69130800B8008E = {
+			isa = PBXGroup;
+			children = (
+				16B5C6031B691E3800754981 /* libboost_log.dylib */,
+				163B94BF1B691B6300B8008E /* libmy01.a */,
+				163B94601B69137900B8008E /* src */,
+				163B94511B69130800B8008E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		163B94511B69130800B8008E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				163B94501B69130800B8008E /* dotasrv */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		163B94601B69137900B8008E /* src */ = {
+			isa = PBXGroup;
+			children = (
+				163B94611B69139E00B8008E /* main.cpp */,
+				163B94621B69139E00B8008E /* server.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		163B944F1B69130800B8008E /* dotasrv */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 163B94571B69130800B8008E /* Build configuration list for PBXNativeTarget "dotasrv" */;
+			buildPhases = (
+				163B944C1B69130800B8008E /* Sources */,
+				163B944D1B69130800B8008E /* Frameworks */,
+				163B944E1B69130800B8008E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = dotasrv;
+			productName = dotasrv;
+			productReference = 163B94501B69130800B8008E /* dotasrv */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		163B94481B69130800B8008E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = mid;
+				TargetAttributes = {
+					163B944F1B69130800B8008E = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = 163B944B1B69130800B8008E /* Build configuration list for PBXProject "dotasrv" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 163B94471B69130800B8008E;
+			productRefGroup = 163B94511B69130800B8008E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				163B944F1B69130800B8008E /* dotasrv */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		163B944C1B69130800B8008E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				163B94641B69139E00B8008E /* server.cpp in Sources */,
+				163B94631B69139E00B8008E /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		163B94551B69130800B8008E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		163B94561B69130800B8008E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		163B94581B69130800B8008E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					_MAC,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/Midstream/ln/my01/src,
+					/Users/Midstream/Documents/Dev/boost/boost_1_58_0/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/my01-cgtryiuywkpjdudwhlcsqnmhidru/Build/Products/Debug",
+					/Users/Midstream/Documents/Dev/boost/boost_1_58_0/stage/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		163B94591B69130800B8008E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = _MAC;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/Midstream/ln/my01/src,
+					/Users/Midstream/Documents/Dev/boost/boost_1_58_0/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/my01-cgtryiuywkpjdudwhlcsqnmhidru/Build/Products/Debug",
+					/Users/Midstream/Documents/Dev/boost/boost_1_58_0/stage/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		163B944B1B69130800B8008E /* Build configuration list for PBXProject "dotasrv" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				163B94551B69130800B8008E /* Debug */,
+				163B94561B69130800B8008E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		163B94571B69130800B8008E /* Build configuration list for PBXNativeTarget "dotasrv" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				163B94581B69130800B8008E /* Debug */,
+				163B94591B69130800B8008E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 163B94481B69130800B8008E /* Project object */;
+}

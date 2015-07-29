@@ -90,6 +90,48 @@ boost::asio::const_buffer to_buffer(reply::status_type status)
     return boost::asio::buffer(internal_server_error);
   }
 }
+    
+//lkj add:
+std::string to_string(reply::status_type status)
+{
+    switch (status)
+    {
+        case reply::ok:
+            return (ok);
+        case reply::created:
+            return (created);
+        case reply::accepted:
+            return (accepted);
+        case reply::no_content:
+            return (no_content);
+        case reply::multiple_choices:
+            return (multiple_choices);
+        case reply::moved_permanently:
+            return (moved_permanently);
+        case reply::moved_temporarily:
+            return (moved_temporarily);
+        case reply::not_modified:
+            return (not_modified);
+        case reply::bad_request:
+            return (bad_request);
+        case reply::unauthorized:
+            return (unauthorized);
+        case reply::forbidden:
+            return (forbidden);
+        case reply::not_found:
+            return (not_found);
+        case reply::internal_server_error:
+            return (internal_server_error);
+        case reply::not_implemented:
+            return (not_implemented);
+        case reply::bad_gateway:
+            return (bad_gateway);
+        case reply::service_unavailable:
+            return (service_unavailable);
+        default:
+            return (internal_server_error);
+    }
+}
 
 } // namespace status_strings
 
@@ -115,6 +157,25 @@ std::vector<boost::asio::const_buffer> reply::to_buffers()
   buffers.push_back(boost::asio::buffer(misc_strings::crlf));
   buffers.push_back(boost::asio::buffer(content));
   return buffers;
+}
+    
+std::string reply::to_string(){
+    std::string data;
+    data.append(status_strings::to_string(status));
+    for (std::size_t i = 0; i < headers.size(); ++i)
+    {
+        header& h = headers[i];
+        data.append(h.name);
+        data.append(misc_strings::name_value_separator);
+        data.append(h.value);
+        data.append(misc_strings::crlf);
+    }
+    data.append(misc_strings::crlf);
+    data.append(content);
+    //lkj add two for client recognize
+    data.append(misc_strings::crlf);
+    data.append(misc_strings::crlf);
+    return data;
 }
 
 namespace stock_replies {
