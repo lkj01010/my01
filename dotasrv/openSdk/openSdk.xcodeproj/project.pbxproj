@@ -1,0 +1,150 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		16E01A0E1B6A59AF0044DD9A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		16E01A0F1B6A59AF0044DD9A /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
+		16E01A101B6A59AF0044DD9A /* example */ = {isa = PBXFileReference; lastKnownFileType = folder; path = example; sourceTree = "<group>"; };
+		16E01A111B6A59AF0044DD9A /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		16E01A121B6A59AF0044DD9A /* package */ = {isa = PBXFileReference; lastKnownFileType = folder; path = package; sourceTree = "<group>"; };
+		16E01A131B6A59AF0044DD9A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		16E01A141B6A59AF0044DD9A /* README.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		16E01A151B6A59AF0044DD9A /* tencent_sdk_lib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tencent_sdk_lib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		16E01A081B6A59AF0044DD9A = {
+			isa = PBXGroup;
+			children = (
+				16E01A0E1B6A59AF0044DD9A /* .gitignore */,
+				16E01A0F1B6A59AF0044DD9A /* build.sh */,
+				16E01A101B6A59AF0044DD9A /* example */,
+				16E01A111B6A59AF0044DD9A /* Makefile */,
+				16E01A121B6A59AF0044DD9A /* package */,
+				16E01A131B6A59AF0044DD9A /* README.md */,
+				16E01A141B6A59AF0044DD9A /* README.txt */,
+				16E01A151B6A59AF0044DD9A /* tencent_sdk_lib */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		16E01A0D1B6A59AF0044DD9A /* openSdk */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 16E01A161B6A59AF0044DD9A /* Build configuration list for PBXLegacyTarget "openSdk" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "/Users/Midstream/Documents/Dev/git-me/my01/dotasrv/openSdk";
+			dependencies = (
+			);
+			name = openSdk;
+			passBuildSettingsInEnvironment = 1;
+			productName = openSdk;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		16E01A091B6A59AF0044DD9A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 16E01A0C1B6A59AF0044DD9A /* Build configuration list for PBXProject "openSdk" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 16E01A081B6A59AF0044DD9A;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				16E01A0D1B6A59AF0044DD9A /* openSdk */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		16E01A0A1B6A59AF0044DD9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		16E01A0B1B6A59AF0044DD9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+		16E01A171B6A59AF0044DD9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = openSdk;
+			};
+			name = Debug;
+		};
+		16E01A181B6A59AF0044DD9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = openSdk;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		16E01A0C1B6A59AF0044DD9A /* Build configuration list for PBXProject "openSdk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16E01A0A1B6A59AF0044DD9A /* Debug */,
+				16E01A0B1B6A59AF0044DD9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		16E01A161B6A59AF0044DD9A /* Build configuration list for PBXLegacyTarget "openSdk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16E01A171B6A59AF0044DD9A /* Debug */,
+				16E01A181B6A59AF0044DD9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 16E01A091B6A59AF0044DD9A /* Project object */;
+}

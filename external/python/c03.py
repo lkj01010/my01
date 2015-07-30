@@ -19,8 +19,9 @@ message = bytearray([52,18, 14,0, 0,6, 0, 0,10, 1,2,3,4,5,6,7,8,9,0,1])
 content = "content is very long !!!"
 pad16=4660
 size16 = 9+len(content) + 1
-cmd16 = 10
-encrypt8 = b'x'  #######################  这还是算2位，'c'  怎么表示1位？！？！？！？
+cmd16 = 10    
+
+encrypt8 = 's'
 param16 = 255
 
 

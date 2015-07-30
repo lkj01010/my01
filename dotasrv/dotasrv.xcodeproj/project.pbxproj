@@ -11,6 +11,7 @@
 		163B94641B69139E00B8008E /* server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 163B94621B69139E00B8008E /* server.cpp */; };
 		163B94C01B691B6300B8008E /* libmy01.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 163B94BF1B691B6300B8008E /* libmy01.a */; };
 		16B5C6041B691E3800754981 /* libboost_log.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B5C6031B691E3800754981 /* libboost_log.dylib */; };
+		16E01A071B6A59830044DD9A /* tencent_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16E01A051B6A59830044DD9A /* tencent_api.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,9 @@
 		163B94621B69139E00B8008E /* server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server.cpp; sourceTree = "<group>"; };
 		163B94BF1B691B6300B8008E /* libmy01.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmy01.a; path = "../../../../../Library/Developer/Xcode/DerivedData/my01-cgtryiuywkpjdudwhlcsqnmhidru/Build/Products/Debug/libmy01.a"; sourceTree = "<group>"; };
 		16B5C6031B691E3800754981 /* libboost_log.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_log.dylib; path = ../../../boost/boost_1_58_0/stage/lib/libboost_log.dylib; sourceTree = "<group>"; };
+		16E01A051B6A59830044DD9A /* tencent_api.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tencent_api.cpp; sourceTree = "<group>"; };
+		16E01A061B6A59830044DD9A /* tencent_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tencent_api.h; sourceTree = "<group>"; };
+		16E01A191B6A59B00044DD9A /* openSdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openSdk.xcodeproj; path = openSdk/openSdk.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +53,7 @@
 		163B94471B69130800B8008E = {
 			isa = PBXGroup;
 			children = (
+				16E01A191B6A59B00044DD9A /* openSdk.xcodeproj */,
 				16B5C6031B691E3800754981 /* libboost_log.dylib */,
 				163B94BF1B691B6300B8008E /* libmy01.a */,
 				163B94601B69137900B8008E /* src */,
@@ -67,10 +72,19 @@
 		163B94601B69137900B8008E /* src */ = {
 			isa = PBXGroup;
 			children = (
+				16E01A051B6A59830044DD9A /* tencent_api.cpp */,
+				16E01A061B6A59830044DD9A /* tencent_api.h */,
 				163B94611B69139E00B8008E /* main.cpp */,
 				163B94621B69139E00B8008E /* server.cpp */,
 			);
 			name = src;
+			sourceTree = "<group>";
+		};
+		16E01A1A1B6A59B00044DD9A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -117,6 +131,12 @@
 			mainGroup = 163B94471B69130800B8008E;
 			productRefGroup = 163B94511B69130800B8008E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 16E01A1A1B6A59B00044DD9A /* Products */;
+					ProjectRef = 16E01A191B6A59B00044DD9A /* openSdk.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				163B944F1B69130800B8008E /* dotasrv */,
@@ -129,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16E01A071B6A59830044DD9A /* tencent_api.cpp in Sources */,
 				163B94641B69139E00B8008E /* server.cpp in Sources */,
 				163B94631B69139E00B8008E /* main.cpp in Sources */,
 			);

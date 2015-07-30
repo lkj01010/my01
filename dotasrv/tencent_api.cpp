@@ -1,6 +1,7 @@
 #include "tencent_api.h"
 
 using namespace std;
+
 #if defined _LINUX
 
 #include "openSdk/tencent_sdk_lib/include/http_request_helper.h"
@@ -67,4 +68,8 @@ tencent_api::tencent_api()
 
 tencent_api::~tencent_api()
 {
+}
+
+const std::string& tencent_api::handle_request(const std::string& request){
+    return "hello tencent api";
 }
