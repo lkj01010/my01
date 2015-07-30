@@ -11,5 +11,9 @@
   <ItemGroup>
     <ClCompile Include="server.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="tencent_api.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tencent_api.h" />
   </ItemGroup>
 </Project>

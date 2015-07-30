@@ -25,15 +25,15 @@ public:
     bool decode(std::string& data); // return false indicates got a wrong request
 	
 //	static std::vector<boost::asio::const_buffer> make_replay(const std::string& content);
-    static std::string make_replay(const std::string& content);
-    static std::string make_bad_replay();
+    static std::string make_reply(const std::string& content);
+    static std::string make_bad_reply();
 private:
 	void handle_request();
 private:
     http_codec_callback http_codec_callback_;
     
-    http::request request_;
-	http::reply reply_;
+    //http::request request_;
+	//http::reply reply_;
     http::request_handler request_handler_;
     http::request_parser request_parser_;
 };

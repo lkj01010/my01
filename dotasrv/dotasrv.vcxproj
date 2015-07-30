@@ -13,11 +13,15 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="server.cpp" />
+    <ClCompile Include="tencent_api.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\my01.vcxproj">
       <Project>{68dc702d-838c-4476-93cc-e77900e29a53}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tencent_api.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8442CD30-5283-41C5-AE5E-5A24623B1541}</ProjectGuid>

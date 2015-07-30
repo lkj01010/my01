@@ -173,8 +173,8 @@ std::string reply::to_string(){
     data.append(misc_strings::crlf);
     data.append(content);
     //lkj add two for client recognize
-    data.append(misc_strings::crlf);
-    data.append(misc_strings::crlf);
+    /*data.append(misc_strings::crlf);
+    data.append(misc_strings::crlf);*/
     return data;
 }
 

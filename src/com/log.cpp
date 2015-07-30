@@ -51,7 +51,8 @@ BOOST_LOG_ATTRIBUTE_KEYWORD(_scope, "Scope", attrs::named_scope::value_type);
 void SLog::InitLog(const std::string& filename)
 {
      auto asink = logging::add_console_log(std::clog, keywords::format = expr::stream
-         << expr::format_date_time(_timestamp, "[%Y-%m-%d,%H:%M:%S.%f]")
+         //<< expr::format_date_time(_timestamp, "[%Y-%m-%d,%H:%M:%S.%f]")
+         << expr::format_date_time(_timestamp, "[%Y-%m-%d,%H:%M:%S]")
          << " <" << _severity
          << ">: " << expr::message);
 
@@ -79,7 +80,7 @@ void SLog::InitLog(const std::string& filename)
 
         sink->locked_backend()->scan_for_files();
 
-        if(i<=slog_error)
+		if (i <= slog_error)
         {
             sink->locked_backend()->auto_flush();
         }

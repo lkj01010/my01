@@ -118,7 +118,7 @@ void tcp_connection::handle_write(const boost::system::error_code& e, const size
     }
 }
 
-//lkj todo: need default
+//lkj todo: need default ?
 void tcp_connection::close(){
 	// remove self in parent. 
 	// 1. invoke parent close connection
@@ -133,10 +133,12 @@ void tcp_connection::close(){
 void tcp_connection::connect_destroyed(){
     try{
         if (is_open()){
-            // Initiate graceful connection closure.
-            boost::system::error_code ignored_ec;
-            socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
-            //lkj todo: test if socket_ is closed
+			//FIXME: need ? how ?
+            //// Initiate graceful connection closure.
+            //boost::system::error_code ignored_ec;
+            //socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
+            
+			socket_.close();
             connection_callback_(shared_from_this());
         }
     }
