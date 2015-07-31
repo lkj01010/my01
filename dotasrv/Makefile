@@ -2,13 +2,15 @@ RM = /bin/rm -f
 CP = /bin/CP
 
 CC = g++
+LD = g++
+
 CPPFLAGS = -g -O2 -Wall -W  \
 	-pedantic -ansi \
 	-D_LINUX
 
 
-LIB_BOOST = -L/usr/local/lib/boost_1_58_0/stage/lib
-INC_BOOST = -I/usr/local/lib/boost_1_58_0
+LIB_BOOST = -L/usr/local/lib64/boost_1_58_0/stage/lib
+INC_BOOST = -I/usr/local/lib64/boost_1_58_0
 
 
 top_path := $(shell pwd | awk -F ' ' {print$1})
@@ -32,30 +34,51 @@ export INC_OPENAPI:=-I$(tencent_sdk_dir)/include
 export LIB_OPENAPI:=-L$(tencent_sdk_dir)/lib -lopenapi
 
 
-LIBS =  $(LIB_OPENAPI) $(LIB_JSON) $(LIB_OAUTH) $(LIB_CURL) $(LIB_OPENSSL)  \
-		$(LIB_BOOST) -lrt  -ldl -std=c++11
+# LDFLAGS ->lib dir flags   -> L/xxxx
+# LIBS -> -lxxx
+LIBS =  $(LIB_OPENAPI) $(LIB_JSON) $(LIB_OAUTH) $(LIB_CURL) $(LIB_OPENSSL) \
+		-L../lib -lmy01	\
+		$(LIB_BOOST) \
+		 libboost_system.a libboost_thread.a libboost_log.a libboost_date_time.a  libboost_locale.a libboost_filesystem.a  \
+		-std=c++11\
+		-lrt \
+		 -ldl  
+
 INCL =  $(INC_OPENAPI) $(INC_JSON)  $(INC_OPENSSL) $(INC_OAUTH) $(INC_CURL) \
-		$(INC_BOOST)
+		$(INC_BOOST) \
+		-I../src 
+		# ../src/com \
+		# ../src/mongodb \
+		# ../src/net \
+		# ../src/net/proto 
 
 
 SRC := $(wildcard *.cpp)
 
 # OBJS := $(patsubst %.cpp, obj/%.o, $(notdir $(SRC)))
-OBJS := $(patsubst %.cpp, obj/%.o, $(SRC))
+OBJS := $(patsubst %.cpp, ../obj/%.o, $(SRC))
 
-TARGET = datasrv
+# TARGET = ../bin/dotasrv
+TARGET = dotasrv
 
-all: $(TARGET)
+all: config $(TARGET)
 
-$(TARGET): config $(OBJS)
-	ar -rc $(TARGET) $(OBJS)
+$(TARGET):  $(OBJS)
+	$(LD) -o 	$@   $^ $(LIBS) 	 
+	# chmod u+x $(TARGET)
 
 config:
-	mkdir -p obj
+	mkdir -p ../obj
+	mkdir -p ../bin
 
-obj/%.o: /%.cpp
+../obj/%.o: %.cpp
 	$(CC) -c -o $@ $< $(CPPFLAGS) $(LIBS) $(INCL) 
 
 
 clean:
 	$(RM) $(OBJS) $(TARGET)
+
+# ############
+	# ar -rc $(TARGET) $(OBJS) && \
+# .mkdir:
+#         @if [ ! -d $(OBJ_DIR) ]; then mkdir -p $(OBJ_DIR); fi

@@ -16,6 +16,31 @@ static const string s_appid = "1104680669";
 static const string s_appkey = "M6TOzozadY9AK8ug";
 static const string s_server_name = "119.147.19.43";
 
+struct  userinfo
+{
+    int ret;
+    int is_lost;
+    string nickname;
+    string gender;
+    string country;
+    string province;
+    string city;
+    string figureurl;
+    int is_yellow_vip;
+    int is_yellow_year_vip;
+    int yellow_vip_level;
+    int is_yellow_high_vip;
+    userinfo()
+	{
+        ret =0;
+		is_lost = 0;
+		is_yellow_vip =0;
+		is_yellow_year_vip=0;
+		yellow_vip_level=0;
+		is_yellow_high_vip=0;
+	}
+};
+
 int get_user_info(class OpenApiV3* sdk, string& openid, string& openkey, string& pf, Json::Value& JsonRes)
 {
 	map<string, string> params;
@@ -57,11 +82,11 @@ int get_user_info_parse(Json::Value& JsonRes ,struct userinfo& Info)
 tencent_api::tencent_api()
 {
 #if defined _LINUX
-	COpenApiV3 sdk(s_appid, s_appkey);
+	// COpenApiV3 sdk(s_appid, s_appkey);
 
-	sdk.init();
-	sdk.setServerName(s_server_name);
-	sdk.setDebugSwitch(true);
+	// sdk.init();
+	// sdk.setServerName(s_server_name);
+	// sdk.setDebugSwitch(true);
 #endif
 }
 
