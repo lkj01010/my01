@@ -1,3 +1,7 @@
-# top_path := $(shell pwd | awk -F ' ' {print$1})
-top_path :=pwd 
-echo top_path
+all: src dotasrv
+
+src:
+	$(MAKE) --directory=$@ all
+
+dotasrv:
+	$(MAKE) --directory=$@ all

@@ -228,7 +228,6 @@ int HttpRequestHelper::GetHttpRequest(string url, map<string, string>& params, f
 	if (ret != CURLE_OK) // CURLE_OK : 0
 	{
 		snprintf(m_szErrMsg, sizeof(m_szErrMsg), "Failed to get '%s' [%s]\n", full_url.c_str(), errorBuffer);
-		OutPutDebug("Failed to get '%s' [%s]\n", full_url.c_str(), errorBuffer);
 		return ret;
 	}
 	else
@@ -238,10 +237,8 @@ int HttpRequestHelper::GetHttpRequest(string url, map<string, string>& params, f
 		if(200 != http_code)
 		{
 			snprintf(m_szErrMsg, sizeof(m_szErrMsg), "succ to get '%s',but response http_code[%d]\n", full_url.c_str(), http_code);
-			OutPutDebug("succ to get '%s',but response http_code[%d]\n", full_url.c_str(), http_code);
 			return http_code;
 		}
-		OutPutDebug("Failed to get '%s'", full_url.c_str());
 		return 0;//状态码为200时返回0
 	}
 }

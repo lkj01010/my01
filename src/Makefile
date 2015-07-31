@@ -6,7 +6,8 @@ CPPFLAGS = -g -O2 -Wall -W \
 	-pedantic -ansi
 
 
-# LIB_BOOST = ./usr/lib64
+LIB_BOOST = -L/usr/local/lib/boost_1_58_0/stage/lib
+INC_BOOST = -I/usr/local/lib/boost_1_58_0
 
 # LIBDIR = $(LIB_BOOST)
 
@@ -18,10 +19,13 @@ SRC := $(wildcard \
 		net/*.cpp \
 		net/proto/*.cpp)
 
-INCL = -I./com \
+INCL =	$(INC_BOOST)\
+		-I./com \
 		-I./mongodb \
  		-I./net \
 		-I./net/proto 
+
+LIBS = $(LIB_BOOST) -std=c++11
 
 # OBJS := $(patsubst %.cpp, obj/%.o, $(notdir $(SRC)))
 OBJS := $(patsubst %.cpp, obj/%.o, $(SRC))
@@ -39,14 +43,15 @@ $(TARGET): $(OBJS)
 	ar -rc $(TARGET) $(OBJS)
 
 obj/com/%.o: com/%.cpp
-	$(CC) -c -o $@ $(CPPFLAGS) $(INCL) $< -lboost_log
+	$(CC) -c -o $@ $< $(CPPFLAGS) $(LIBS) $(INCL) 
 obj/mongodb/%.o: mongodb/%.cpp
-	$(CC) -c -o $@ $(CPPFLAGS) $(INCL) $<
+	$(CC) -c -o $@ $< $(CPPFLAGS) $(LIBS) $(INCL) 
 obj/net/%.o: net/%.cpp
-	$(CC) -c -o $@ $(CPPFLAGS) $(INCL) $< -lboost_system  -lboost_filesystem \
-		-lboost_thread -lboost_date_time -lboost_timer
+	$(CC) -c -o $@ $< $(CPPFLAGS) $(LIBS) $(INCL)  
+	# -lboost_system  -lboost_filesystem \
+	# 	-lboost_thread -lboost_date_time -lboost_timer
 obj/net/proto/%.o: net/proto/%.cpp
-	$(CC) -c -o $@ $(CPPFLAGS) $(INCL) $<
+	$(CC) -c -o $@ $< $(CPPFLAGS) $(LIBS) $(INCL) 
 
 
 clean:
