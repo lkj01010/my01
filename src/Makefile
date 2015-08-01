@@ -2,14 +2,16 @@ RM = /bin/rm -f
 CP = /bin/CP
 
 CC = g++
-CPPFLAGS = -g -O2 -Wall -W \
+CPPFLAGS = -g -O2 -Wall -W -std=c++11 \
+	# -D_LINUX	\
+	-rdynamic \
 	-pedantic -ansi
 
 
-LIB_BOOST = -L/usr/local/lib64/boost_1_58_0/stage/lib
-INC_BOOST = -I/usr/local/lib64/boost_1_58_0
+LIB_BOOST = -L$(BOOST_LIB)
+INC_BOOST = -I$(BOOST_INCLUDE)
 
-# LIBDIR = $(LIB_BOOST)
+LIBDIR = $(LIB_BOOST)
 
 
 
@@ -28,8 +30,9 @@ INCL =	$(INC_BOOST)	\
 		-I./net/proto \
 		-I./net/proto/http
 
-LIBS = $(LIB_BOOST) -lboost_system -lboost_thread  -lboost_date_time -lboost_log\
-	-std=c++11
+LIBS = $(LIB_BOOST) -lboost_system -lboost_thread  -lboost_date_time -lboost_log \
+		-lrd -ldl
+	
 
 # OBJS := $(patsubst %.cpp, obj/%.o, $(notdir $(SRC)))
 OBJS := $(patsubst %.cpp, ../obj/%.o, $(SRC))
@@ -57,6 +60,7 @@ config:
 	mkdir -p ../obj/net/proto/http
 
 ../obj/com/%.o: com/%.cpp
+	echo '$(BOOST_LIB)'
 	$(CC) -c -o $@ $< $(CPPFLAGS) $(LIBS) $(INCL) 
 ../obj/mongodb/%.o: mongodb/%.cpp
 	$(CC) -c -o $@ $< $(CPPFLAGS) $(LIBS) $(INCL) 

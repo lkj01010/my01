@@ -1,4 +1,6 @@
-﻿#include "net/tcp_server.h"
+﻿#include <cstring>
+#include <climits>
+#include "net/tcp_server.h"
 #include "net/proto/http_codec.h"
 #include "tencent_api.h"
 
@@ -58,7 +60,7 @@ public:
 		else{
 			pay_session *s = (pay_session*)connection_ptr->module();
 			delete s;
-			connection_ptr->set_module(nullptr);
+			connection_ptr->set_module(NULL);
 			n_conn_--;
 		}
 		SLOG_DEBUG << "connection_callback , conn count = " << n_conn_;

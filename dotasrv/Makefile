@@ -4,13 +4,12 @@ CP = /bin/CP
 CC = g++
 LD = g++
 
-CPPFLAGS = -g -O2 -Wall -W  \
-	-pedantic -ansi \
-	-D_LINUX
+CPPFLAGS = -std=c++11  -D_REENTRANT  -W -funroll-loops  \
+	-pedantic -ansi 
 
 
-LIB_BOOST = -L/usr/local/lib64/boost_1_58_0/stage/lib
-INC_BOOST = -I/usr/local/lib64/boost_1_58_0
+LIB_BOOST = -L$(BOOST_LIB)
+INC_BOOST = -I$(BOOST_INCLUDE)
 
 
 top_path := $(shell pwd | awk -F ' ' {print$1})
@@ -36,13 +35,20 @@ export LIB_OPENAPI:=-L$(tencent_sdk_dir)/lib -lopenapi
 
 # LDFLAGS ->lib dir flags   -> L/xxxx
 # LIBS -> -lxxx
-LIBS =  $(LIB_OPENAPI) $(LIB_JSON) $(LIB_OAUTH) $(LIB_CURL) $(LIB_OPENSSL) \
-		-L../lib -lmy01	\
+# LIBS =  $(LIB_OPENAPI) $(LIB_JSON) $(LIB_OAUTH) $(LIB_CURL) $(LIB_OPENSSL) \
+LIBS = 		-L../lib \
 		$(LIB_BOOST) \
-		 libboost_system.a libboost_thread.a libboost_log.a libboost_date_time.a  libboost_locale.a libboost_filesystem.a  \
-		-std=c++11\
+		# $(BOOST_LIB)/libboost_system.a \
+		# $(BOOST_LIB)/libboost_thread.a \
+		# $(BOOST_LIB)/libboost_date_time.a \
+		# $(BOOST_LIB)/libboost_locale.a \
+		# $(BOOST_LIB)/libboost_filesystem.a \
+		# $(BOOST_LIB)/libboost_log.a \
+		-std=c++11 \
+		-lboost_system -lboost_thread  -lboost_date_time  -lboost_locale -lboost_filesystem -lboost_log \
+		-lmy01	\
 		-lrt \
-		 -ldl  
+		  -ldl  
 
 INCL =  $(INC_OPENAPI) $(INC_JSON)  $(INC_OPENSSL) $(INC_OAUTH) $(INC_CURL) \
 		$(INC_BOOST) \
@@ -64,7 +70,7 @@ TARGET = dotasrv
 all: config $(TARGET)
 
 $(TARGET):  $(OBJS)
-	$(LD) -o 	$@   $^ $(LIBS) 	 
+	$(LD)   -o $@   $(CPPFLAGS)	$(LIBS)   $^  	 
 	# chmod u+x $(TARGET)
 
 config:
@@ -72,7 +78,7 @@ config:
 	mkdir -p ../bin
 
 ../obj/%.o: %.cpp
-	$(CC) -c -o $@ $< $(CPPFLAGS) $(LIBS) $(INCL) 
+	$(CC) -std=c++11 -c -o $@ $(CPPFLAGS) $(LIBS) $(INCL) $<  
 
 
 clean:
