@@ -11,8 +11,6 @@ CPPFLAGS = -g -O2 -Wall -W -std=c++11 \
 LIB_BOOST = -L$(BOOST_LIB)
 INC_BOOST = -I$(BOOST_INCLUDE)
 
-LIBDIR = $(LIB_BOOST)
-
 
 
 SRC := $(wildcard \
@@ -30,8 +28,8 @@ INCL =	$(INC_BOOST)	\
 		-I./net/proto \
 		-I./net/proto/http
 
-LIBS = $(LIB_BOOST) -lboost_system -lboost_thread  -lboost_date_time -lboost_log \
-		-lrd -ldl
+LIBS = $(LIB_BOOST) -lboost_system -lboost_thread  -lboost_date_time -lboost_log 
+		
 	
 
 # OBJS := $(patsubst %.cpp, obj/%.o, $(notdir $(SRC)))
@@ -44,9 +42,9 @@ OBJS := $(patsubst %.cpp, ../obj/%.o, $(SRC))
 
 TARGET = ../lib/libmy01.a
 
-all: $(TARGET)
+all: config  $(TARGET)
 
-$(TARGET): config $(OBJS)
+$(TARGET): $(OBJS)
 	ar -rc $(TARGET) $(OBJS)
 
 .PHONY: config

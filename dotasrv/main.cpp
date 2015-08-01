@@ -4,6 +4,9 @@
 #include "net/proto/http_codec.h"
 #include "tencent_api.h"
 
+#include "com/log.h"
+
+
 using boost::asio::ip::tcp;
 
 using namespace net;

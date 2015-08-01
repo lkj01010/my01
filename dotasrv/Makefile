@@ -4,8 +4,14 @@ CP = /bin/CP
 CC = g++
 LD = g++
 
-CPPFLAGS = -std=c++11  -D_REENTRANT  -W -funroll-loops  \
-	-pedantic -ansi 
+# !!!!!!!!!!!!!!!!!!!!
+# 这里必须要有  -W 禁止 所有 警告訊息.（有些头文件会有#error xxxxx 直接包括，但那只是（有
+# 的是版本警告）只是人为警告成错误，但不是真正的错误
+# -Wall 这是编译器的警告开关，这是真正的潜在错误（编译器给出的）
+CPPFLAGS = -g -O2 -Wall -W -std=c++11 \
+	# -D_LINUX	\
+	-rdynamic \
+	-pedantic -ansi
 
 
 LIB_BOOST = -L$(BOOST_LIB)
@@ -36,27 +42,41 @@ export LIB_OPENAPI:=-L$(tencent_sdk_dir)/lib -lopenapi
 # LDFLAGS ->lib dir flags   -> L/xxxx
 # LIBS -> -lxxx
 # LIBS =  $(LIB_OPENAPI) $(LIB_JSON) $(LIB_OAUTH) $(LIB_CURL) $(LIB_OPENSSL) \
-LIBS = 		-L../lib \
-		$(LIB_BOOST) \
-		# $(BOOST_LIB)/libboost_system.a \
+
+LIBS := $(LIB_BOOST) \
+		-lboost_system -lboost_iostreams  -lboost_log   -lboost_date_time  -lboost_locale -lboost_filesystem -lboost_thread \
+		-L../lib -lmy01 \
+		-lrt \
+		-ldl  
+
+LIBS = -L../lib -lmy01
+
+# LIBS = -lboost_log   -lboost_date_time  -lboost_locale -lboost_filesystem -lboost_thread -lboost_system 
+
+# LIBS = -L../lib \
+# 		$(LIB_BOOST) \
+# 		-lboost_date_time \
+# 		-lmy01	\
+# 		-lboost_log   -lboost_date_time  -lboost_locale -lboost_filesystem -lboost_thread -lboost_system \
+# 		-lrt \
+# 		 -ldl 
+
+
+		  		# $(BOOST_LIB)/libboost_system.a \
 		# $(BOOST_LIB)/libboost_thread.a \
 		# $(BOOST_LIB)/libboost_date_time.a \
 		# $(BOOST_LIB)/libboost_locale.a \
 		# $(BOOST_LIB)/libboost_filesystem.a \
 		# $(BOOST_LIB)/libboost_log.a \
-		-std=c++11 \
-		-lboost_system -lboost_thread  -lboost_date_time  -lboost_locale -lboost_filesystem -lboost_log \
-		-lmy01	\
-		-lrt \
-		  -ldl  
 
 INCL =  $(INC_OPENAPI) $(INC_JSON)  $(INC_OPENSSL) $(INC_OAUTH) $(INC_CURL) \
 		$(INC_BOOST) \
-		-I../src 
-		# ../src/com \
-		# ../src/mongodb \
-		# ../src/net \
-		# ../src/net/proto 
+		-I../src \
+		-I../src/com \
+		-I../src/mongodb \
+		-I../src/net \
+		-I../src/net/proto \
+		-I../src/net/proto/http
 
 
 SRC := $(wildcard *.cpp)
@@ -69,16 +89,25 @@ TARGET = dotasrv
 
 all: config $(TARGET)
 
-$(TARGET):  $(OBJS)
+$(TARGET):  $(OBJS) 
+	echo -e "\033[41;36m  $(LIBS) TARGET start oooooooooooooooooooooooooo \033[0m"	&&\
 	$(LD)   -o $@   $(CPPFLAGS)	$(LIBS)   $^  	 
-	# chmod u+x $(TARGET)
+	chmod u+x $(TARGET)
 
 config:
 	mkdir -p ../obj
 	mkdir -p ../bin
 
-../obj/%.o: %.cpp
-	$(CC) -std=c++11 -c -o $@ $(CPPFLAGS) $(LIBS) $(INCL) $<  
+# ../obj/server.o: server.cpp 
+# 	$(CC) -c -o $@ $(CPPFLAGS) $(LIBS) $(INCL) $<  
+# ../obj/tencent_api.o:tencent_api.cpp 
+# 	$(CC) -c -o $@ $(CPPFLAGS) $(LIBS) $(INCL) $<  
+# ../obj/main.o: main.cpp 
+# 	$(CC) -c -o $@ $(CPPFLAGS) $(LIBS) $(INCL) $<  
+
+../obj/%.o: %.cpp 
+	echo -e "\033[41;36m  obj compiler start oooooooooooooooooooooooooo \033[0m"	&&\
+	$(CC) -c -o $@ $(CPPFLAGS) $(LIBS) $(INCL) $<  
 
 
 clean:
