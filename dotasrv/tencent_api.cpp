@@ -82,11 +82,11 @@ static const string s_server_name = "119.147.19.43";
 tencent_api::tencent_api()
 {
 #if defined _LINUX
-	// COpenApiV3 sdk(s_appid, s_appkey);
+	COpenApiV3 sdk(s_appid, s_appkey);
 
-	// sdk.init();
-	// sdk.setServerName(s_server_name);
-	// sdk.setDebugSwitch(true);
+	sdk.init();
+	sdk.setServerName(s_server_name);
+	sdk.setDebugSwitch(true);
 #endif
 }
 

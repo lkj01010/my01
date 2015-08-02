@@ -11,6 +11,8 @@ CPPFLAGS = -g -O2 -Wall -W -std=c++11 \
 LIB_BOOST = -L$(BOOST_LIB)
 INC_BOOST = -I$(BOOST_INCLUDE)
 
+LIBDIR = $(LIB_BOOST)
+
 
 
 SRC := $(wildcard \

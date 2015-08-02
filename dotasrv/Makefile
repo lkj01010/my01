@@ -41,15 +41,16 @@ export LIB_OPENAPI:=-L$(tencent_sdk_dir)/lib -lopenapi
 
 # LDFLAGS ->lib dir flags   -> L/xxxx
 # LIBS -> -lxxx
-# LIBS =  $(LIB_OPENAPI) $(LIB_JSON) $(LIB_OAUTH) $(LIB_CURL) $(LIB_OPENSSL) \
+LIB_SDK =  $(LIB_OPENAPI) $(LIB_JSON) $(LIB_OAUTH) $(LIB_CURL) $(LIB_OPENSSL) \
 
-LIBS := $(LIB_BOOST) \
-		-lboost_system -lboost_iostreams  -lboost_log   -lboost_date_time  -lboost_locale -lboost_filesystem -lboost_thread \
-		-L../lib -lmy01 \
+LIBS := -L../lib -Wl,-Bstatic -lmy01 \
+		$(LIB_BOOST) \
+		-Wl,-Bdynamic  -lboost_system -lboost_iostreams  -lboost_log -lboost_regex   -lboost_date_time  -lboost_locale -lboost_chrono -lboost_filesystem -lboost_thread -lboost_log\
+		$(LIB_SDK) \
 		-lrt \
 		-ldl  
 
-LIBS = -L../lib -lmy01
+# LIBS = -L../lib -lmy01
 
 # LIBS = -lboost_log   -lboost_date_time  -lboost_locale -lboost_filesystem -lboost_thread -lboost_system 
 
@@ -91,7 +92,7 @@ all: config $(TARGET)
 
 $(TARGET):  $(OBJS) 
 	echo -e "\033[41;36m  $(LIBS) TARGET start oooooooooooooooooooooooooo \033[0m"	&&\
-	$(LD)   -o $@   $(CPPFLAGS)	$(LIBS)   $^  	 
+	$(LD)   -o $@  $^  $(CPPFLAGS)	$(LIBS)   	 
 	chmod u+x $(TARGET)
 
 config:
