@@ -1,4 +1,4 @@
-//
+﻿//
 // reply.cpp
 // ~~~~~~~~~
 //
@@ -159,22 +159,38 @@ std::vector<boost::asio::const_buffer> reply::to_buffers()
   return buffers;
 }
     
+
 std::string reply::to_string(){
+	SLOG_DEBUG << "/nmake response:";
     std::string data;
     data.append(status_strings::to_string(status));
     for (std::size_t i = 0; i < headers.size(); ++i)
     {
         header& h = headers[i];
+		SLOG_DEBUG << "head[" << i << "].name=" << h.name;
         data.append(h.name);
+		SLOG_DEBUG << "append name, data=" << data;
         data.append(misc_strings::name_value_separator);
+		SLOG_DEBUG << "append separator , data=" << data;
+
+
+		SLOG_DEBUG << "head[" << i << "].value=" << h.value;
         data.append(h.value);
-        data.append(misc_strings::crlf);
+		SLOG_DEBUG << "append value, data=" << data;
+        //data.append(misc_strings::crlf);
+        data.append("\r\n");
+		SLOG_DEBUG << "append crlf , data=" << data;
     }
-    data.append(misc_strings::crlf);
+    //data.append(misc_strings::crlf);
+	data.append("\r\n");
+
+	SLOG_DEBUG << "content: \n" << content;
     data.append(content);
     //lkj add two for client recognize
     /*data.append(misc_strings::crlf);
     data.append(misc_strings::crlf);*/
+
+	SLOG_DEBUG << "result data: \n" << data;
     return data;
 }
 

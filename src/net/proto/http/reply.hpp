@@ -1,4 +1,4 @@
-//
+﻿//
 // reply.hpp
 // ~~~~~~~~~
 //
@@ -15,6 +15,7 @@
 #include <vector>
 #include <boost/asio.hpp>
 #include "net/proto/http/header.hpp"
+#include "com/common.h"
 
 namespace net {
 namespace http {

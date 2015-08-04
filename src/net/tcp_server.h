@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "com/common.h"
 #include "net/tcp_connection.h"

@@ -99,7 +99,7 @@ void tcp_connection::handle_read(const boost::system::error_code& e,
 
 void tcp_connection::handle_write(const boost::system::error_code& e, const size_t size)
 {
-    SLOG_DEBUG << "write size:" << size;
+	SLOG_DEBUG << "write size: " << size << "\ncontent: " << send_queue_[0];
     
     send_queue_.pop_front();
     // there would be much accumulated commands before socket is closed. When this occurs, discard them.

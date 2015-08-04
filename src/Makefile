@@ -30,7 +30,9 @@ INCL =	$(INC_BOOST)	\
 		-I./net/proto \
 		-I./net/proto/http
 
-LIBS = $(LIB_BOOST) -lboost_system -lboost_thread  -lboost_date_time -lboost_log 
+LIBS = $(LIB_BOOST) -Wl,-Bdynamic  $(LIB_BOOST) -lboost_log -lboost_date_time -lboost_thread -lboost_system   \
+		-lrt \
+		-ldl
 		
 	
 

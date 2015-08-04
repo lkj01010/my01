@@ -1,4 +1,4 @@
-#ifdef _MONGO
+﻿#ifdef _MONGO
 
 #include "mongo_wrapper.h"
 

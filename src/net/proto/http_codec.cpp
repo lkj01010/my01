@@ -1,4 +1,4 @@
-#include "net/proto/http_codec.h"
+﻿#include "net/proto/http_codec.h"
 
 
 using namespace net;
@@ -37,36 +37,37 @@ string http_codec::make_reply(const std::string& content){
 
 	rep.headers.resize(3);
 	
-	rep.headers[0].name = "Content-Length";
-	rep.headers[0].value = boost::lexical_cast<std::string>(rep.content.size());
-	rep.headers[1].name = "Content-Type";
-	rep.headers[1].value = "text/html";
 	//lkj note: do steps below to allow ajax XMLHttpRequest GET access server
 	// 1. download jquery-1.7.2.min.js
 	// 2. client index.html add JSONP script:
-	
+
 	/*<script type = "text/javascript" src = "jquery-1.7.2.min.js">< / script>
-		<script type = "text/javascript">
-		jQuery(document).ready(function(){
-			$.ajax({
-			type: "get",
-			  url : "http:127.0.0.1:12303",
-				dataType : "jsonp",
-					   jsonp : "callback",
-						   jsonpCallback : "jsonpCallback",
-									   success : function(json){
-				alert('json:' + json);
-									   },
-									   error : function(){
-				  alert('fail');
-									   }
-			});
-		});
+	<script type = "text/javascript">
+	jQuery(document).ready(function(){
+	$.ajax({
+	type: "get",
+	url : "http:127.0.0.1:12303",
+	dataType : "jsonp",
+	jsonp : "callback",
+	jsonpCallback : "jsonpCallback",
+	success : function(json){
+	alert('json:' + json);
+	},
+	error : function(){
+	alert('fail');
+	}
+	});
+	});
 	< / script>*/
-	
+
 	// 3. add header "Access-Control-Allow-Origin" to relay
-	rep.headers[2].name = "Access-Control-Allow-Origin";
-	rep.headers[2].value = "*";
+	rep.headers[0].name = "Access-Control-Allow-Origin";
+	rep.headers[0].value = "*";
+	rep.headers[1].name = "Content-Length";
+	rep.headers[1].value = boost::lexical_cast<std::string>(rep.content.size());
+	rep.headers[2].name = "Content-Type";
+	rep.headers[2].value = "text/html";
+	
     string ret = rep.to_string();
     return ret;
 }

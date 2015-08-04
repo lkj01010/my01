@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "mongo_wrapper.h"
 
 #ifndef verify

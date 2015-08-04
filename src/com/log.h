@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-#ifdef _MAC
+#ifndef _WIN32
 #define BOOST_LOG_DYN_LINK 1
 #endif
 

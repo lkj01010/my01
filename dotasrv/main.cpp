@@ -5,7 +5,7 @@
 #include "tencent_api.h"
 
 #include "com/log.h"
-
+// #include <boost/regex.hpp>
 
 using boost::asio::ip::tcp;
 
@@ -32,12 +32,27 @@ public:
                 
                //conn->send(http_codec::make_reply("indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need  "));
 
-				long idx = content.find_last_of("=");
-				string funcname = content.substr(idx + 1, funcname.size() - idx);
+				/*long idx = content.find_last_of("=");
+				string funcname = content.substr(idx + 1, funcname.size() - idx);*/
 				//SLOG_DEBUG << "funcname:" << funcname;
 				//conn->send(http_codec::make_reply(funcname + string("({ \"xx\":\"10\"})")));
-				conn->send(http_codec::make_reply(string("tencent_api_callback") + string("({ \"xx\":\"10\"})")));
-				SLOG_DEBUG << "sended:" << string("tencent_api_callback") + string("({ \"xx\":\"10\"})");
+				
+				bool is_valid = false;
+				//string content = "/fefex?callback=jxilcvjjvlj1212&_=192120129320";
+				string funcname;
+				long idx_1 = content.find("/");
+				long idx_2 = content.find("?");
+				long idx_3 = content.find_first_of("=");
+				long idx_4 = content.find("&");
+				if (idx_1 >= 0 && idx_2 > idx_1 && idx_3 > idx_2 && idx_4 > idx_3){
+					funcname = content.substr(idx_3 + 1, idx_4 - idx_3 - 1);
+					is_valid = true;
+				}
+
+				if (is_valid){
+					conn->send(http_codec::make_reply(funcname + string("({ \"xx\":\"10\"})")));
+					SLOG_DEBUG << "send:" << funcname + string("({ \"xx\":\"10\"})");
+				}
 
             }
 		}
@@ -100,8 +115,46 @@ public:
 
 int main(int argc, char* argv[])
 {
-	string funcname = "/?callback=jxilcvjjvlj1212&_=192120129320";
-	string retname = "";
+	string content = "/fefex?callback=jxilcvjjvlj1212&_=192120129320";
+	string funcname;
+	long idx_1 = content.find("/");
+	long idx_2 = content.find("?");
+	long idx_3 = content.find_first_of("=");
+	long idx_4 = content.find("&");
+	if (idx_1 >= 0 && idx_2 > idx_1 && idx_3 > idx_2 && idx_4 > idx_3){
+		funcname = content.substr(idx_3+1, idx_4 - idx_3 -1);
+	}
+
+
+	//
+	////?、*、<、>、=、/、1这些都不需要转义的。无需加 \
+
+	////boost::regex e1("[0-9]+");
+	///*boost::regex expression(
+	//	"^(/?callback=/)"
+	//	"(\\w+)"
+	//	"(/&_/\\d+)"
+	//	);*/
+
+	//boost::regex expression(
+	//	"^(\\</?callback=\\>)"
+	//	"\\<\\w+\\>"
+	//	"(\\<\&_=\>(\\d+)"
+
+	//	);
+
+	//std::string::const_iterator start, end;
+	//start = str.begin();
+	//end = str.end();
+
+	//boost::match_results<std::string::const_iterator> what;
+	//boost::match_flag_type flags = boost::match_default;
+
+	//while (regex_search(start, end, what, expression, flags))
+	//{
+	//	SLOG_DEBUG << "regex: " << string(what[0].first, what[0].second);
+	//	start = what[0].second;
+	//}
 
 	try
 	{
