@@ -4,13 +4,44 @@
 #include "net/proto/http_codec.h"
 #include "tencent_api.h"
 
-#include "com/log.h"
-// #include <boost/regex.hpp>
+ #include <boost/regex.hpp>
 
 using boost::asio::ip::tcp;
 
 using namespace net;
 using namespace std;
+
+
+void parse_request_param(std::map<std::string, std::string>& map, const std::string& request){
+	std::string key = "";
+	std::string cache = "";
+	map.clear();
+	for (int i = 0; i < request.size(); ++i)
+	{
+		const char& c = request[i];
+		char word[2] = { c, '\0' };
+		std::string cstr = word;
+		if (c == '=')
+		{
+			key = cache;
+			cache.clear();
+		}
+		else if (c == '&'){
+			map.insert(std::pair<std::string,std::string>(key, cache));
+			cache.clear();
+		}
+		else if (c == '?'){
+			map.insert(std::pair<std::string,std::string>(key, cache));
+			cache.clear();
+		}
+		else if (c == '/'){}	//skip
+		else{
+			cache.append(cstr);
+		}
+	}
+}
+
+
 
 typedef boost::weak_ptr<tcp_connection> weak_tcp_connection_ptr;
 class pay_session{
@@ -28,32 +59,114 @@ public:
                 conn->send(http_codec::make_bad_reply());
             }else{
                 
-                tapi_.handle_request(content);
-                
-               //conn->send(http_codec::make_reply("indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need  "));
+			//////////////////////////////////////////////////////////////////////////
 
-				/*long idx = content.find_last_of("=");
-				string funcname = content.substr(idx + 1, funcname.size() - idx);*/
-				//SLOG_DEBUG << "funcname:" << funcname;
-				//conn->send(http_codec::make_reply(funcname + string("({ \"xx\":\"10\"})")));
-				
-				bool is_valid = false;
-				//string content = "/fefex?callback=jxilcvjjvlj1212&_=192120129320";
-				string funcname;
-				long idx_1 = content.find("/");
-				long idx_2 = content.find("?");
-				long idx_3 = content.find_first_of("=");
-				long idx_4 = content.find("&");
-				if (idx_1 >= 0 && idx_2 > idx_1 && idx_3 > idx_2 && idx_4 > idx_3){
-					funcname = content.substr(idx_3 + 1, idx_4 - idx_3 - 1);
-					is_valid = true;
+				//boost::regex expression(
+				//	"/openid=(\\w+)"
+				//	"&openkey=(\\w+)"
+				//	"&pf=[\\w_]+"
+				//	"&pfkey=\\w*"
+				//	"&platform=([\\w_]+)"
+				//	"&api=([\\w_]+)"
+				//	"[?]callback=([\\w_]+)"
+				//	"&_=\\d+"
+				//	);
+
+				//bool ismc = boost::regex_match(content, expression);
+				//if (ismc)
+				//{
+				//	std::string::const_iterator start, end;
+				//	start = content.begin();
+				//	end = content.end();
+
+				//	boost::match_results<std::string::const_iterator> what;
+				//	boost::match_flag_type flags = boost::match_default;
+
+				//	//int i = 0;
+				//	if (regex_search(start, end, what, expression, flags))
+				//	{
+				//		//for (size_t i = 0; i < what.size(); ++i)
+				//		//{
+				//		//	if (what[i].matched)
+				//		//		std::cout << string(what[i].first, what[i].second) << std::endl;
+				//		//}
+
+				//		SLOG_INFO << "parse result: openid=" << what[1] << " openkey=" << what[2] << " platform=" << what[3] << " api="
+				//			<< what[4] << " callback=" << what[5];
+				//	}
+
+
+				//	//tapi_.handle_request( what[1], what[2], what[3], what[4]);
+				//////////////////////////////////////////////////////////////////////////
+
+				std::map<std::string, std::string> param_map;
+				parse_request_param(param_map, content);
+				std::string openid, openkey, platform, api;
+				bool is_valid = true;
+				std::map<std::string,std::string>::iterator it = param_map.find("openid");
+				if (it != param_map.end())
+				{
+					openid = it->second;
+				}
+				else{
+					is_valid = false;
+				}
+				it = param_map.find("openkey");
+				if (it != param_map.end())
+				{
+					openkey = it->second;
+				}
+				else{
+					is_valid = false;
+				}
+				it = param_map.find("platform");
+				if (it != param_map.end())
+				{
+					platform = it->second;
+				}
+				else{
+					is_valid = false;
+				}
+				it = param_map.find("api");
+				if (it != param_map.end())
+				{
+					api = it->second;
+				}
+				else{
+					is_valid = false;
+				}
+					 
+				if (is_valid)
+				{
+					tapi_.handle_request(openid, openkey, platform, api);
+				}
+				else{
+					SLOG_INFO << "client pass a invalid url.";
 				}
 
-				if (is_valid){
-					conn->send(http_codec::make_reply(funcname + string("({ \"xx\":\"10\"})")));
-					SLOG_DEBUG << "send:" << funcname + string("({ \"xx\":\"10\"})");
-				}
 
+				//////////////////////////////////////////////////////////////////////////
+				//conn->send(http_codec::make_reply("indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need read any more, close connection indicate not need  "));
+				//bool is_valid = false;
+				////string content = "/fefex?callback=jxilcvjjvlj1212&_=192120129320";
+				//string funcname;
+				//long idx_1 = content.find("/");
+				//long idx_2 = content.find("?");
+				//long idx_3 = content.find_first_of("=");
+				//long idx_4 = content.find("&");
+				//if (idx_1 >= 0 && idx_2 > idx_1 && idx_3 > idx_2 && idx_4 > idx_3){
+				//	funcname = content.substr(idx_3 + 1, idx_4 - idx_3 - 1);
+				//	is_valid = true;
+				//}
+
+				//if (is_valid){
+				//	conn->send(http_codec::make_reply(funcname + string("({ \"xx\":\"10\"})")));
+				//	SLOG_DEBUG << "send:" << funcname + string("({ \"xx\":\"10\"})");
+				//}
+				//else{
+				//	int i;
+				//	SLOG_DEBUG << "parse url error. ";
+				//}
             }
 		}
 		return false;	//indicate not need read any more, close connection
@@ -115,47 +228,6 @@ public:
 
 int main(int argc, char* argv[])
 {
-	string content = "/fefex?callback=jxilcvjjvlj1212&_=192120129320";
-	string funcname;
-	long idx_1 = content.find("/");
-	long idx_2 = content.find("?");
-	long idx_3 = content.find_first_of("=");
-	long idx_4 = content.find("&");
-	if (idx_1 >= 0 && idx_2 > idx_1 && idx_3 > idx_2 && idx_4 > idx_3){
-		funcname = content.substr(idx_3+1, idx_4 - idx_3 -1);
-	}
-
-
-	//
-	////?、*、<、>、=、/、1这些都不需要转义的。无需加 \
-
-	////boost::regex e1("[0-9]+");
-	///*boost::regex expression(
-	//	"^(/?callback=/)"
-	//	"(\\w+)"
-	//	"(/&_/\\d+)"
-	//	);*/
-
-	//boost::regex expression(
-	//	"^(\\</?callback=\\>)"
-	//	"\\<\\w+\\>"
-	//	"(\\<\&_=\>(\\d+)"
-
-	//	);
-
-	//std::string::const_iterator start, end;
-	//start = str.begin();
-	//end = str.end();
-
-	//boost::match_results<std::string::const_iterator> what;
-	//boost::match_flag_type flags = boost::match_default;
-
-	//while (regex_search(start, end, what, expression, flags))
-	//{
-	//	SLOG_DEBUG << "regex: " << string(what[0].first, what[0].second);
-	//	start = what[0].second;
-	//}
-
 	try
 	{
 		if (argc != 2)
@@ -189,3 +261,9 @@ int main(int argc, char* argv[])
 
 	return 0;
 }
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+// test Regex:

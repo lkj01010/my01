@@ -9,9 +9,9 @@ LD = g++
 # 的是版本警告）只是人为警告成错误，但不是真正的错误
 # -Wall 这是编译器的警告开关，这是真正的潜在错误（编译器给出的）
 CPPFLAGS = -g -O2 -Wall -W -std=c++11 \
-	# -D_LINUX	\
-	-rdynamic \
-	-pedantic -ansi
+	 -D_LINUX	
+	# -rdynamic \
+	# -pedantic -ansi
 
 
 LIB_BOOST = -L$(BOOST_LIB)
@@ -85,7 +85,8 @@ INCL =  $(INC_OPENAPI) $(INC_JSON)  $(INC_OPENSSL) $(INC_OAUTH) $(INC_CURL) \
 SRC := $(wildcard *.cpp)
 
 # OBJS := $(patsubst %.cpp, obj/%.o, $(notdir $(SRC)))
-OBJS := $(patsubst %.cpp, ../obj/%.o, $(SRC))
+# OBJS := $(patsubst %.cpp, ../obj/%.o, $(SRC))
+OBJS := ../obj/main.o ../obj/tencent_api.o
 
 # TARGET = ../bin/dotasrv
 TARGET = dotasrv
@@ -101,15 +102,16 @@ config:
 	mkdir -p ../obj
 	mkdir -p ../bin
 
-# ../obj/server.o: server.cpp 
-# 	$(CC) -c -o $@ $(CPPFLAGS) $(LIBS) $(INCL) $<  
-# ../obj/tencent_api.o:tencent_api.cpp 
-# 	$(CC) -c -o $@ $(CPPFLAGS) $(LIBS) $(INCL) $<  
-# ../obj/main.o: main.cpp 
+
+# ../obj/%.o: %.cpp 
+# 	echo -e "\033[41;36m  obj compiler start oooooooooooooooooooooooooo \033[0m"	&&\
 # 	$(CC) -c -o $@ $(CPPFLAGS) $(LIBS) $(INCL) $<  
 
-../obj/%.o: %.cpp 
-	echo -e "\033[41;36m  obj compiler start oooooooooooooooooooooooooo \033[0m"	&&\
+../obj/main.o: main.cpp
+	echo -e "\033[41;36m  main compiler start oooooooooooooooooooooooooo \033[0m"	&&\
+	$(CC) -c -o $@ $(CPPFLAGS) $(LIBS) $(INCL) $<  
+../obj/tencent_api.o: tencent_api.cpp
+	echo -e "\033[41;36m  tencent_api compiler start oooooooooooooooooooooooooo \033[0m"	&&\
 	$(CC) -c -o $@ $(CPPFLAGS) $(LIBS) $(INCL) $<  
 
 
