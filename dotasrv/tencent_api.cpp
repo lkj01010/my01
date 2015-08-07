@@ -47,7 +47,7 @@ int get_playzone_userinfo(class OpenApiV3* sdk, const string& openid, const stri
 
 	script_name = "/v3/user/get_playzone_userinfo";
 
-	SLOG_DEBUG << "do sdk->api";
+	SLOG_DEBUG << "do sdk->get_playzone_userinfo";
 	return sdk->api(script_name, params, JsonRes);
 }
 
@@ -265,6 +265,7 @@ const std::string tencent_api::handle_request(std::string openid, std::string op
 			return string("({\"is_ok\":0})");
 		}
 		else{
+			SLOG_INFO << "get_playzone_userinfo: success. " ; 
 			get_playzone_userinfo_parse(JsonRes,Info);
 			SLOG_INFO << "userinfo fetched: is_vip=" << Info.is_vip << " socre=" << Info.score << " expiredtime="
 				<< Info.expiredtime;
@@ -318,7 +319,7 @@ const std::string tencent_api::handle_request(std::string openid, std::string op
 		}
 		else{
 			SLOG_INFO << "get_user_info: success." ; 
-			return "";
+			return string("({\"is_ok\":1})");
 		}
 	}
 	else{

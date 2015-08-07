@@ -2,7 +2,7 @@ RM = /bin/rm -f
 CP = /bin/CP
 
 CC = g++
-CPPFLAGS = -g -O2 -Wall -W -std=c++11 \
+CPPFLAGS = -g -O0 -Wall -W -std=c++11 \
 	# -D_LINUX	\
 	-rdynamic \
 	-pedantic -ansi

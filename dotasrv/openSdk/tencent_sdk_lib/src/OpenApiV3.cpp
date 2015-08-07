@@ -67,7 +67,7 @@ void OpenApiV3::init(string stServer_name,string stStat_url,string format,bool I
 **************************************************************/
 int OpenApiV3::api(string& script_name, map<string,string>& params, Json::Value& JsonRes ,OPEN_API_V3_METHOD method, OPEN_API_V3_PROTOCOL protocol,double timeout_sec)
 {
-            
+    OutPutDebug("openApiV3::api 1\n");         
     int iRet=0;
     m_iRet=0;
 
@@ -86,17 +86,20 @@ int OpenApiV3::api(string& script_name, map<string,string>& params, Json::Value&
     
     // 生成签名
     string HttpMethod;
+    printf("openApiV3::api");
     if( OPEN_API_V3_METHOD_GET ==  method)
     {   
+        printf("openApiV3::api 2\n");
         HttpMethod = HTTP_METHOD_GET;   
     }
     else
     {
         
+        printf("openApiV3::api 2\n");
         HttpMethod = HTTP_METHOD_POST;   
     }
     
-    
+    printf("openApiV3::api 3\n");
     string secret = m_appkey +"&";
     string sig = SigCheckApi.makeSig(HttpMethod, script_name, params, secret);
     params["sig"] = sig;
@@ -121,17 +124,19 @@ int OpenApiV3::api(string& script_name, map<string,string>& params, Json::Value&
     struct timeval start_tv;
     gettimeofday(&start_tv, NULL);
 
+    printf("openApiV3::api 4\n");
+
     string res;
     if( OPEN_API_V3_METHOD_GET  == method)
     {
         iRet = HttpRequestApi.GetHttpRequest(url, params,timeout_sec,res);
+        printf("GetHttpRequest end, res=%s \n", res.c_str());
     }
     else
     {
         iRet = HttpRequestApi.PostHttpRequest(url, params,timeout_sec,res);
     }
 
-    
     if( 0 != iRet )
     {
         OPENAPIV3_ERROR("PostHttpRequest failed err[%s]",HttpRequestApi.GetErrMsg());
@@ -146,6 +151,7 @@ int OpenApiV3::api(string& script_name, map<string,string>& params, Json::Value&
         }
 
         //对JSON数据进行解析    
+        printf("JsonResolve begin \n"); 
         m_iRet=JsonResolve(JsonRes,res);
     } 
 

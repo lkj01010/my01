@@ -101,7 +101,7 @@ public:
 
 				std::map<std::string, std::string> param_map;
 				parse_request_param(param_map, content);
-				std::string openid, openkey, platform, api;
+				std::string openid, openkey, platform, api, funcname;
 				bool is_valid = true;
 				std::map<std::string,std::string>::iterator it = param_map.find("openid");
 				if (it != param_map.end())
@@ -135,10 +135,20 @@ public:
 				else{
 					is_valid = false;
 				}
+				it = param_map.find("callback");
+				if (it != param_map.end())
+				{
+					funcname = it->second;
+				}
+				else{
+					is_valid = false;
+				}
 					 
 				if (is_valid)
 				{
-					tapi_.handle_request(openid, openkey, platform, api);
+					string ret = tapi_.handle_request(openid, openkey, platform, api);
+					conn->send(http_codec::make_reply(funcname + ret));
+					SLOG_DEBUG << "reply: " << (funcname + ret);
 				}
 				else{
 					SLOG_INFO << "client pass a invalid url.";

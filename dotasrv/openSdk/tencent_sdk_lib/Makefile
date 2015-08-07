@@ -3,7 +3,7 @@ RM = /bin/rm -f
 CP = /bin/cp
 
 CC = g++
-CPPFLAGS = -g  -rdynamic  -Wall -D_REENTRANT
+CPPFLAGS = -g -O2 -rdynamic  -Wall -D_REENTRANT
 
 # lkj add:
 top_path := $(shell pwd | awk -F ' ' {print$1})

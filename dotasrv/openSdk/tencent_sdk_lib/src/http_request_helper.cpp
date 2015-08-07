@@ -171,34 +171,45 @@ int static responesWriteCallback(void *ptr, size_t size, size_t nmemb,
 **************************************************************/     
 int HttpRequestHelper::GetHttpRequest(string url, map<string, string>& params, float timeout_sec, string& rsp)
 {
+	printf("GetHttpRequest begin \n");
 	string full_url;
 
-	stringstream ss;
-	ss<<url.c_str();
-	ss<<"?";
-	ss<<EncodeParams(params).c_str();
-	full_url = ss.str();
+	// stringstream ss;
+	// ss<<url.c_str();
+	// ss<<"?";
+	// ss<<EncodeParams(params).c_str();
+	// full_url = ss.str();
+
+	string ss;
+	ss += url;
+	ss += "?";
+	ss += EncodeParams(params);
+	full_url = ss;
+
+
 
 	CURL *curl = 0;
 	CURLcode ret;
 
+	printf("curl_easy_init begin \n");
 	curl = curl_easy_init();
+	printf("curl_easy_init end \n");
 	if (0 == curl)
 	{
 		snprintf(m_szErrMsg, sizeof(m_szErrMsg), "curl_easy_init() failed");
 		return -1;
 	}
 
-	StConnFree conn_free(curl);
+	// StConnFree conn_free(curl);
     struct curl_slist *headerlist=NULL;
 
-	char buf[128] = {0};
+	char buf[256] = {0};
 	
 	// disable Expect: 100-continue 
 	snprintf(buf, sizeof(buf), "%s", "Expect:");
     headerlist = curl_slist_append(headerlist, buf);
 
-    //printf("bafore Host: %s\n", m_host.c_str());
+    printf("before Host: %s\n", m_host.c_str());
 
 	if (!m_host.empty())
 	{
@@ -207,8 +218,10 @@ int HttpRequestHelper::GetHttpRequest(string url, map<string, string>& params, f
 		//printf("Host: %s\n", m_host.c_str());
 	}
 
-    StSlistFree slist_free(headerlist);
-    
+	//lkj del:
+    // StSlistFree slist_free(headerlist);
+    //to
+
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headerlist);
 
 	static char errorBuffer[CURL_ERROR_SIZE];
@@ -224,23 +237,65 @@ int HttpRequestHelper::GetHttpRequest(string url, map<string, string>& params, f
 	curl_easy_setopt(curl,CURLOPT_SSL_VERIFYPEER,false);
 	curl_easy_setopt(curl,CURLOPT_SSL_VERIFYHOST,false);
 
+	printf("curl_easy_perform begin \n");
 	ret = curl_easy_perform(curl);
+
+	int retval = 0;
 	if (ret != CURLE_OK) // CURLE_OK : 0
 	{
+		printf("CURLE_FAIL \n");
 		snprintf(m_szErrMsg, sizeof(m_szErrMsg), "Failed to get '%s' [%s]\n", full_url.c_str(), errorBuffer);
-		return ret;
+		retval = ret;
 	}
 	else
 	{//如果访问正常但http状态码不是200，直接返回http的状态码
+		printf("CURLE_OK \n");
 		int http_code = 0;
 		curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+		printf("curl_easy_getinfo finish \n");
 		if(200 != http_code)
 		{
 			snprintf(m_szErrMsg, sizeof(m_szErrMsg), "succ to get '%s',but response http_code[%d]\n", full_url.c_str(), http_code);
-			return http_code;
+			printf("errmsg: %s \n", m_szErrMsg);	//lkj add
+			retval = http_code;
 		}
-		return 0;//状态码为200时返回0
+		else{
+			printf("http_code =%d \n", http_code);
+			retval = 0;
+		}
+		retval = 0;//状态码为200时返回0
 	}
+
+	curl_slist_free_all (headerlist);
+	curl_easy_cleanup(curl);
+	printf("curl_easy_cleanup done \n");
+
+	return retval;
+
+
+	// if (ret != CURLE_OK) // CURLE_OK : 0
+	// {
+	// 	printf("CURLE_FAIL \n");
+	// 	snprintf(m_szErrMsg, sizeof(m_szErrMsg), "Failed to get '%s' [%s]\n", full_url.c_str(), errorBuffer);
+	// 	return ret;
+	// }
+	// else
+	// {//如果访问正常但http状态码不是200，直接返回http的状态码
+	// 	printf("CURLE_OK \n");
+	// 	int http_code = 0;
+	// 	curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+	// 	printf("curl_easy_getinfo finish \n");
+	// 	if(200 != http_code)
+	// 	{
+	// 		snprintf(m_szErrMsg, sizeof(m_szErrMsg), "succ to get '%s',but response http_code[%d]\n", full_url.c_str(), http_code);
+	// 		printf("errmsg: %s \n", m_szErrMsg);	//lkj add
+	// 		return http_code;
+	// 	}
+	// 	else{
+	// 		printf("http_code =%d \n", http_code);
+	// 	}
+	// 	return 0;//状态码为200时返回0
+	// }
 }
 
 /***********************************************************

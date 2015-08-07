@@ -45,7 +45,7 @@ LIB_SDK =  $(LIB_OPENAPI) $(LIB_JSON) $(LIB_OAUTH) $(LIB_CURL) $(LIB_OPENSSL) \
 
 LIBS := -L../lib -Wl,-Bstatic -lmy01 \
 		$(LIB_BOOST) \
-		-Wl,-Bdynamic  -lboost_system  -lboost_filesystem -lboost_thread  -lboost_iostreams -lboost_date_time  -lboost_locale -lboost_chrono -lboost_regex  -lboost_log  \
+		-Wl,-Bdynamic  -lboost_system  -lboost_filesystem -lboost_thread  -lboost_date_time  -lboost_locale -lboost_chrono -lboost_regex  -lboost_log  \
 		$(LIB_SDK) \
 		-lrt \
 		-ldl  
